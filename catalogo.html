@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/checkout.css">
   <style>
     body { font-family: 'Plus Jakarta Sans', var(--font-family); }
+    .brand-mark { width:40px; height:40px; border-radius:14px; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#133326,#28c76f); color:#fff; font-weight:800; letter-spacing:.04em; box-shadow:0 10px 24px rgba(19,51,38,.18); }
     .marketplace-toolbar { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:16px; }
     .marketplace-panel { background:#fff; border:1px solid rgba(27,67,50,.08); border-radius:18px; padding:16px; box-shadow:var(--shadow-sm); }
     .marketplace-panel label { display:block; margin-bottom:6px; font-size:12px; font-weight:700; color:var(--verde-escuro); text-transform:uppercase; letter-spacing:.04em; }
@@ -30,8 +31,8 @@
   <header class="site-header" id="header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <span class="logo-icon"><img src="img/logo-full.png" alt="Logo Nattu Shop"></span>
-        Nattu Shop
+        <span class="logo-icon brand-mark">NS</span>
+        <span style="color:var(--verde-escuro);font-weight:800;">Nattu Shop</span>
       </a>
 
       <nav class="header-nav" id="main-nav">
@@ -58,7 +59,7 @@
   <section class="search-section" id="search-section">
     <div class="container">
       <div class="search-section__input-wrap">
-        <span class="search-section__icon">Buscar</span>
+        <span class="search-section__icon" aria-hidden="true">⌕</span>
         <input
           type="search"
           class="search-section__input"
@@ -128,7 +129,7 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--branco);margin-bottom:var(--space-2);">
-          <img src="img/logo-full.png" alt="" style="width:28px;height:28px;display:inline-block;vertical-align:middle;margin-right:6px;">Nattu Shop
+          <span class="brand-mark" style="width:28px;height:28px;border-radius:10px;font-size:11px;vertical-align:middle;margin-right:6px;">NS</span>Nattu Shop
         </div>
         <p>Marketplace para lojas de produtos naturais com navegacao por loja.</p>
       </div>

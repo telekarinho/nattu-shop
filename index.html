@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="css/checkout.css">
   <style>
     body { font-family: 'Plus Jakarta Sans', var(--font-family); }
+    .brand-mark { width:40px; height:40px; border-radius:14px; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#133326,#28c76f); color:#fff; font-weight:800; letter-spacing:.04em; box-shadow:0 10px 24px rgba(19,51,38,.18); }
     .saas-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
     .saas-card { background:#fff; border-radius:20px; padding:24px; box-shadow:var(--shadow-md); border:1px solid rgba(27,67,50,.08); }
     .saas-card h4 { margin:0 0 10px; color:var(--verde-escuro); }
@@ -42,8 +43,8 @@
   <header class="site-header" id="header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <span class="logo-icon"><img src="img/logo-full.png" alt="Logo Nattu Shop"></span>
-        Nattu Shop
+        <span class="logo-icon brand-mark">NS</span>
+        <span style="color:var(--verde-escuro);font-weight:800;">Nattu Shop</span>
       </a>
 
       <nav class="header-nav" id="main-nav">
@@ -194,7 +195,7 @@
   <section class="section scroll-reveal" id="cta-final">
     <div class="container">
       <div class="final-cta">
-        <h2 style="margin-top:0;">Nattu Shop ja esta pronto para vender</h2>
+        <h2 style="margin-top:0;color:#fff;">Nattu Shop ja esta pronto para vender</h2>
         <p>Voce agora tem uma base publicada, com marketplace, painel administrativo e posicionamento de software para lojas de produtos naturais. O proximo passo comercial e colocar dominio, SSL, GitHub e captar os primeiros lojistas.</p>
         <div class="hero-cta" style="justify-content:flex-start;">
           <a href="mailto:contato@nattu.shop" class="btn btn-primary btn-lg">Falar com a marca</a>
@@ -208,7 +209,7 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--branco);margin-bottom:var(--space-2);">
-          <img src="img/logo-full.png" alt="" style="width:28px;height:28px;display:inline-block;vertical-align:middle;margin-right:6px;">Nattu Shop
+          <span class="brand-mark" style="width:28px;height:28px;border-radius:10px;font-size:11px;vertical-align:middle;margin-right:6px;">NS</span>Nattu Shop
         </div>
         <p>SaaS e marketplace para lojas de produtos naturais.</p>
       </div>
