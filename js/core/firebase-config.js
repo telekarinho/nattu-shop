@@ -50,7 +50,9 @@
         }
         this.auth = firebase.auth();
         this.db = firebase.firestore();
-        this.storage = firebase.storage();
+        this.storage = typeof firebase.storage === 'function'
+          ? firebase.storage()
+          : null;
 
         // Enable offline persistence (must be called before any other Firestore call)
         this.db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
