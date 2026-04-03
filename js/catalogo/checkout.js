@@ -17,6 +17,101 @@ const Checkout = (() => {
   let orderResult = null;
   let isProcessing = false;
 
+  function getSelectedStore() {
+    const checkoutData = AppState.get('checkoutData') || {};
+    const stores = window.DataStores || [];
+
+    if (checkoutData.loja && checkoutData.loja.id) {
+      return stores.find(store => store.id === checkoutData.loja.id) || checkoutData.loja;
+    }
+
+    const tenant = typeof TenantResolver !== 'undefined'
+      ? TenantResolver.resolveCurrentStore(stores)
+      : { store: null };
+    if (tenant.store) {
+      checkoutData.loja = tenant.store;
+      AppState.set('checkoutData', checkoutData);
+      return tenant.store;
+    }
+
+    return null;
+  }
+
+  function getStorePaymentSettings() {
+    const store = getSelectedStore();
+    return typeof TenantResolver !== 'undefined'
+      ? TenantResolver.getStorePaymentSettings(store)
+      : {
+          methods: { pix: true, mercadoPago: true, boleto: false, dinheiro: true },
+          pixKey: '',
+          pixReceiverName: store ? (store.nome || 'Nattu Shop') : 'Nattu Shop',
+          pixCity: store ? (store.cidade || 'SAO PAULO') : 'SAO PAULO',
+          mercadoPagoEmail: '',
+          statementDescriptor: store ? (store.nome || 'Nattu Shop') : 'Nattu Shop',
+          instructions: '',
+        };
+  }
+
+  function buildPaymentOptionsHTML(paymentSettings) {
+    const methods = paymentSettings.methods || {};
+    const options = [];
+
+    if (methods.pix !== false) {
+      options.push(`
+        <div class="ck-payment-option selected" data-method="pix">
+          <div class="radio-card__radio"></div>
+          <div class="ck-payment-option__icon">&#128178;</div>
+          <div class="ck-payment-option__info">
+            <div class="ck-payment-option__title">PIX da loja</div>
+            <div class="ck-payment-option__desc">Aprovacao rapida para ${paymentSettings.pixReceiverName || 'a loja'}.</div>
+          </div>
+          <div class="ck-payment-option__badge" style="background:#E8F5E9;color:var(--verde-escuro);padding:2px 8px;border-radius:var(--radius-full);font-size:var(--fs-xs);font-weight:var(--fw-bold);">Recomendado</div>
+        </div>
+      `);
+    }
+
+    if (methods.mercadoPago !== false) {
+      options.push(`
+        <div class="ck-payment-option ${methods.pix === false ? 'selected' : ''}" data-method="credit_card">
+          <div class="radio-card__radio"></div>
+          <div class="ck-payment-option__icon">&#128179;</div>
+          <div class="ck-payment-option__info">
+            <div class="ck-payment-option__title">Mercado Pago</div>
+            <div class="ck-payment-option__desc">Checkout online da propria loja${paymentSettings.mercadoPagoEmail ? ` (${paymentSettings.mercadoPagoEmail})` : ''}.</div>
+          </div>
+        </div>
+      `);
+    }
+
+    if (methods.boleto) {
+      options.push(`
+        <div class="ck-payment-option ${methods.pix === false && methods.mercadoPago === false ? 'selected' : ''}" data-method="boleto">
+          <div class="radio-card__radio"></div>
+          <div class="ck-payment-option__icon">&#128196;</div>
+          <div class="ck-payment-option__info">
+            <div class="ck-payment-option__title">Boleto</div>
+            <div class="ck-payment-option__desc">Geracao manual ou via integracao da loja.</div>
+          </div>
+        </div>
+      `);
+    }
+
+    if (methods.dinheiro) {
+      options.push(`
+        <div class="ck-payment-option ${methods.pix === false && methods.mercadoPago === false && !methods.boleto ? 'selected' : ''}" data-method="cash">
+          <div class="radio-card__radio"></div>
+          <div class="ck-payment-option__icon">&#128176;</div>
+          <div class="ck-payment-option__info">
+            <div class="ck-payment-option__title">Dinheiro na entrega</div>
+            <div class="ck-payment-option__desc">Recebimento presencial pela operacao da loja.</div>
+          </div>
+        </div>
+      `);
+    }
+
+    return options.join('');
+  }
+
   // Restore saved customer data
   function getSavedCustomer() {
     return Storage.get('checkout_customer') || {
@@ -270,38 +365,19 @@ const Checkout = (() => {
     const container = document.getElementById('ck-step-3');
     if (!container) return;
     const totals = calcTotals();
+    const store = getSelectedStore();
+    const paymentSettings = getStorePaymentSettings();
 
     container.innerHTML = `
       <h3 class="ck-section-title">Forma de Pagamento</h3>
 
+      <div style="background:#F7FBF8;border:1px solid rgba(27,67,50,.08);border-radius:16px;padding:16px;margin-bottom:16px;">
+        <strong style="display:block;color:var(--verde-escuro);margin-bottom:6px;">Loja do pedido</strong>
+        <span style="color:var(--cinza-700);">${store ? `${store.nome} · ${store.endereco || ''}` : 'Selecione uma loja no tenant ou marketplace.'}</span>
+      </div>
+
       <div class="ck-payment-options">
-        <div class="ck-payment-option selected" data-method="pix">
-          <div class="radio-card__radio"></div>
-          <div class="ck-payment-option__icon">&#128178;</div>
-          <div class="ck-payment-option__info">
-            <div class="ck-payment-option__title">PIX</div>
-            <div class="ck-payment-option__desc">Aprovacao instantanea. Copie o codigo ou escaneie o QR.</div>
-          </div>
-          <div class="ck-payment-option__badge" style="background:#E8F5E9;color:var(--verde-escuro);padding:2px 8px;border-radius:var(--radius-full);font-size:var(--fs-xs);font-weight:var(--fw-bold);">Recomendado</div>
-        </div>
-
-        <div class="ck-payment-option" data-method="credit_card">
-          <div class="radio-card__radio"></div>
-          <div class="ck-payment-option__icon">&#128179;</div>
-          <div class="ck-payment-option__info">
-            <div class="ck-payment-option__title">Cartao de Credito</div>
-            <div class="ck-payment-option__desc">Parcele em ate 3x sem juros. Visa, Master, Elo.</div>
-          </div>
-        </div>
-
-        <div class="ck-payment-option" data-method="boleto">
-          <div class="radio-card__radio"></div>
-          <div class="ck-payment-option__icon">&#128196;</div>
-          <div class="ck-payment-option__info">
-            <div class="ck-payment-option__title">Boleto Bancario</div>
-            <div class="ck-payment-option__desc">Vencimento em 3 dias uteis. Compensacao em ate 2 dias.</div>
-          </div>
-        </div>
+        ${buildPaymentOptionsHTML(paymentSettings)}
       </div>
 
       <!-- Resumo do pedido -->
@@ -331,7 +407,7 @@ const Checkout = (() => {
       </div>
 
       <div style="font-size:var(--fs-xs);color:var(--cinza-500);text-align:center;margin-top:var(--space-3);">
-        &#128274; Pagamento seguro processado via MercadoPago
+        &#128274; ${paymentSettings.instructions || 'Os meios de pagamento abaixo pertencem a loja selecionada.'}
       </div>
     `;
 
@@ -342,6 +418,12 @@ const Checkout = (() => {
         opt.classList.add('selected');
       });
     });
+
+    const selected = container.querySelector('.ck-payment-option.selected');
+    const checkoutData = AppState.get('checkoutData') || {};
+    checkoutData.pagamento = checkoutData.pagamento || {};
+    checkoutData.pagamento.tipo = selected ? selected.dataset.method : 'pix';
+    AppState.set('checkoutData', checkoutData);
 
     updateNavButtons();
   }
@@ -359,6 +441,8 @@ const Checkout = (() => {
     const cart = AppState.get('cart') || [];
     const totals = calcTotals();
     const subItems = cart.filter(i => i.isSubscription);
+    const store = getSelectedStore();
+    const paymentSettings = getStorePaymentSettings();
 
     container.innerHTML = `
       <div class="ck-confirmation">
@@ -379,7 +463,7 @@ const Checkout = (() => {
               <button class="pix-copy-btn" id="ck-pix-copy">&#128203; Copiar Codigo PIX</button>
             </div>
             <div style="font-size:var(--fs-xs);color:var(--cinza-500);margin-top:var(--space-3);">
-              O pagamento via PIX e aprovado instantaneamente.
+              PIX configurado para ${paymentSettings.pixReceiverName || 'a loja'}${paymentSettings.pixKey ? ` · chave ${paymentSettings.pixKey}` : ''}.
             </div>
           </div>
         ` : ''}
@@ -390,6 +474,12 @@ const Checkout = (() => {
             <a href="${orderResult.checkoutUrl}" target="_blank" class="btn btn-primary btn-lg" rel="noopener">
               &#128179; Pagar com Cartao
             </a>
+          </div>
+        ` : ''}
+
+        ${orderResult.paymentMethod === 'cash' ? `
+          <div style="text-align:center;margin:var(--space-6) 0;">
+            <p style="margin-bottom:var(--space-3);">Pagamento presencial diretamente com ${store ? store.nome : 'a loja'}.</p>
           </div>
         ` : ''}
 
@@ -440,6 +530,7 @@ const Checkout = (() => {
         </div>
 
         <div class="ck-confirmation__delivery">
+          ${store ? `<p><strong>Loja:</strong> ${store.nome} - ${store.endereco || ''}</p>` : ''}
           <p><strong>Entrega em:</strong> ${customer.endereco}, ${customer.numero}${customer.complemento ? ' - ' + customer.complemento : ''}<br>
           ${customer.bairro} - ${customer.cidade}/${customer.estado} - CEP ${customer.cep}</p>
           <p style="font-size:var(--fs-xs);color:var(--cinza-500);">Enviaremos atualizacoes para ${customer.email}</p>
@@ -658,9 +749,18 @@ const Checkout = (() => {
     const paymentMethod = getPaymentMethod();
     const totals = calcTotals();
     const orderNumber = Utils.generateOrderNumber();
+    const store = getSelectedStore();
+    const paymentSettings = getStorePaymentSettings();
 
     const orderData = {
       orderNumber,
+      loja: store ? store.id : null,
+      lojaSnapshot: store ? {
+        id: store.id,
+        nome: store.nome,
+        slug: store.slug,
+        subdomain: store.subdomain || '',
+      } : null,
       items: cart.map(item => ({
         productId: item.productId,
         nome: item.nome,
@@ -679,6 +779,12 @@ const Checkout = (() => {
       shipping: totals.shippingCost,
       total: totals.total,
       createdAt: new Date().toISOString(),
+      paymentSettings: {
+        methods: paymentSettings.methods,
+        mercadoPagoEmail: paymentSettings.mercadoPagoEmail || '',
+        pixKey: paymentSettings.pixKey || '',
+        pixReceiverName: paymentSettings.pixReceiverName || '',
+      },
     };
 
     try {
@@ -704,13 +810,13 @@ const Checkout = (() => {
     } catch (e) {
       // Fallback: simulate order locally
       console.warn('API unavailable, processing order locally:', e.message);
-      orderResult = {
-        orderNumber,
-        paymentMethod,
-        pixCode: paymentMethod === 'pix' ? generateLocalPixCode(orderNumber, totals.total) : null,
-        checkoutUrl: paymentMethod === 'credit_card' ? null : null,
-        boletoUrl: paymentMethod === 'boleto' ? null : null,
-      };
+        orderResult = {
+          orderNumber,
+          paymentMethod,
+          pixCode: paymentMethod === 'pix' ? generateLocalPixCode(orderNumber, totals.total, store, paymentSettings) : null,
+          checkoutUrl: paymentMethod === 'credit_card' ? null : null,
+          boletoUrl: paymentMethod === 'boleto' ? null : null,
+        };
     }
 
     // Save order to local history
@@ -727,7 +833,7 @@ const Checkout = (() => {
       try {
         FirestoreService.init();
         // Save order - use 'centro' as default store for online orders
-        const storeId = savedOrder.loja || 'centro';
+        const storeId = savedOrder.loja || (store ? store.id : 'centro');
         savedOrder.loja = storeId;
         savedOrder.numero = orderResult.orderNumber;
         savedOrder.data = savedOrder.createdAt;
@@ -818,10 +924,13 @@ const Checkout = (() => {
     renderCurrentStep();
   }
 
-  function generateLocalPixCode(orderNum, total) {
+  function generateLocalPixCode(orderNum, total, store, paymentSettings) {
     // Generate a simulated PIX code (copia-e-cola format)
     const cleanTotal = total.toFixed(2).replace('.', '');
-    return `00020126580014BR.GOV.BCB.PIX0136nattu-shop-${orderNum}520400005303986540${cleanTotal}5802BR5925NATTU SHOP LTDA6009SAO PAULO62070503***6304`;
+    const pixKey = String((paymentSettings && paymentSettings.pixKey) || `pedido-${orderNum}@nattu.shop`).slice(0, 36);
+    const receiver = String((paymentSettings && paymentSettings.pixReceiverName) || (store && store.nome) || 'NATTU SHOP').toUpperCase().slice(0, 25);
+    const city = String((paymentSettings && paymentSettings.pixCity) || (store && store.cidade) || 'SAO PAULO').toUpperCase().slice(0, 15);
+    return `00020126580014BR.GOV.BCB.PIX01${String(pixKey.length).padStart(2, '0')}${pixKey}520400005303986540${cleanTotal}5802BR59${String(receiver.length).padStart(2, '0')}${receiver}60${String(city.length).padStart(2, '0')}${city}62070503***6304`;
   }
 
   // ======= PUBLIC API =======

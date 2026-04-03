@@ -5,6 +5,8 @@
 const CatalogoPage = {
   _allProducts: [],
   _selectedStore: 'todas',
+  _tenantStore: null,
+  _tenantLocked: false,
 
   async init() {
     Search.init();
@@ -15,28 +17,76 @@ const CatalogoPage = {
   },
 
   initStoreSelector() {
-    const params = new URLSearchParams(window.location.search);
-    const storeFromUrl = params.get('loja');
+    const stores = window.DataStores || [];
+    const tenant = typeof TenantResolver !== 'undefined'
+      ? TenantResolver.resolveCurrentStore(stores)
+      : { store: null, locked: false };
     const select = document.getElementById('marketplace-store-select');
     if (!select) return;
 
     const options = ['<option value="todas">Todas as lojas do marketplace</option>']
-      .concat((window.DataStores || []).map(store => `<option value="${store.id}">${store.nome}</option>`));
+      .concat(stores.map(store => `<option value="${store.id}">${store.nome}</option>`));
     select.innerHTML = options.join('');
 
-    if (storeFromUrl && (window.DataStores || []).some(store => store.id === storeFromUrl)) {
+    this._tenantStore = tenant.store || null;
+    this._tenantLocked = !!tenant.locked;
+
+    if (tenant.store) {
+      this._selectedStore = tenant.store.id;
+      select.value = tenant.store.id;
+      this.syncCheckoutStore(tenant.store);
+    }
+
+    if (this._tenantLocked && tenant.store) {
+      select.innerHTML = `<option value="${tenant.store.id}">${tenant.store.nome}</option>`;
+      select.disabled = true;
+      this.applyTenantBranding(tenant.store);
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const storeFromUrl = params.get('loja');
+    if (storeFromUrl && stores.some(store => store.id === storeFromUrl)) {
       this._selectedStore = storeFromUrl;
       select.value = storeFromUrl;
+      const selected = stores.find(store => store.id === storeFromUrl);
+      if (selected) this.syncCheckoutStore(selected);
     }
 
     select.addEventListener('change', () => {
       this._selectedStore = select.value || 'todas';
+      const selected = stores.find(store => store.id === this._selectedStore) || null;
+      this.syncCheckoutStore(selected);
       const nextUrl = new URL(window.location.href);
       if (this._selectedStore === 'todas') nextUrl.searchParams.delete('loja');
       else nextUrl.searchParams.set('loja', this._selectedStore);
       window.history.replaceState({}, '', nextUrl);
       this.filterAndRender();
     });
+  },
+
+  syncCheckoutStore(store) {
+    const checkoutData = AppState.get('checkoutData') || {};
+    checkoutData.loja = store ? {
+      id: store.id,
+      nome: store.nome,
+      slug: store.slug,
+      subdomain: store.subdomain || '',
+      endereco: store.endereco,
+      cidade: store.cidade,
+      estado: store.estado,
+      whatsapp: store.whatsapp,
+      paymentSettings: store.paymentSettings || {},
+    } : null;
+    AppState.set('checkoutData', checkoutData);
+  },
+
+  applyTenantBranding(store) {
+    document.title = `${store.nome} - Nattu Shop`;
+    const promoBanner = document.getElementById('promo-banner');
+    if (promoBanner) {
+      promoBanner.textContent = `${store.nome}: catalogo proprio, checkout da loja e atendimento direto pelo tenant.`;
+    }
   },
 
   getFilteredProducts() {
@@ -131,7 +181,7 @@ const CatalogoPage = {
     }
     if (storeMeta) {
       storeMeta.textContent = selectedStore
-        ? `${selectedStore.nome} · Plano ${selectedStore.plano.toUpperCase()} · Mensalidade ${Utils.formatBRL(selectedStore.mensalidade)}`
+        ? `${selectedStore.nome} · ${selectedStore.subdomain || selectedStore.slug}.${(typeof TenantResolver !== 'undefined' ? TenantResolver.PRIMARY_DOMAIN : 'nattu.shop')} · Plano ${selectedStore.plano.toUpperCase()}`
         : 'Compare catalogos, disponibilidade e operacao das lojas parceiras.';
     }
   },

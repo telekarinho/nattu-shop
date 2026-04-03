@@ -3,6 +3,15 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (typeof TenantResolver !== 'undefined') {
+    const tenant = TenantResolver.resolveCurrentStore(window.DataStores || []);
+    const isHome = /(^\/$|\/index\.html$)/i.test(window.location.pathname);
+    if (tenant.store && tenant.locked && isHome) {
+      window.location.replace(TenantResolver.getStoreUrl(tenant.store, '/catalogo.html'));
+      return;
+    }
+  }
+
   // Init storage
   Storage.init();
   AppState.restore();

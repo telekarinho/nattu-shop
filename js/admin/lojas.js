@@ -266,7 +266,7 @@ const AdminLojas = (() => {
         <div>
           <h2 style="margin:0;color:#1B4332;font-size:22px;">${store.nome}</h2>
           <p style="margin:4px 0 0;color:#666;font-size:14px;">📍 ${store.endereco} — ${store.cidade}/${store.estado}</p>
-          <p style="margin:6px 0 0;color:#2D6A4F;font-size:13px;">URL pública: /catalogo.html?loja=${store.slug || store.id}</p>
+          <p style="margin:6px 0 0;color:#2D6A4F;font-size:13px;">URL pública: https://${store.subdomain || store.slug || store.id}.nattu.shop/catalogo.html</p>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
           <span class="loja-card__status" style="background:${badge.bg};color:${badge.color};padding:6px 16px;border-radius:12px;font-size:14px;font-weight:600;">${badge.label}</span>
@@ -308,6 +308,10 @@ const AdminLojas = (() => {
           <p style="margin:4px 0;font-size:13px;color:#555;">Mensalidade: ${Utils.formatBRL(store.mensalidade || 0)}</p>
           <p style="margin:4px 0;font-size:13px;color:#555;">Próxima cobrança: ${store.nextBillingAt ? Utils.formatDate(store.nextBillingAt) : '—'}</p>
           <p style="margin:4px 0;font-size:13px;color:#555;">Segmento: ${store.segmento || '—'}</p>
+          <h4 style="margin:16px 0 10px;color:#1B4332;font-size:14px;">Pagamentos</h4>
+          <p style="margin:4px 0;font-size:13px;color:#555;">PIX: ${store.paymentSettings?.methods?.pix ? 'Ativo' : 'Desligado'}</p>
+          <p style="margin:4px 0;font-size:13px;color:#555;">Mercado Pago: ${store.paymentSettings?.methods?.mercadoPago ? (store.paymentSettings?.mercadoPagoEmail || 'Ativo') : 'Desligado'}</p>
+          <p style="margin:4px 0;font-size:13px;color:#555;">Chave PIX: ${store.paymentSettings?.pixKey || '—'}</p>
           <h4 style="margin:16px 0 10px;color:#1B4332;font-size:14px;">Horários</h4>
           <p style="margin:4px 0;font-size:13px;color:#555;">Seg-Sex: ${store.horario ? store.horario.seg_sex : '—'}</p>
           <p style="margin:4px 0;font-size:13px;color:#555;">Sábado: ${store.horario ? store.horario.sabado : '—'}</p>
@@ -395,7 +399,7 @@ const AdminLojas = (() => {
     const s = store || {
       id: '', nome: '', endereco: '', cidade: '', estado: 'SP', cep: '',
       cnpj: '', ie: '', telefone: '', whatsapp: '',
-      ownerName: '', ownerEmail: '', segmento: '', slug: '',
+      ownerName: '', ownerEmail: '', segmento: '', slug: '', subdomain: '',
       plano: 'start', mensalidade: 197, billingStatus: 'teste', nextBillingAt: '',
       horario: { seg_sex: '08:00 - 20:00', sabado: '08:00 - 18:00', domingo: '09:00 - 14:00' },
       taxasEntrega: [
@@ -403,6 +407,16 @@ const AdminLojas = (() => {
         { distanciaMax: 5, valor: 5.99, label: 'Até 5km - R$ 5,99' },
         { distanciaMax: 10, valor: 9.99, label: 'Até 10km - R$ 9,99' },
       ],
+      paymentSettings: {
+        methods: { pix: true, mercadoPago: true, boleto: false, dinheiro: true },
+        pixKey: '',
+        pixKeyType: 'email',
+        pixReceiverName: '',
+        pixCity: 'SAO PAULO',
+        mercadoPagoEmail: '',
+        statementDescriptor: '',
+        instructions: '',
+      },
       raioEntrega: 10,
       status: 'aberta',
     };
@@ -472,6 +486,10 @@ const AdminLojas = (() => {
             <div>
               <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;">Slug público</label>
               <input type="text" name="slug" value="${s.slug || ''}" placeholder="minha-loja-natural" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box;">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;">Subdomínio</label>
+              <input type="text" name="subdomain" value="${s.subdomain || ''}" placeholder="minha-loja" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box;">
             </div>
             <div>
               <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;">Status</label>
@@ -544,6 +562,57 @@ const AdminLojas = (() => {
             <div style="margin-top:12px;">
               <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;">Raio de Entrega (km)</label>
               <input type="number" name="raioEntrega" value="${s.raioEntrega || 10}" min="0" style="width:120px;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;">
+            </div>
+          </fieldset>
+
+          <fieldset style="border:1px solid #eee;border-radius:8px;padding:16px;margin-top:16px;">
+            <legend style="font-weight:700;color:#1B4332;padding:0 8px;font-size:14px;">Pagamentos da loja</legend>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                <input type="checkbox" name="pm_pix" ${(s.paymentSettings?.methods?.pix ?? true) ? 'checked' : ''}> PIX
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                <input type="checkbox" name="pm_mercadopago" ${(s.paymentSettings?.methods?.mercadoPago ?? true) ? 'checked' : ''}> Mercado Pago
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                <input type="checkbox" name="pm_boleto" ${s.paymentSettings?.methods?.boleto ? 'checked' : ''}> Boleto
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                <input type="checkbox" name="pm_dinheiro" ${(s.paymentSettings?.methods?.dinheiro ?? true) ? 'checked' : ''}> Dinheiro
+              </label>
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;">Chave PIX</label>
+                <input type="text" name="pixKey" value="${s.paymentSettings?.pixKey || ''}" placeholder="pix@sualoja.com.br" style="width:100%;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;">Tipo da chave PIX</label>
+                <select name="pixKeyType" style="width:100%;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box;">
+                  <option value="email" ${(s.paymentSettings?.pixKeyType || 'email') === 'email' ? 'selected' : ''}>E-mail</option>
+                  <option value="telefone" ${s.paymentSettings?.pixKeyType === 'telefone' ? 'selected' : ''}>Telefone</option>
+                  <option value="cpf_cnpj" ${s.paymentSettings?.pixKeyType === 'cpf_cnpj' ? 'selected' : ''}>CPF/CNPJ</option>
+                  <option value="aleatoria" ${s.paymentSettings?.pixKeyType === 'aleatoria' ? 'selected' : ''}>Aleatória</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;">Recebedor PIX</label>
+                <input type="text" name="pixReceiverName" value="${s.paymentSettings?.pixReceiverName || s.razaoSocial || s.nome || ''}" placeholder="Razão social da loja" style="width:100%;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;">Cidade PIX</label>
+                <input type="text" name="pixCity" value="${s.paymentSettings?.pixCity || s.cidade || ''}" placeholder="SAO PAULO" style="width:100%;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;">E-mail Mercado Pago</label>
+                <input type="email" name="mercadoPagoEmail" value="${s.paymentSettings?.mercadoPagoEmail || ''}" placeholder="financeiro@sualoja.com.br" style="width:100%;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;">Descriptor</label>
+                <input type="text" name="statementDescriptor" value="${s.paymentSettings?.statementDescriptor || ''}" placeholder="MINHA LOJA" style="width:100%;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              </div>
+              <div style="grid-column:1/-1;">
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;">Instruções simples</label>
+                <textarea name="paymentInstructions" rows="3" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box;">${s.paymentSettings?.instructions || ''}</textarea>
+              </div>
             </div>
           </fieldset>
 
@@ -631,6 +700,7 @@ const AdminLojas = (() => {
         ownerEmail: form.ownerEmail.value.trim(),
         segmento: form.segmento.value.trim(),
         slug: form.slug.value.trim() || Utils.slugify(form.nome.value),
+        subdomain: form.subdomain.value.trim() || Utils.slugify(form.nome.value),
         plano: form.plano.value,
         mensalidade: parseFloat(form.mensalidade.value) || 0,
         billingStatus: form.billingStatus.value,
@@ -641,9 +711,25 @@ const AdminLojas = (() => {
           sabado: form.horario_sabado.value.trim(),
           domingo: form.horario_domingo.value.trim(),
         },
+        paymentSettings: {
+          methods: {
+            pix: form.pm_pix.checked,
+            mercadoPago: form.pm_mercadopago.checked,
+            boleto: form.pm_boleto.checked,
+            dinheiro: form.pm_dinheiro.checked,
+          },
+          pixKey: form.pixKey.value.trim(),
+          pixKeyType: form.pixKeyType.value,
+          pixReceiverName: form.pixReceiverName.value.trim(),
+          pixCity: form.pixCity.value.trim().toUpperCase(),
+          mercadoPagoEmail: form.mercadoPagoEmail.value.trim(),
+          statementDescriptor: form.statementDescriptor.value.trim(),
+          instructions: form.paymentInstructions.value.trim(),
+        },
         taxasEntrega: taxas,
         raioEntrega: parseFloat(form.raioEntrega.value) || 10,
-        publicUrl: `/catalogo.html?loja=${form.slug.value.trim() || Utils.slugify(form.nome.value)}`,
+        publicUrl: `https://${form.subdomain.value.trim() || Utils.slugify(form.nome.value)}.nattu.shop/catalogo.html`,
+        adminUrl: `https://${form.subdomain.value.trim() || Utils.slugify(form.nome.value)}.nattu.shop/admin/`,
       };
       delete storeData._id;
 

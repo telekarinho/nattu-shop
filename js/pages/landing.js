@@ -5,10 +5,19 @@
 
 // Category cards click handler
 document.addEventListener('DOMContentLoaded', () => {
+  const tenant = typeof TenantResolver !== 'undefined'
+    ? TenantResolver.resolveCurrentStore(window.DataStores || [])
+    : { store: null };
+
   document.querySelectorAll('.category-card').forEach(card => {
     card.addEventListener('click', () => {
       const cat = card.dataset.category;
-      if (cat) window.location.href = `catalogo.html?cat=${cat}`;
+      if (!cat) return;
+      if (tenant.store && typeof TenantResolver !== 'undefined') {
+        window.location.href = TenantResolver.getStoreUrl(tenant.store, '/catalogo.html', { cat, loja: tenant.store.id });
+        return;
+      }
+      window.location.href = `catalogo.html?cat=${cat}`;
     });
   });
 

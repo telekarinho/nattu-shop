@@ -30,6 +30,14 @@ const Cart = {
           Toast.warning('Carrinho vazio!');
           return;
         }
+        const checkoutData = AppState.get('checkoutData') || {};
+        const tenant = typeof TenantResolver !== 'undefined'
+          ? TenantResolver.resolveCurrentStore(window.DataStores || [])
+          : { store: null };
+        if (!(checkoutData.loja && checkoutData.loja.id) && !tenant.store) {
+          Toast.warning('Selecione uma loja antes de finalizar a compra.');
+          return;
+        }
         this.closeSidebar();
         if (typeof Checkout !== 'undefined') {
           Checkout.open();
