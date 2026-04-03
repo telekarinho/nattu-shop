@@ -79,7 +79,7 @@ body{
   <!-- Normal login state -->
   <div id="login-panel">
     <div class="logo">🌿</div>
-    <div class="brand">Clube do <span>Natural</span></div>
+    <div class="brand">Nattu <span>Shop</span></div>
     <p class="subtitle">Faça login para acessar o sistema</p>
 
     <button class="btn-google" id="btn-google-login" onclick="doGoogleLogin()">
@@ -257,7 +257,7 @@ body{
 
       let msg = 'Erro ao fazer login. ';
       if (err.code === 'auth/popup-closed-by-user') msg = 'Login cancelado. Tente novamente.';
-      else if (err.code === 'auth/unauthorized-domain') msg = 'Dominio nao autorizado no Firebase. Adicione o dominio deste site em Authentication > Settings > Authorized domains no console Firebase (ex: www.nattu-shop.com, nattu-shop.com, nattu-shop.vercel.app).';
+      else if (err.code === 'auth/unauthorized-domain') msg = 'Dominio nao autorizado no Firebase. Adicione este dominio em Authentication > Settings > Authorized domains no console Firebase (ex: nattu.shop e www.nattu.shop).';
       else if (err.code === 'auth/popup-blocked') msg = 'Popup bloqueado pelo navegador. Tente permitir popups ou use outro navegador.';
       else if (err.code === 'auth/cancelled-popup-request') msg = 'Login cancelado. Tente novamente.';
       else if (err.code === 'auth/network-request-failed') msg = 'Sem internet. Verifique sua conexao.';

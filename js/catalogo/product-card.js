@@ -3,6 +3,17 @@
    ============================================ */
 
 const ProductCard = {
+  _placeholderMarkup(product) {
+    const category = DataCategories.find(c => c.id === product.categoria);
+    const icon = category ? category.icone : '🌿';
+    return `
+      <div class="product-card__img-fallback" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;background:radial-gradient(circle at top, rgba(40,199,111,.18), rgba(19,51,38,.06));color:var(--verde-escuro);">
+        <span style="font-size:2.2rem;line-height:1;margin-bottom:8px;">${icon}</span>
+        <span style="font-size:var(--fs-sm);font-weight:var(--fw-bold);line-height:1.25;">${product.nome}</span>
+      </div>
+    `;
+  },
+
   _salesCount(id) {
     let h = 0;
     for (let i = 0; i < id.length; i++) h = ((h << 5) - h) + id.charCodeAt(i);
@@ -64,7 +75,8 @@ const ProductCard = {
     card.dataset.id = product.id;
     card.innerHTML = `
       <div class="product-card__image-wrap">
-        ${product.imagem ? `<img class="product-card__img" src="${product.imagem}" alt="${product.nome}" loading="lazy" onerror="this.style.display='none'">` : ''}
+        ${product.imagem ? `<img class="product-card__img" src="${product.imagem}" alt="${product.nome}" loading="lazy">` : ''}
+        ${this._placeholderMarkup(product)}
         <div class="product-card__badges">${selosHTML}</div>
         ${recurrenceBadge}
         ${urgencyBadge}
@@ -91,6 +103,20 @@ const ProductCard = {
     });
 
     const addBtn = card.querySelector('.product-card__add-btn');
+    const img = card.querySelector('.product-card__img');
+    const fallback = card.querySelector('.product-card__img-fallback');
+    if (img && fallback) {
+      fallback.style.display = 'none';
+      img.addEventListener('error', () => {
+        img.style.display = 'none';
+        fallback.style.display = 'flex';
+      });
+      img.addEventListener('load', () => {
+        img.style.display = '';
+        fallback.style.display = 'none';
+      });
+    }
+
     addBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       AppState.addToCart(product, defaultVariacao, 1);

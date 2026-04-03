@@ -2,15 +2,16 @@
 declare(strict_types=1);
 
  $allowedOrigins = [
-    'https://nattu-shop.com',
-    'https://www.nattu-shop.com',
+    'https://nattu.shop',
+    'https://www.nattu.shop',
     'https://clube-do-natural.web.app',
+    'http://localhost:3000',
  ];
  $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
  if (in_array($origin, $allowedOrigins, true)) {
     header('Access-Control-Allow-Origin: ' . $origin);
  } else {
-    header('Access-Control-Allow-Origin: https://nattu-shop.com');
+    header('Access-Control-Allow-Origin: https://nattu.shop');
  }
 header('Access-Control-Allow-Headers: Authorization, Content-Type');
 header('Access-Control-Allow-Methods: POST, OPTIONS');

@@ -637,7 +637,7 @@ input{font-family:inherit;outline:none}
 <div id="posApp">
   <!-- Top Bar -->
   <div class="topbar">
-    <div class="topbar-logo"><img src="../img/logo-full.png" alt="" class="topbar-logo-icon"> Clube do <span>Natural</span></div>
+    <div class="topbar-logo"><img src="../img/logo-full.png" alt="" class="topbar-logo-icon"> Nattu <span>Shop</span></div>
     <div class="topbar-divider"></div>
     <div class="topbar-info">
       <span id="storeName">Centro</span> &bull;
@@ -2412,7 +2412,7 @@ function generateLabels() {
   const variation = product.variacoes[varIndex];
   const qty = parseInt(document.getElementById('labelQty').value) || 1;
 
-  const qrUrl = `https://nattu-shop.com/catalogo?produto=${product.id}`;
+  const qrUrl = `https://nattu.shop/catalogo.html?produto=${product.id}`;
   const qrSvg = generateQRCodeSVG(qrUrl, 100);
 
   const preview = document.getElementById('labelPreview');
@@ -2429,7 +2429,7 @@ function generateLabels() {
       <div class="product-label">
         <div class="label-header">
           <img class="label-logo" src="../img/logo-full.png" alt="">
-          <div class="label-brand">Clube do <span>Natural</span></div>
+          <div class="label-brand">Nattu <span>Shop</span></div>
         </div>
         <div class="label-body">
           <div class="label-name">${product.nome}</div>
