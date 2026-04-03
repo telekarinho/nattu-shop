@@ -1,4 +1,4 @@
-# CBN Plus
+# Nattu Shop
 
 Plataforma SaaS para lojas de produtos naturais com operacao completa por loja e marketplace centralizado.
 
