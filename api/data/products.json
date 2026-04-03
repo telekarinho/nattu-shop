@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "name": "Granola Artesanal Tradicional",
+    "slug": "granola-artesanal-tradicional",
+    "description": "Granola crocante feita com aveia, mel, castanhas e frutas secas. Sem conservantes.",
+    "price": 24.90,
+    "unit": "kg",
+    "category": "granolas",
+    "image": "/img/produtos/granola-tradicional.webp",
+    "available": true,
+    "granel": true
+  },
+  {
+    "id": "2",
+    "name": "Castanha do Pará",
+    "slug": "castanha-do-para",
+    "description": "Castanha do Pará selecionada, rica em selênio. Produto 100% natural.",
+    "price": 89.90,
+    "unit": "kg",
+    "category": "castanhas",
+    "image": "/img/produtos/castanha-para.webp",
+    "available": true,
+    "granel": true
+  },
+  {
+    "id": "3",
+    "name": "Mel Silvestre Puro",
+    "slug": "mel-silvestre-puro",
+    "description": "Mel silvestre puro, extraído de forma sustentável. Sem adição de açúcar.",
+    "price": 39.90,
+    "unit": "un",
+    "category": "mel",
+    "image": "/img/produtos/mel-silvestre.webp",
+    "available": true,
+    "granel": false
+  },
+  {
+    "id": "4",
+    "name": "Mix de Nuts Premium",
+    "slug": "mix-nuts-premium",
+    "description": "Combinação de castanhas, nozes, amêndoas e macadâmia. Energia e saúde.",
+    "price": 79.90,
+    "unit": "kg",
+    "category": "castanhas",
+    "image": "/img/produtos/mix-nuts.webp",
+    "available": true,
+    "granel": true
+  },
+  {
+    "id": "5",
+    "name": "Farinha de Amêndoas",
+    "slug": "farinha-de-amendoas",
+    "description": "Farinha de amêndoas fina, ideal para receitas low carb e sem glúten.",
+    "price": 64.90,
+    "unit": "kg",
+    "category": "farinhas",
+    "image": "/img/produtos/farinha-amendoas.webp",
+    "available": true,
+    "granel": true
+  },
+  {
+    "id": "6",
+    "name": "Óleo de Coco Extra Virgem",
+    "slug": "oleo-coco-extra-virgem",
+    "description": "Óleo de coco extra virgem prensado a frio. 500ml.",
+    "price": 32.90,
+    "unit": "un",
+    "category": "oleos",
+    "image": "/img/produtos/oleo-coco.webp",
+    "available": true,
+    "granel": false
+  }
+]

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff8e1;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ffecb3;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#ffb74d" stroke-width="3"/>
+  <!-- Root shape -->
+  <g transform="translate(200,170)">
+    <path d="M-40,10 Q-50,-10 -30,-20 Q-10,-5 0,10 Q10,-5 30,-20 Q50,-10 40,10 Q30,30 0,25 Q-30,30 -40,10" fill="#E65100"/>
+    <path d="M-30,5 Q-35,-5 -20,-12 Q-5,0 0,10" fill="#EF6C00" opacity="0.7"/>
+    <path d="M0,10 Q5,0 20,-12 Q35,-5 30,5" fill="#FF8F00" opacity="0.5"/>
+    <!-- Bumps/knobs -->
+    <circle cx="-35" cy="-5" r="8" fill="#E65100"/>
+    <circle cx="35" cy="-5" r="8" fill="#E65100"/>
+    <ellipse cx="0" cy="-15" rx="10" ry="7" fill="#EF6C00"/>
+  </g>
+  <!-- Powder in small bowl -->
+  <ellipse cx="200" cy="260" rx="50" ry="15" fill="#C49000"/>
+  <path d="M150 255 Q155 285 200 285 Q245 285 250 255" fill="#8D6E00"/>
+  <ellipse cx="200" cy="255" rx="50" ry="15" fill="#FFB300"/>
+  <!-- Powder particles -->
+  <g fill="#FFB300" opacity="0.4">
+    <circle cx="165" cy="240" r="2"/><circle cx="235" cy="238" r="2"/>
+    <circle cx="180" cy="235" r="1.5"/><circle cx="220" cy="236" r="1.5"/>
+  </g>
+  <text x="200" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#E65100">Cúrcuma</text>
+</svg>

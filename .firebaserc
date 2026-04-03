@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "clube-do-natural"
+  },
+  "targets": {
+    "clube-do-natural": {
+      "hosting": {
+        "production": [
+          "clube-do-natural"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

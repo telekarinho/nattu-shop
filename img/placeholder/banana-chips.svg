@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff8e1;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ffecb3;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#ffc107" stroke-width="3"/>
+  <!-- Paper bag/bowl -->
+  <path d="M120 210 Q115 290 200 295 Q285 290 280 210" fill="#D4A050"/>
+  <path d="M115 210 L120 190 Q200 180 280 190 L285 210 Q200 200 115 210" fill="#E0B060"/>
+  <!-- Banana chips -->
+  <g>
+    <ellipse cx="160" cy="210" rx="18" ry="14" fill="#FFD54F" stroke="#FFC107" stroke-width="1.5"/>
+    <ellipse cx="190" cy="200" rx="18" ry="14" fill="#FFCA28" stroke="#FFB300" stroke-width="1.5" transform="rotate(-10 190 200)"/>
+    <ellipse cx="220" cy="205" rx="18" ry="14" fill="#FFD54F" stroke="#FFC107" stroke-width="1.5" transform="rotate(8 220 205)"/>
+    <ellipse cx="250" cy="210" rx="18" ry="14" fill="#FFCA28" stroke="#FFB300" stroke-width="1.5" transform="rotate(-5 250 210)"/>
+    <ellipse cx="175" cy="225" rx="16" ry="12" fill="#FFD54F" stroke="#FFC107" stroke-width="1.5" transform="rotate(15 175 225)"/>
+    <ellipse cx="205" cy="220" rx="16" ry="12" fill="#FFCA28" stroke="#FFB300" stroke-width="1.5" transform="rotate(-12 205 220)"/>
+    <ellipse cx="235" cy="225" rx="16" ry="12" fill="#FFD54F" stroke="#FFC107" stroke-width="1.5" transform="rotate(7 235 225)"/>
+    <!-- Chip details (center holes) -->
+    <circle cx="160" cy="210" r="3" fill="#FFB300" opacity="0.4"/>
+    <circle cx="190" cy="200" r="3" fill="#FFA000" opacity="0.4"/>
+    <circle cx="220" cy="205" r="3" fill="#FFB300" opacity="0.4"/>
+  </g>
+  <!-- Banana decoration -->
+  <g transform="translate(200,130)">
+    <path d="M-30,10 Q-35,-15 -10,-25 Q15,-30 30,-15 Q35,0 20,10" fill="#FFD54F" stroke="#FFC107" stroke-width="2"/>
+    <path d="M-28,8 Q-32,-12 -8,-22 Q12,-26 26,-13" fill="#FFEB3B" opacity="0.5"/>
+    <rect x="-5" y="-28" width="10" height="6" rx="2" fill="#8D6E63"/>
+  </g>
+  <text x="200" y="348" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#E65100">Banana Chips</text>
+</svg>

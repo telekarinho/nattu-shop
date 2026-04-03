@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0e8f5;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#e4d6ee;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#9b7bb5" stroke-width="3"/>
+  <!-- Acai bowl -->
+  <path d="M110 220 Q110 300 200 300 Q290 300 290 220" fill="#4A148C"/>
+  <ellipse cx="200" cy="220" rx="90" ry="32" fill="#6A1B9A"/>
+  <!-- Acai berries cluster -->
+  <g transform="translate(200,150)">
+    <circle cx="-15" cy="-10" r="12" fill="#4A148C"/>
+    <circle cx="5" cy="-15" r="12" fill="#38006B"/>
+    <circle cx="20" cy="-5" r="12" fill="#4A148C"/>
+    <circle cx="-5" cy="5" r="12" fill="#38006B"/>
+    <circle cx="12" cy="10" r="12" fill="#4A148C"/>
+    <!-- Highlights -->
+    <circle cx="-12" cy="-14" r="3" fill="white" opacity="0.3"/>
+    <circle cx="8" cy="-19" r="3" fill="white" opacity="0.3"/>
+    <circle cx="23" cy="-9" r="3" fill="white" opacity="0.3"/>
+  </g>
+  <!-- Palm leaf -->
+  <g transform="translate(200,95)">
+    <line x1="0" y1="15" x2="0" y2="-10" stroke="#4CAF50" stroke-width="2"/>
+    <path d="M0,-10 Q-25,-30 -40,-20 Q-20,-18 0,-10" fill="#66BB6A"/>
+    <path d="M0,-10 Q25,-30 40,-20 Q20,-18 0,-10" fill="#4CAF50"/>
+    <path d="M0,-10 Q-15,-35 -25,-35 Q-12,-22 0,-10" fill="#81C784"/>
+    <path d="M0,-10 Q15,-35 25,-35 Q12,-22 0,-10" fill="#66BB6A"/>
+  </g>
+  <text x="200" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#4A148C">Açaí em Pó</text>
+</svg>

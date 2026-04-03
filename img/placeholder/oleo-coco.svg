@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f1f8e9;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#e0f0d0;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#a5c97a" stroke-width="3"/>
+  <!-- Jar -->
+  <g transform="translate(200,215)">
+    <rect x="-45" y="-45" width="90" height="80" rx="10" fill="#F5F5F5"/>
+    <!-- Lid -->
+    <rect x="-40" y="-58" width="80" height="16" rx="6" fill="#E0E0E0"/>
+    <!-- Oil inside (white/clear) -->
+    <rect x="-38" y="-40" width="76" height="68" rx="8" fill="#FAFAFA"/>
+    <!-- Label -->
+    <rect x="-35" y="-15" width="70" height="35" rx="4" fill="white" opacity="0.9" stroke="#A5D6A7" stroke-width="1"/>
+    <text x="0" y="2" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2E7D32">ÓLEO DE</text>
+    <text x="0" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2E7D32">COCO</text>
+  </g>
+  <!-- Coconut halves -->
+  <g transform="translate(130,145)">
+    <path d="M-25,5 Q-25,-15 0,-20 Q25,-15 25,5 Q25,20 0,22 Q-25,20 -25,5" fill="#8D6E63"/>
+    <path d="M-20,3 Q-20,-10 0,-14 Q20,-10 20,3 Q20,15 0,17 Q-20,15 -20,3" fill="white"/>
+    <circle cx="0" cy="2" r="5" fill="#F5F5F5"/>
+  </g>
+  <!-- Palm leaf -->
+  <g transform="translate(275,115) scale(0.5)">
+    <line x1="0" y1="20" x2="0" y2="-20" stroke="#4CAF50" stroke-width="3"/>
+    <path d="M0,-20 Q-30,-40 -50,-25 Q-25,-20 0,-20" fill="#66BB6A"/>
+    <path d="M0,-20 Q30,-40 50,-25 Q25,-20 0,-20" fill="#4CAF50"/>
+    <path d="M0,-15 Q-25,-30 -40,-18 Q-20,-15 0,-15" fill="#81C784"/>
+    <path d="M0,-15 Q25,-30 40,-18 Q20,-15 0,-15" fill="#66BB6A"/>
+  </g>
+  <text x="200" y="348" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2E7D32">Óleo de Coco</text>
+</svg>

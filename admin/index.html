@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1B4332">
+  <meta name="description" content="CBN Plus — Painel Administrativo">
+  <title>Admin — CBN Plus</title>
+  <link rel="icon" type="image/png" href="../img/logo-full.png">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="../css/variables.css?v=20260318">
+  <link rel="stylesheet" href="../css/base.css?v=20260318">
+  <link rel="stylesheet" href="../css/components.css?v=20260318">
+  <link rel="stylesheet" href="../css/admin.css?v=20260318b">
+  <link rel="stylesheet" href="../css/dashboard.css?v=20260318b">
+  <link rel="stylesheet" href="../css/forms.css?v=20260318">
+  <link rel="stylesheet" href="../css/tables.css?v=20260318">
+  <style>
+    /* User management cards */
+    .users-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+    .user-card{background:white;border-radius:12px;padding:16px;border:1px solid #e0e0e0;transition:box-shadow 0.2s}
+    .user-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08)}
+    .user-card--pending{border-color:#E63946;border-width:2px;background:#fff8f8}
+    .user-card__header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .user-card__avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0}
+    .user-card__avatar--placeholder{background:#2D6A4F;color:white;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+    .user-card__info{min-width:0;flex:1}
+    .user-card__name{display:block;font-size:15px;color:#1B4332;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .user-card__email{display:block;font-size:12px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .user-card__meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
+    .user-card__role{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px}
+    .user-card__date{font-size:11px;color:#999}
+    .user-card__actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .user-card__role-select{padding:6px 10px;border:1px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer;background:white}
+    .btn--danger{background:#E63946 !important;color:white !important;border:none}
+    .btn--danger:hover{background:#c62828 !important}
+    .btn--danger-ghost{background:none !important;color:#E63946 !important;border:1px solid #E63946 !important;font-size:12px;padding:4px 12px;border-radius:6px;cursor:pointer}
+    .btn--danger-ghost:hover{background:#fef2f2 !important}
+    @media(max-width:600px){.users-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- ========== ADMIN SHELL ========== -->
+  <!-- Auth is handled by CdnAuth.guard (Firebase Google login) -->
+  <div id="admin-shell" class="admin-shell" hidden>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside id="admin-sidebar" class="admin-sidebar">
+      <div class="sidebar__header">
+        <a href="../index.html" class="sidebar__logo">
+          <span class="sidebar__logo-icon"><img src="../img/logo-full.png" alt="Logo" style="width:100%;height:100%;"></span>
+          <span class="sidebar__logo-text">CBN Plus</span>
+        </a>
+      </div>
+
+      <div class="sidebar__user" id="sidebar-user">
+        <span class="sidebar__user-name" id="sidebar-user-name">—</span>
+        <span class="sidebar__user-cargo" id="sidebar-user-cargo">—</span>
+      </div>
+
+      <nav class="sidebar__nav">
+        <!-- PRINCIPAL -->
+        <p class="sidebar__group-label">PRINCIPAL</p>
+        <a href="#" class="sidebar__link sidebar__link--active" data-page="dashboard">
+          <span class="sidebar__link-icon">📊</span>
+          <span class="sidebar__link-text">Dashboard</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="pedidos">
+          <span class="sidebar__link-icon">📋</span>
+          <span class="sidebar__link-text">Pedidos</span>
+          <span class="sidebar__badge" id="pedidos-badge" hidden>0</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="assinaturas">
+          <span class="sidebar__link-icon">🔄</span>
+          <span class="sidebar__link-text">Assinaturas</span>
+        </a>
+
+        <!-- OPERAÇÕES -->
+        <p class="sidebar__group-label">OPERAÇÕES</p>
+        <a href="#" class="sidebar__link" data-page="estoque">
+          <span class="sidebar__link-icon">📦</span>
+          <span class="sidebar__link-text">Estoque</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="caixa">
+          <span class="sidebar__link-icon">💰</span>
+          <span class="sidebar__link-text">Caixa</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="financeiro">
+          <span class="sidebar__link-icon">&#128200;</span>
+          <span class="sidebar__link-text">Financeiro</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="nf">
+          <span class="sidebar__link-icon">🧾</span>
+          <span class="sidebar__link-text">Notas Fiscais</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="restock">
+          <span class="sidebar__link-icon">🛒</span>
+          <span class="sidebar__link-text">Pedido de Compra</span>
+        </a>
+
+        <!-- GESTÃO -->
+        <p class="sidebar__group-label">GESTÃO</p>
+        <a href="#" class="sidebar__link" data-page="produtos">
+          <span class="sidebar__link-icon">🏷️</span>
+          <span class="sidebar__link-text">Produtos</span>
+        </a>
+        <a href="/admin/cadastro-produto" class="sidebar__link">
+          <span class="sidebar__link-icon">📸</span>
+          <span class="sidebar__link-text">Cadastro Rápido</span>
+          <span class="sidebar__badge" style="background:#52B788;display:inline">AI</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="lojas">
+          <span class="sidebar__link-icon">🏪</span>
+          <span class="sidebar__link-text">Lojas</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="funcionarios">
+          <span class="sidebar__link-icon">👥</span>
+          <span class="sidebar__link-text">Funcionários</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="clientes">
+          <span class="sidebar__link-icon">👤</span>
+          <span class="sidebar__link-text">Clientes</span>
+        </a>
+
+        <!-- ANÁLISE -->
+        <p class="sidebar__group-label">ANÁLISE</p>
+        <a href="#" class="sidebar__link" data-page="relatorios">
+          <span class="sidebar__link-icon">📈</span>
+          <span class="sidebar__link-text">Relatórios</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="metas">
+          <span class="sidebar__link-icon">🏆</span>
+          <span class="sidebar__link-text">Metas & Pontos</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="afiliados">
+          <span class="sidebar__link-icon">🔗</span>
+          <span class="sidebar__link-text">Afiliados</span>
+        </a>
+
+        <!-- SISTEMA -->
+        <p class="sidebar__group-label">SISTEMA</p>
+        <a href="#" class="sidebar__link" data-page="usuarios">
+          <span class="sidebar__link-icon">🔐</span>
+          <span class="sidebar__link-text">Usuários</span>
+          <span class="sidebar__badge" id="badge-pending-users" style="display:none;background:#E63946">0</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="config">
+          <span class="sidebar__link-icon">⚙️</span>
+          <span class="sidebar__link-text">Configurações</span>
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <button id="btn-logout" class="sidebar__logout" type="button">
+          <span>🚪</span>
+          <span>Sair</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="admin-main">
+
+      <!-- Admin Header -->
+      <header class="admin-header" id="admin-header">
+        <div class="admin-header__left">
+          <button id="btn-sidebar-toggle" class="admin-header__hamburger" type="button" aria-label="Abrir menu">
+            <span></span><span></span><span></span>
+          </button>
+          <h1 class="admin-header__title" id="admin-page-title">Dashboard</h1>
+        </div>
+        <div class="admin-header__right">
+          <span class="admin-header__status" id="connection-status">
+            <span class="status-dot status-dot--online"></span>
+            <span class="status-text">Online</span>
+          </span>
+          <select id="store-selector" class="admin-header__store-select">
+            <option value="todas">Todas as Lojas</option>
+            <option value="centro">Centro</option>
+            <option value="shopping">Shopping</option>
+            <option value="norte">Zona Norte</option>
+            <option value="sul">Zona Sul</option>
+            <option value="praia">Praia Grande</option>
+          </select>
+          <time class="admin-header__datetime" id="header-datetime"></time>
+        </div>
+      </header>
+
+      <!-- Sync Banner -->
+      <div id="sync-banner" class="sync-banner" hidden>
+        <span>⚠️ Modo offline — <strong id="sync-pending-count">0</strong> operações pendentes de sincronização</span>
+      </div>
+
+      <section id="admin-context" class="admin-context" hidden>
+        <div class="admin-context__main">
+          <div class="admin-context__eyebrow">
+            <span id="admin-context-scope" class="admin-context__scope">Visão geral</span>
+          </div>
+          <h2 id="admin-context-title" class="admin-context__title">Painel administrativo</h2>
+          <p id="admin-context-description" class="admin-context__description">Resumo rápido da tela e do próximo passo recomendado.</p>
+        </div>
+        <div class="admin-context__actions" id="admin-context-actions"></div>
+        <div class="admin-context__tips">
+          <div class="admin-context__tips-head">
+            <strong>Próximos passos</strong>
+            <button type="button" id="admin-context-help" class="admin-context__help-btn">Ver passo a passo</button>
+          </div>
+          <ul id="admin-context-tips" class="admin-context__tips-list"></ul>
+        </div>
+      </section>
+
+      <!-- Page Container -->
+      <div id="admin-pages" class="admin-pages">
+        <section class="admin-page admin-page--active" data-page="dashboard">
+          <div id="dashboard-content"></div>
+        </section>
+
+        <section class="admin-page" data-page="pedidos">
+          <div id="pedidos-content">
+            <h2>Pedidos</h2>
+            <p class="admin-page__placeholder">Carregando pedidos...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="assinaturas">
+          <div id="assinaturas-content">
+            <h2>Assinaturas</h2>
+            <p class="admin-page__placeholder">Carregando assinaturas...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="estoque">
+          <div id="estoque-content">
+            <h2>Estoque</h2>
+            <p class="admin-page__placeholder">Carregando estoque...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="caixa">
+          <div id="caixa-content">
+            <h2>Caixa</h2>
+            <p class="admin-page__placeholder">Carregando caixa...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="financeiro">
+          <div id="financeiro-content">
+            <h2>Financeiro</h2>
+            <p class="admin-page__placeholder">Carregando financeiro...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="nf">
+          <div id="nf-content">
+            <h2>Notas Fiscais</h2>
+            <p class="admin-page__placeholder">Carregando notas fiscais...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="produtos">
+          <div id="produtos-content">
+            <h2>Produtos</h2>
+            <p class="admin-page__placeholder">Carregando produtos...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="lojas">
+          <div id="lojas-content">
+            <h2>Lojas</h2>
+            <p class="admin-page__placeholder">Carregando lojas...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="funcionarios">
+          <div id="funcionarios-content">
+            <h2>Funcionários</h2>
+            <p class="admin-page__placeholder">Carregando funcionários...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="clientes">
+          <div id="clientes-content">
+            <h2>Clientes</h2>
+            <p class="admin-page__placeholder">Carregando clientes...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="relatorios">
+          <div id="relatorios-content">
+            <h2>Relatórios</h2>
+            <p class="admin-page__placeholder">Carregando relatórios...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="usuarios">
+          <div id="usuarios-content">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">
+              <h2 style="margin:0;color:var(--verde-escuro,#1B4332)">🔐 Gestão de Usuários</h2>
+              <button class="btn btn--sm btn--ghost" onclick="UsersAdmin.refresh()">🔄 Atualizar</button>
+            </div>
+
+            <!-- Pending Users -->
+            <div id="pending-users-section" style="display:none;margin-bottom:24px">
+              <h3 style="color:#E63946;font-size:16px;margin-bottom:12px">⏳ Aguardando Aprovação</h3>
+              <div id="pending-users-list" class="users-grid"></div>
+            </div>
+
+            <!-- Approved Users -->
+            <h3 style="color:var(--verde-escuro,#1B4332);font-size:16px;margin-bottom:12px">✅ Usuários Aprovados</h3>
+            <div id="approved-users-list" class="users-grid">
+              <p class="admin-page__placeholder">Carregando usuários...</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="metas">
+          <div id="metas-content">
+            <h2>Metas & Gamificação</h2>
+            <p class="admin-page__placeholder">Carregando metas...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="afiliados">
+          <div id="afiliados-content">
+            <h2>Afiliados & Indicações</h2>
+            <p class="admin-page__placeholder">Carregando afiliados...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="restock">
+          <div id="restock-content">
+            <h2>Pedido de Compra</h2>
+            <p class="admin-page__placeholder">Carregando pedido de compra...</p>
+          </div>
+        </section>
+
+        <section class="admin-page" data-page="config">
+          <div id="config-content">
+            <h2>Configurações</h2>
+            <p class="admin-page__placeholder">Carregando configurações...</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Sidebar Overlay (mobile) -->
+  <div id="sidebar-overlay" class="sidebar-overlay" hidden></div>
+
+  <div id="admin-help-modal" class="admin-help-modal" hidden>
+    <div id="admin-help-backdrop" class="admin-help-modal__backdrop"></div>
+    <div class="admin-help-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="admin-help-title">
+      <div class="admin-help-modal__header">
+        <div>
+          <div class="admin-help-modal__eyebrow">Guia simples</div>
+          <h3 id="admin-help-title" class="admin-help-modal__title">Como usar esta tela</h3>
+        </div>
+        <button type="button" id="admin-help-close" class="admin-help-modal__close" aria-label="Fechar ajuda">×</button>
+      </div>
+      <p id="admin-help-description" class="admin-help-modal__description"></p>
+      <ol id="admin-help-steps" class="admin-help-modal__steps"></ol>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+  <script src="../js/core/firebase-config.js"></script>
+  <script src="../js/core/firebase-auth.js"></script>
+  <script>CdnAuth.guard({
+    requireApproval: true,
+    allowedRoles: ['dono','gerente','atendente','caixa','estoquista'],
+    onReady: function(userData) {
+      // Map Firebase user to admin user format
+      var PERMISSIONS = {
+        dono: ['dashboard','pedidos','assinaturas','estoque','caixa','financeiro','nf','restock','metas','afiliados','funcionarios','produtos','lojas','clientes','relatorios','config','usuarios'],
+        gerente: ['dashboard','pedidos','assinaturas','estoque','caixa','financeiro','nf','restock','metas','afiliados','produtos','clientes','relatorios'],
+        atendente: ['pedidos','assinaturas','metas','afiliados'],
+        caixa: ['pedidos','caixa','financeiro','nf','metas'],
+        estoquista: ['estoque','restock','produtos','metas'],
+        motoboy: ['pedidos']
+      };
+      var resolvedPermissions = Array.isArray(userData.permissions) && userData.permissions.length
+        ? userData.permissions
+        : (window.CdnPermissionPresets && window.CdnPermissionPresets[userData.role]
+          ? window.CdnPermissionPresets[userData.role]
+          : (PERMISSIONS[userData.role] || []));
+      var adminUser = {
+        id: userData.uid || CdnAuth.currentUser.uid,
+        nome: userData.displayName || CdnAuth.currentUser.displayName || CdnAuth.currentUser.email,
+        cargo: userData.role || 'pendente',
+        permissions: resolvedPermissions,
+        storeId: userData.storeId || null,
+        email: CdnAuth.currentUser.email,
+        photoURL: CdnAuth.currentUser.photoURL
+      };
+      // Store in AppState so admin-app can use it
+      if (typeof AppState !== 'undefined') {
+        AppState.set('user', adminUser);
+        AppState.set('isAdmin', true);
+        AppState.set('userStoreId', userData.storeId || null);
+      }
+      if (typeof Storage !== 'undefined' && Storage.set) {
+        Storage.set('user', adminUser);
+      }
+    }
+  });</script>
+
+  <!-- Core JS -->
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/state.js"></script>
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/firestore-service.js"></script>
+
+  <!-- Data (fallback for seed migration + offline) -->
+  <script src="../js/data/products.js"></script>
+  <script src="../js/data/stores.js"></script>
+  <script src="../js/data/categories.js"></script>
+  <script src="../js/data/employees.js"></script>
+
+  <!-- Components -->
+  <script src="../js/components/toast.js"></script>
+
+  <!-- Admin Modules -->
+  <script src="../js/admin/dashboard.js"></script>
+  <script src="../js/admin/pedidos.js"></script>
+  <script src="../js/admin/assinaturas.js"></script>
+  <script src="../js/admin/estoque.js"></script>
+  <script src="../js/admin/caixa.js"></script>
+  <script src="../js/admin/financeiro.js"></script>
+  <script src="../js/admin/nf.js"></script>
+  <script src="../js/admin/produtos-admin.js"></script>
+  <script src="../js/admin/lojas.js"></script>
+  <script src="../js/admin/funcionarios.js"></script>
+  <script src="../js/admin/clientes.js"></script>
+  <script src="../js/admin/relatorios.js"></script>
+  <script src="../js/admin/usuarios.js"></script>
+  <script src="../js/admin/metas-extra.js"></script>
+  <script src="../js/admin/metas.js"></script>
+  <script src="../js/admin/afiliados.js"></script>
+  <script src="../js/admin/restock.js"></script>
+
+  <!-- Admin Bootstrap (must be last) -->
+  <script src="../js/admin/admin-app.js"></script>
+
+  <!-- Initialize Firebase-based features after auth guard resolves -->
+  <script>
+    CdnAuth.onReady(function(userData) {
+      // Initialize Firestore service layer
+      if (typeof FirestoreService !== 'undefined') {
+        FirestoreService.init();
+        // Run seed migration on first load (only dono)
+        if (userData.role === 'dono') {
+          FirestoreService.seedFromMockData()
+            .then(function(result) {
+              if (result.products > 0) {
+                console.log('[Admin] Seeded ' + result.products + ' products, ' + result.stores + ' stores');
+                if (typeof Toast !== 'undefined') Toast.success('Dados migrados para Firestore! ' + result.products + ' produtos, ' + result.stores + ' lojas.');
+              }
+            })
+            .catch(function(err) { console.warn('[Admin] Seed skipped or failed:', err.message); });
+        }
+        // Store user's storeId for gerente scoping
+        if (userData.storeId && typeof AppState !== 'undefined') {
+          AppState.set('userStoreId', userData.storeId);
+        }
+      }
+
+      // Show admin shell with Firebase user data
+      var user = AppState.get('user');
+      if (user && typeof AdminApp !== 'undefined') {
+        // Admin shell is already hidden, show it now
+        var shell = document.getElementById('admin-shell');
+        if (shell) shell.hidden = false;
+        // Re-run init to pick up the user
+        AdminApp.navigateTo(AppState.get('activeAdminPage') || 'dashboard');
+      }
+      // Add user badge to header
+      var headerRight = document.querySelector('.admin-header__right');
+      if (headerRight && CdnAuth.currentUser) {
+        var badge = document.createElement('div');
+        badge.style.cssText = 'position:relative;display:flex;align-items:center';
+        badge.innerHTML = CdnAuth.getUserBadge();
+        headerRight.prepend(badge);
+      }
+      // Init users page if dono
+      if (userData.role === 'dono' && typeof UsersAdmin !== 'undefined') {
+        UsersAdmin.init();
+      }
+
+      // Periodic motivational messages (every 30 min for employees)
+      if (typeof MetasExtra !== 'undefined') {
+        setInterval(function() { MetasExtra.checkPeriodicMotivation(); }, 30 * 60 * 1000);
+      }
+    });
+  </script>
+</body>
+</html>
+
+

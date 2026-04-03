@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff3e0;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ffe0b2;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#ffb74d" stroke-width="3"/>
+  <!-- Wooden board -->
+  <ellipse cx="200" cy="240" rx="100" ry="40" fill="#A0845C"/>
+  <ellipse cx="200" cy="235" rx="95" ry="35" fill="#C4A67D"/>
+  <!-- Dried fruits -->
+  <!-- Dried mango slices -->
+  <path d="M150,220 Q145,210 155,205 Q165,210 160,220 Q155,225 150,220" fill="#FF8F00"/>
+  <path d="M165,215 Q160,205 170,200 Q180,205 175,215 Q170,220 165,215" fill="#FFA726"/>
+  <!-- Dried apricots -->
+  <circle cx="195" cy="225" r="10" fill="#FF6F00"/>
+  <circle cx="195" cy="225" r="6" fill="#FF8F00" opacity="0.6"/>
+  <circle cx="215" cy="220" r="10" fill="#E65100"/>
+  <circle cx="215" cy="220" r="6" fill="#FF6F00" opacity="0.6"/>
+  <!-- Dried cranberries -->
+  <circle cx="240" cy="225" r="6" fill="#C62828"/>
+  <circle cx="250" cy="220" r="5" fill="#D32F2F"/>
+  <circle cx="245" cy="230" r="5" fill="#B71C1C"/>
+  <!-- Dried figs -->
+  <path d="M170,235 Q168,225 178,225 Q185,228 182,238 Q175,240 170,235" fill="#6D4C41"/>
+  <!-- Raisins -->
+  <g fill="#311B92" opacity="0.8">
+    <circle cx="200" cy="238" r="4"/><circle cx="210" cy="235" r="4"/>
+    <circle cx="225" cy="238" r="3.5"/><circle cx="190" cy="242" r="3.5"/>
+  </g>
+  <!-- Date -->
+  <ellipse cx="155" cy="235" rx="10" ry="5" fill="#3E2723" transform="rotate(-20 155 235)"/>
+  <text x="200" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#E65100">Frutas Secas</text>
+</svg>

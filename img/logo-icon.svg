@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Left leaf (darker green) -->
+  <path d="M50 5 C28 5, 8 30, 8 58 C8 80, 28 95, 45 98 C45 98, 48 65, 50 50 C50 50, 42 28, 50 5Z" fill="#5BAD2F"/>
+  <!-- Right leaf (lighter green) -->
+  <path d="M50 5 C72 5, 92 30, 92 58 C92 80, 72 95, 55 98 C55 98, 52 65, 50 50 C50 50, 58 28, 50 5Z" fill="#8DC63F"/>
+  <!-- Left leaf vein -->
+  <path d="M49 12 C40 35, 35 55, 33 78" stroke="#4A9A25" stroke-width="1" fill="none" opacity="0.35"/>
+  <!-- Right leaf vein -->
+  <path d="M51 12 C60 35, 65 55, 67 78" stroke="#7AB535" stroke-width="1" fill="none" opacity="0.35"/>
+</svg>

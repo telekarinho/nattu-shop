@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f1f8e9;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#dcedc8;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="oil" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#C0CA33"/>
+      <stop offset="100%" style="stop-color:#9E9D24"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#a5c97a" stroke-width="3"/>
+  <!-- Olive oil bottle -->
+  <g transform="translate(200,200)">
+    <!-- Body -->
+    <path d="M-30,-30 Q-35,-30 -35,0 Q-35,60 -30,65 Q-20,70 20,70 Q30,65 35,60 Q35,0 35,-30 Q30,-30 30,-30Z" fill="url(#oil)" opacity="0.8"/>
+    <path d="M-30,-30 L-15,-55 Q-10,-60 10,-60 L15,-55 L30,-30Z" fill="#C0CA33" opacity="0.6"/>
+    <!-- Neck -->
+    <rect x="-8" y="-70" width="16" height="14" rx="3" fill="#9E9D24"/>
+    <!-- Cork -->
+    <rect x="-6" y="-80" width="12" height="12" rx="3" fill="#D4A050"/>
+    <!-- Label -->
+    <rect x="-25" y="0" width="50" height="40" rx="5" fill="white" opacity="0.9"/>
+    <text x="0" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#558B2F">AZEITE</text>
+    <text x="0" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#689F38">Extra Virgem</text>
+    <!-- Olive highlight -->
+    <rect x="-30" y="-30" width="60" height="15" rx="5" fill="#CDDC39" opacity="0.3"/>
+  </g>
+  <!-- Olive branch -->
+  <g transform="translate(120,140) scale(0.8)">
+    <path d="M0,0 Q20,-10 50,-5" stroke="#689F38" stroke-width="2" fill="none"/>
+    <ellipse cx="15" cy="-8" rx="7" ry="4" fill="#558B2F" transform="rotate(-20 15 -8)"/>
+    <ellipse cx="30" cy="-10" rx="7" ry="4" fill="#689F38" transform="rotate(10 30 -10)"/>
+    <ellipse cx="45" cy="-6" rx="7" ry="4" fill="#7CB342" transform="rotate(-15 45 -6)"/>
+    <circle cx="50" cy="-2" r="5" fill="#33691E"/>
+    <circle cx="42" cy="2" r="5" fill="#2E7D32"/>
+  </g>
+  <text x="200" y="348" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#558B2F">Azeite de Oliva</text>
+</svg>

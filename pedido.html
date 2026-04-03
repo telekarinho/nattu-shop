@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FAFAF7">
+  <meta name="description" content="Pedido Confirmado — Clube do Natural. Acompanhe seu pedido de produtos naturais.">
+  <title>Pedido Confirmado — Clube do Natural</title>
+  <link rel="icon" type="image/png" href="img/logo-full.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <style>
+    /* === ORDER CONFIRMATION PAGE === */
+    .order-page {
+      min-height: 100vh;
+      background: var(--bege);
+      padding-bottom: var(--space-16);
+    }
+
+    .order-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    /* === SUCCESS HERO === */
+    .order-success {
+      text-align: center;
+      padding: var(--space-10) var(--space-4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .order-success__icon {
+      width: 80px;
+      height: 80px;
+      background: var(--verde-claro);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-4);
+      font-size: var(--fs-4xl);
+      animation: scaleIn 0.5s ease-out;
+    }
+
+    @keyframes scaleIn {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.2); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .order-success__title {
+      font-size: var(--fs-2xl);
+      font-weight: var(--fw-bold);
+      color: var(--verde-escuro);
+      margin-bottom: var(--space-2);
+    }
+
+    .order-success__subtitle {
+      font-size: var(--fs-base);
+      color: var(--cinza-600);
+    }
+
+    #confetti-area {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: var(--z-toast);
+    }
+
+    /* === ORDER NUMBER === */
+    .order-number-card {
+      background: var(--branco);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: var(--space-6);
+      text-align: center;
+      margin-bottom: var(--space-6);
+    }
+
+    .order-number-card__label {
+      font-size: var(--fs-sm);
+      color: var(--cinza-600);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-2);
+    }
+
+    .order-number-card__value {
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-bold);
+      color: var(--verde-escuro);
+      font-family: var(--font-mono);
+    }
+
+    /* === STATUS TRACKER === */
+    .order-tracker {
+      background: var(--branco);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .order-tracker__title {
+      font-size: var(--fs-md);
+      font-weight: var(--fw-semibold);
+      color: var(--cinza-800);
+      margin-bottom: var(--space-6);
+    }
+
+    .tracker-steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .tracker-steps::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 40px;
+      right: 40px;
+      height: 3px;
+      background: var(--cinza-300);
+      z-index: 0;
+    }
+
+    .tracker-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    .tracker-step__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background: var(--cinza-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--fs-lg);
+      transition: background var(--transition-base);
+    }
+
+    .tracker-step.active .tracker-step__icon {
+      background: var(--verde-claro);
+      box-shadow: 0 0 0 4px rgba(82, 183, 136, 0.2);
+    }
+
+    .tracker-step__label {
+      font-size: var(--fs-xs);
+      color: var(--cinza-500);
+      text-align: center;
+      font-weight: var(--fw-medium);
+    }
+
+    .tracker-step.active .tracker-step__label {
+      color: var(--verde-escuro);
+      font-weight: var(--fw-semibold);
+    }
+
+    /* === ORDER DETAILS CARD === */
+    .order-details-card {
+      background: var(--branco);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .order-details-card__title {
+      font-size: var(--fs-md);
+      font-weight: var(--fw-semibold);
+      color: var(--cinza-800);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .order-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--cinza-200);
+    }
+
+    .order-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .order-detail-row__label {
+      font-size: var(--fs-sm);
+      color: var(--cinza-600);
+    }
+
+    .order-detail-row__value {
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-semibold);
+      color: var(--cinza-800);
+      text-align: right;
+    }
+
+    /* === ITEMS LIST === */
+    .order-items-card {
+      background: var(--branco);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--cinza-100);
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item__info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      flex: 1;
+    }
+
+    .order-item__name {
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
+      color: var(--cinza-800);
+    }
+
+    .order-item__qty {
+      font-size: var(--fs-xs);
+      color: var(--cinza-500);
+    }
+
+    .order-item__sub {
+      font-size: var(--fs-xs);
+      color: var(--verde-claro);
+      font-weight: var(--fw-medium);
+    }
+
+    .order-item__price {
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-semibold);
+      color: var(--cinza-800);
+      white-space: nowrap;
+      margin-left: var(--space-4);
+    }
+
+    /* === SUBSCRIPTION SECTION === */
+    .order-subscription {
+      background: var(--amarelo-claro);
+      border: 1px solid var(--amarelo);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .order-subscription__title {
+      font-size: var(--fs-md);
+      font-weight: var(--fw-semibold);
+      color: var(--cinza-800);
+      margin-bottom: var(--space-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .order-subscription__items {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--space-3) 0;
+    }
+
+    .order-subscription__items li {
+      font-size: var(--fs-sm);
+      color: var(--cinza-700);
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid rgba(244, 162, 97, 0.2);
+    }
+
+    .order-subscription__items li:last-child {
+      border-bottom: none;
+    }
+
+    .order-subscription__total {
+      font-size: var(--fs-base);
+      font-weight: var(--fw-bold);
+      color: var(--cinza-800);
+      text-align: right;
+    }
+
+    .order-subscription__note {
+      font-size: var(--fs-xs);
+      color: var(--cinza-600);
+      margin-top: var(--space-2);
+    }
+
+    /* === TOTAL PAID === */
+    .order-total-card {
+      background: var(--verde-escuro);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .order-total-card__label {
+      font-size: var(--fs-md);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .order-total-card__value {
+      font-size: var(--fs-2xl);
+      font-weight: var(--fw-bold);
+      color: var(--branco);
+    }
+
+    /* === ACTION BUTTONS === */
+    .order-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      background: #25D366;
+      color: var(--branco);
+      border: none;
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-6);
+      font-size: var(--fs-base);
+      font-weight: var(--fw-semibold);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition-fast);
+    }
+
+    .btn-whatsapp:hover {
+      background: #1EBE5A;
+    }
+
+    .btn-new-order {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      background: var(--branco);
+      color: var(--verde-escuro);
+      border: 2px solid var(--verde-escuro);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-6);
+      font-size: var(--fs-base);
+      font-weight: var(--fw-semibold);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-new-order:hover {
+      background: var(--verde-escuro);
+      color: var(--branco);
+    }
+
+    /* === PWA INSTALL SUGGESTION === */
+    .pwa-install-card {
+      background: var(--azul-claro);
+      border: 1px solid var(--azul);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      margin-bottom: var(--space-8);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .pwa-install-card__icon {
+      font-size: var(--fs-2xl);
+      flex-shrink: 0;
+    }
+
+    .pwa-install-card__text {
+      flex: 1;
+    }
+
+    .pwa-install-card__title {
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-semibold);
+      color: var(--cinza-800);
+      margin-bottom: var(--space-1);
+    }
+
+    .pwa-install-card__desc {
+      font-size: var(--fs-xs);
+      color: var(--cinza-600);
+    }
+
+    /* === FOOTER === */
+    .order-footer {
+      text-align: center;
+      padding: var(--space-8) var(--space-4);
+      border-top: 1px solid var(--cinza-200);
+    }
+
+    .order-footer__text {
+      font-size: var(--fs-xs);
+      color: var(--cinza-500);
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 480px) {
+      .order-success__title {
+        font-size: var(--fs-xl);
+      }
+
+      .order-number-card__value {
+        font-size: var(--fs-2xl);
+      }
+
+      .tracker-steps {
+        flex-wrap: wrap;
+        gap: var(--space-3);
+      }
+
+      .tracker-steps::before {
+        display: none;
+      }
+
+      .tracker-step {
+        flex: 0 0 calc(50% - var(--space-2));
+      }
+
+      .order-total-card {
+        flex-direction: column;
+        gap: var(--space-2);
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="catalogo.html" class="logo">
+        <span class="logo-icon"><img src="img/logo-full.png" alt="Logo Clube do Natural"></span>
+        <span>Clube do Natural</span>
+      </a>
+      <a href="catalogo.html" class="btn btn-ghost btn-sm">
+        ← Voltar ao catálogo
+      </a>
+    </div>
+  </header>
+
+  <!-- ========== CONFETTI AREA ========== -->
+  <div id="confetti-area"></div>
+
+  <div class="order-page">
+    <div class="order-container">
+
+      <!-- ========== SUCCESS HERO ========== -->
+      <section class="order-success">
+        <div class="order-success__icon">✔</div>
+        <h1 class="order-success__title">Pedido Confirmado!</h1>
+        <p class="order-success__subtitle">Obrigado por comprar no Clube do Natural</p>
+      </section>
+
+      <!-- ========== ORDER NUMBER ========== -->
+      <div class="order-number-card">
+        <div class="order-number-card__label">Número do Pedido</div>
+        <div class="order-number-card__value" id="order-number">---</div>
+      </div>
+
+      <!-- ========== STATUS TRACKER ========== -->
+      <div class="order-tracker">
+        <h2 class="order-tracker__title">Acompanhe seu pedido</h2>
+        <div class="tracker-steps">
+          <div class="tracker-step active" data-tracker="1">
+            <div class="tracker-step__icon">🟢</div>
+            <span class="tracker-step__label">Recebido</span>
+          </div>
+          <div class="tracker-step" data-tracker="2">
+            <div class="tracker-step__icon">🟡</div>
+            <span class="tracker-step__label">Preparando</span>
+          </div>
+          <div class="tracker-step" data-tracker="3">
+            <div class="tracker-step__icon">🔵</div>
+            <span class="tracker-step__label">Pronto</span>
+          </div>
+          <div class="tracker-step" data-tracker="4">
+            <div class="tracker-step__icon">✅</div>
+            <span class="tracker-step__label">Entregue</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== ORDER DETAILS ========== -->
+      <div class="order-details-card">
+        <h2 class="order-details-card__title">📋 Detalhes do Pedido</h2>
+        <div class="order-detail-row">
+          <span class="order-detail-row__label">Cliente</span>
+          <span class="order-detail-row__value" id="detail-nome">—</span>
+        </div>
+        <div class="order-detail-row">
+          <span class="order-detail-row__label">Loja</span>
+          <span class="order-detail-row__value" id="detail-loja">—</span>
+        </div>
+        <div class="order-detail-row">
+          <span class="order-detail-row__label">Tipo de entrega</span>
+          <span class="order-detail-row__value" id="detail-entrega">—</span>
+        </div>
+        <div class="order-detail-row">
+          <span class="order-detail-row__label">Pagamento</span>
+          <span class="order-detail-row__value" id="detail-pagamento">—</span>
+        </div>
+      </div>
+
+      <!-- ========== ITEMS LIST ========== -->
+      <div class="order-items-card">
+        <h2 class="order-details-card__title">🛒 Itens do Pedido</h2>
+        <div id="order-items-list">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <!-- ========== SUBSCRIPTION SECTION (hidden by default) ========== -->
+      <div class="order-subscription hidden" id="order-subscription">
+        <h2 class="order-subscription__title">🔄 Assinatura Mensal Ativada</h2>
+        <ul class="order-subscription__items" id="subscription-items-list">
+          <!-- Filled by JS -->
+        </ul>
+        <div class="order-subscription__total" id="subscription-total">R$ 0,00/mês</div>
+        <p class="order-subscription__note">
+          Você pode cancelar ou modificar sua assinatura a qualquer momento pelo WhatsApp ou diretamente na loja.
+        </p>
+      </div>
+
+      <!-- ========== TOTAL PAID ========== -->
+      <div class="order-total-card">
+        <span class="order-total-card__label">Total Pago</span>
+        <span class="order-total-card__value" id="order-total">R$ 0,00</span>
+      </div>
+
+      <!-- ========== ACTION BUTTONS ========== -->
+      <div class="order-actions">
+        <a href="#" class="btn-whatsapp" id="btn-whatsapp" target="_blank" rel="noopener">
+          💬 Falar com a loja pelo WhatsApp
+        </a>
+        <a href="catalogo.html" class="btn-new-order">
+          🛒 Fazer outro pedido
+        </a>
+      </div>
+
+      <!-- ========== PWA INSTALL SUGGESTION ========== -->
+      <div class="pwa-install-card" id="pwa-install-card">
+        <div class="pwa-install-card__icon">📲</div>
+        <div class="pwa-install-card__text">
+          <div class="pwa-install-card__title">Instale o app para acompanhar seus pedidos</div>
+          <div class="pwa-install-card__desc">
+            Adicione o Clube do Natural à tela inicial do seu celular para acesso rápido e notificações.
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== FOOTER ========== -->
+      <footer class="order-footer">
+        <p class="order-footer__text">
+          Clube do Natural &copy; 2026 — Produtos naturais com entrega e assinatura
+        </p>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ========== TOAST CONTAINER ========== -->
+  <div id="toast-container"></div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/core/firebase-config.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/data/stores.js"></script>
+  <script src="js/components/toast.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // ---- Read order data from localStorage ----
+    const raw = localStorage.getItem('cdn_lastOrder');
+    if (!raw) {
+      document.querySelector('.order-success__subtitle').textContent =
+        'Nenhum pedido encontrado. Volte ao catálogo para fazer um pedido.';
+      return;
+    }
+
+    let order;
+    try {
+      order = JSON.parse(raw);
+    } catch (e) {
+      console.error('Erro ao ler pedido:', e);
+      return;
+    }
+
+    // ---- Order number (from URL param or order data) ----
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderNumber = urlParams.get('n') || order.number || order.id || '---';
+    document.getElementById('order-number').textContent = '#' + orderNumber;
+
+    // ---- Customer details ----
+    const nome = order.customer?.nome || order.nome || '—';
+    document.getElementById('detail-nome').textContent = nome;
+
+    // Store name
+    const storeName = order.store?.nome || order.loja || '—';
+    document.getElementById('detail-loja').textContent = storeName;
+
+    // Delivery type
+    const deliveryLabels = {
+      retirada: '🏪 Retirada na Loja',
+      delivery: '🛵 Delivery'
+    };
+    const deliveryType = order.delivery?.type || order.entrega || 'retirada';
+    document.getElementById('detail-entrega').textContent =
+      deliveryLabels[deliveryType] || deliveryType;
+
+    // Payment method
+    const paymentLabels = {
+      pix: '📱 PIX',
+      cartao: '💳 Cartão',
+      dinheiro: '💵 Dinheiro'
+    };
+    const paymentMethod = order.payment?.method || order.pagamento || 'pix';
+    document.getElementById('detail-pagamento').textContent =
+      paymentLabels[paymentMethod] || paymentMethod;
+
+    // ---- Items list ----
+    const itemsContainer = document.getElementById('order-items-list');
+    const items = order.items || [];
+    let hasSubscription = false;
+
+    items.forEach(function(item) {
+      const div = document.createElement('div');
+      div.className = 'order-item';
+
+      const isSubscription = item.subscription || item.assinatura;
+      if (isSubscription) hasSubscription = true;
+
+      const price = typeof item.price === 'number'
+        ? item.price
+        : (typeof item.preco === 'number' ? item.preco : 0);
+      const qty = item.qty || item.quantidade || 1;
+      const lineTotal = price * qty;
+
+      div.innerHTML =
+        '<div class="order-item__info">' +
+          '<span class="order-item__name">' + Utils.escapeHTML(item.name || item.nome || 'Produto') + '</span>' +
+          '<span class="order-item__qty">Qtd: ' + qty + '</span>' +
+          (isSubscription ? '<span class="order-item__sub">🔄 Assinatura mensal</span>' : '') +
+        '</div>' +
+        '<span class="order-item__price">R$ ' + Utils.formatMoney(lineTotal) + '</span>';
+
+      itemsContainer.appendChild(div);
+    });
+
+    // ---- Subscription section ----
+    if (hasSubscription) {
+      const subSection = document.getElementById('order-subscription');
+      subSection.classList.remove('hidden');
+
+      const subList = document.getElementById('subscription-items-list');
+      let subTotal = 0;
+
+      items.forEach(function(item) {
+        if (item.subscription || item.assinatura) {
+          const price = typeof item.price === 'number'
+            ? item.price
+            : (typeof item.preco === 'number' ? item.preco : 0);
+          const qty = item.qty || item.quantidade || 1;
+          subTotal += price * qty;
+
+          const li = document.createElement('li');
+          li.textContent = '🔄 ' + (item.name || item.nome || 'Produto') +
+            ' — ' + qty + 'x R$ ' + Utils.formatMoney(price);
+          subList.appendChild(li);
+        }
+      });
+
+      document.getElementById('subscription-total').textContent =
+        'R$ ' + Utils.formatMoney(subTotal) + '/mês';
+    }
+
+    // ---- Total paid ----
+    const total = order.total || 0;
+    document.getElementById('order-total').textContent =
+      'R$ ' + Utils.formatMoney(total);
+
+    // ---- WhatsApp link ----
+    const storePhone = order.store?.whatsapp || order.store?.telefone || order.whatsapp || '';
+    const phoneClean = storePhone.replace(/\D/g, '');
+
+    let whatsMsg = '🌿 *Clube do Natural — Pedido #' + orderNumber + '*\n\n';
+    whatsMsg += '👤 Cliente: ' + nome + '\n';
+    whatsMsg += '🏪 Loja: ' + storeName + '\n';
+    whatsMsg += '📦 Entrega: ' + (deliveryLabels[deliveryType] || deliveryType) + '\n';
+    whatsMsg += '💳 Pagamento: ' + (paymentLabels[paymentMethod] || paymentMethod) + '\n\n';
+    whatsMsg += '🛒 *Itens:*\n';
+
+    items.forEach(function(item) {
+      const price = typeof item.price === 'number'
+        ? item.price
+        : (typeof item.preco === 'number' ? item.preco : 0);
+      const qty = item.qty || item.quantidade || 1;
+      const sub = (item.subscription || item.assinatura) ? ' (🔄 assinatura)' : '';
+      whatsMsg += '  • ' + (item.name || item.nome) + ' x' + qty +
+        ' — R$ ' + Utils.formatMoney(price * qty) + sub + '\n';
+    });
+
+    whatsMsg += '\n💰 *Total: R$ ' + Utils.formatMoney(total) + '*';
+
+    const whatsUrl = 'https://wa.me/' + (phoneClean || '5511999999999') +
+      '?text=' + encodeURIComponent(whatsMsg);
+    document.getElementById('btn-whatsapp').href = whatsUrl;
+
+    // ---- Confetti animation ----
+    try {
+      if (typeof Utils !== 'undefined' && Utils.confetti) {
+        Utils.confetti(document.getElementById('confetti-area'));
+      }
+    } catch (e) {
+      console.warn('Confetti unavailable:', e);
+    }
+
+    // ---- PWA install detection ----
+    if (window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true) {
+      var pwaCard = document.getElementById('pwa-install-card');
+      if (pwaCard) pwaCard.style.display = 'none';
+    }
+
+  })();
+  </script>
+
+</body>
+</html>

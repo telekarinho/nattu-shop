@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#faf6eb;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f2ead5;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#d4c49a" stroke-width="3"/>
+  <!-- Bowl -->
+  <path d="M115 230 Q115 300 200 300 Q285 300 285 230" fill="#7B6B5A"/>
+  <ellipse cx="200" cy="230" rx="85" ry="30" fill="#A08B74"/>
+  <!-- Oat flakes -->
+  <g fill="#E8D5A8" opacity="0.9">
+    <ellipse cx="165" cy="220" rx="8" ry="4" transform="rotate(-10 165 220)"/>
+    <ellipse cx="185" cy="216" rx="8" ry="4" transform="rotate(15 185 216)"/>
+    <ellipse cx="205" cy="218" rx="8" ry="4" transform="rotate(-5 205 218)"/>
+    <ellipse cx="225" cy="215" rx="8" ry="4" transform="rotate(20 225 215)"/>
+    <ellipse cx="175" cy="228" rx="8" ry="4" transform="rotate(8 175 228)"/>
+    <ellipse cx="195" cy="226" rx="8" ry="4" transform="rotate(-12 195 226)"/>
+    <ellipse cx="215" cy="225" rx="8" ry="4" transform="rotate(10 215 225)"/>
+    <ellipse cx="235" cy="222" rx="8" ry="4" transform="rotate(-8 235 222)"/>
+    <ellipse cx="185" cy="236" rx="7" ry="3.5" transform="rotate(5 185 236)"/>
+    <ellipse cx="205" cy="234" rx="7" ry="3.5" transform="rotate(-15 205 234)"/>
+    <ellipse cx="220" cy="233" rx="7" ry="3.5" transform="rotate(12 220 233)"/>
+  </g>
+  <!-- Wheat stalks -->
+  <g transform="translate(200,140)">
+    <line x1="-20" y1="20" x2="-20" y2="-40" stroke="#B8A060" stroke-width="2"/>
+    <line x1="0" y1="20" x2="0" y2="-50" stroke="#B8A060" stroke-width="2"/>
+    <line x1="20" y1="20" x2="20" y2="-35" stroke="#B8A060" stroke-width="2"/>
+    <g fill="#C8B060">
+      <ellipse cx="-20" cy="-42" rx="4" ry="8"/><ellipse cx="-25" cy="-35" rx="4" ry="7"/>
+      <ellipse cx="-15" cy="-33" rx="4" ry="7"/>
+      <ellipse cx="0" cy="-52" rx="4" ry="8"/><ellipse cx="-5" cy="-44" rx="4" ry="7"/>
+      <ellipse cx="5" cy="-42" rx="4" ry="7"/><ellipse cx="-3" cy="-36" rx="4" ry="7"/>
+      <ellipse cx="20" cy="-37" rx="4" ry="8"/><ellipse cx="15" cy="-30" rx="4" ry="7"/>
+      <ellipse cx="25" cy="-28" rx="4" ry="7"/>
+    </g>
+  </g>
+  <text x="200" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#8B7340">Aveia em Flocos</text>
+</svg>

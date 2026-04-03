@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 320" fill="none">
+  <!-- Left leaf (darker green) -->
+  <path d="M150 20 C90 20, 40 70, 40 140 C40 200, 80 240, 130 250 C130 250, 140 180, 150 140 C150 140, 130 80, 150 20Z" fill="#5BAD2F"/>
+  <!-- Right leaf (lighter green) -->
+  <path d="M150 20 C210 20, 260 70, 260 140 C260 200, 220 240, 170 250 C170 250, 160 180, 150 140 C150 140, 170 80, 150 20Z" fill="#8DC63F"/>
+  <!-- Left leaf vein -->
+  <path d="M148 45 C130 90, 120 140, 115 200" stroke="#4A9A25" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- Right leaf vein -->
+  <path d="M152 45 C170 90, 180 140, 185 200" stroke="#7AB535" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- CLUBE DO NATURAL text -->
+  <text x="150" y="285" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="32" letter-spacing="3">
+    <tspan fill="#333333">CLUBE DO </tspan><tspan fill="#5BAD2F">NATURAL</tspan>
+  </text>
+  <!-- Tagline -->
+  <text x="150" y="310" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="400" font-size="13" fill="#777777" letter-spacing="2">VOCÊ FAZ PARTE DA FAMÍLIA</text>
+</svg>

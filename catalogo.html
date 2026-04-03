@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FAFAF7">
+  <meta name="description" content="Marketplace CBN Plus para lojas de produtos naturais com filtro por loja.">
+  <title>Marketplace - CBN Plus</title>
+  <link rel="icon" type="image/png" href="img/logo-full.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/catalogo.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', var(--font-family); }
+    .marketplace-toolbar { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:16px; }
+    .marketplace-panel { background:#fff; border:1px solid rgba(27,67,50,.08); border-radius:18px; padding:16px; box-shadow:var(--shadow-sm); }
+    .marketplace-panel label { display:block; margin-bottom:6px; font-size:12px; font-weight:700; color:var(--verde-escuro); text-transform:uppercase; letter-spacing:.04em; }
+    .marketplace-panel select { width:100%; padding:10px 12px; border-radius:10px; border:1px solid #d7ddd8; font:inherit; }
+    .marketplace-meta { margin-top:10px; font-size:13px; color:var(--cinza-600); }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon"><img src="img/logo-full.png" alt="Logo CBN Plus"></span>
+        CBN Plus
+      </a>
+
+      <nav class="header-nav" id="main-nav">
+        <a href="catalogo.html" style="color:var(--verde-medio);font-weight:var(--fw-bold);">Marketplace</a>
+        <a href="index.html#saas">SaaS</a>
+        <a href="index.html#planos">Planos</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="cart-btn" id="btn-cart" aria-label="Carrinho">
+          Carrinho
+          <span class="badge-count cart-badge" id="cart-badge" style="display:none;">0</span>
+        </button>
+        <button class="header-hamburger" id="btn-hamburger" aria-label="Menu">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="promo-banner" style="background:linear-gradient(90deg,var(--verde-escuro),var(--verde-medio));color:#fff;text-align:center;padding:10px var(--space-4);font-size:var(--fs-sm);font-weight:var(--fw-semibold);">
+    Marketplace multi-loja para produtos naturais. Selecione uma loja ou compare todas.
+  </div>
+
+  <section class="search-section" id="search-section">
+    <div class="container">
+      <div class="search-section__input-wrap">
+        <span class="search-section__icon">Buscar</span>
+        <input
+          type="search"
+          class="search-section__input"
+          id="search-input"
+          placeholder="Buscar produtos naturais, suplementos, graos..."
+          autocomplete="off"
+        >
+      </div>
+
+      <div class="marketplace-toolbar">
+        <div class="marketplace-panel">
+          <label for="marketplace-store-select">Loja</label>
+          <select id="marketplace-store-select"></select>
+          <div class="marketplace-meta" id="marketplace-store-meta">Compare catalogos, disponibilidade e operacao das lojas parceiras.</div>
+        </div>
+
+        <div class="marketplace-panel">
+          <label>Selos rapidos</label>
+          <div class="search-section__filters" id="seal-filters">
+            <button class="search-section__filter-pill" data-selo="organico">Organico</button>
+            <button class="search-section__filter-pill" data-selo="vegano">Vegano</button>
+            <button class="search-section__filter-pill" data-selo="sem_gluten">Sem Gluten</button>
+            <button class="search-section__filter-pill" data-selo="sem_lactose">Sem Lactose</button>
+            <button class="search-section__filter-pill" data-selo="integral">Integral</button>
+            <button class="search-section__filter-pill" data-selo="sem_acucar">Sem Acucar</button>
+          </div>
+        </div>
+
+        <div class="marketplace-panel">
+          <label for="sort-select">Ordenacao</label>
+          <select class="search-section__sort" id="sort-select">
+            <option value="relevancia">Relevancia</option>
+            <option value="menor_preco">Menor preco</option>
+            <option value="maior_preco">Maior preco</option>
+            <option value="az">A-Z</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="category-bar" id="category-bar">
+    <div class="category-bar__scroll">
+      <button class="category-bar__pill active" data-category="todos">Todos</button>
+      <button class="category-bar__pill" data-category="graos">Graos</button>
+      <button class="category-bar__pill" data-category="suplementos">Suplementos</button>
+      <button class="category-bar__pill" data-category="chas">Chas</button>
+      <button class="category-bar__pill" data-category="temperos">Temperos</button>
+      <button class="category-bar__pill" data-category="mel">Mel</button>
+      <button class="category-bar__pill" data-category="oleos">Oleos</button>
+      <button class="category-bar__pill" data-category="snacks">Snacks</button>
+      <button class="category-bar__pill" data-category="higiene">Higiene</button>
+      <button class="category-bar__pill" data-category="capsulas">Capsulas</button>
+    </div>
+  </nav>
+
+  <main class="section" id="catalogo-main" style="background:var(--bege);min-height:60vh;">
+    <div class="container">
+      <div class="results-meta">
+        <span id="results-count">Carregando produtos...</span>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="contato">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--branco);margin-bottom:var(--space-2);">
+          <img src="img/logo-full.png" alt="" style="width:28px;height:28px;display:inline-block;vertical-align:middle;margin-right:6px;">CBN Plus
+        </div>
+        <p>Marketplace para lojas de produtos naturais com navegacao por loja.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Produto</h5>
+        <a href="index.html#saas">SaaS</a>
+        <a href="index.html#planos">Planos</a>
+        <a href="admin/index.html">Painel</a>
+      </div>
+      <div class="footer-col">
+        <h5>Lojas demo</h5>
+        <a href="catalogo.html?loja=centro">Raiz Pinheiros</a>
+        <a href="catalogo.html?loja=shopping">Vida Leve Paulista</a>
+        <a href="catalogo.html?loja=norte">Grao Vital Santana</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <a href="tel:+5511999990000">(11) 99999-0000</a>
+        <a href="mailto:contato@cbn.plus">contato@cbn.plus</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 CBN Plus. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="cart-sidebar__backdrop" id="cart-backdrop"></div>
+  <aside class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-sidebar__header">
+      <span class="cart-sidebar__title">Carrinho</span>
+      <button class="cart-sidebar__close" id="cart-close">X</button>
+    </div>
+    <div id="cart-shipping-bar"></div>
+    <div class="cart-sidebar__items" id="cart-items"></div>
+    <div class="cart-sidebar__empty" id="cart-empty">
+      <span class="cart-sidebar__empty-icon">Carrinho</span>
+      Seu carrinho esta vazio.
+    </div>
+    <div id="cart-sub-summary"></div>
+    <div class="cart-sidebar__footer" id="cart-footer" style="display:none;">
+      <div class="cart-sidebar__shipping-info" id="cart-shipping-info" style="display:none;"></div>
+      <div class="cart-sidebar__total">
+        <span>Total</span>
+        <span id="cart-total">R$ 0,00</span>
+      </div>
+      <button class="cart-sidebar__checkout-btn" id="cart-checkout-btn">Finalizar Compra</button>
+      <button class="cart-sidebar__checkout-btn" id="btn-subscriptions"
+        style="background:transparent;color:var(--verde-medio);border:1px solid var(--verde-medio);margin-top:var(--space-2);font-size:var(--fs-xs);">
+        Minhas Assinaturas
+        <span class="badge-count" id="sub-badge" style="display:none;position:static;margin-left:var(--space-2);">0</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="bottom-sheet-backdrop" id="product-detail-backdrop"></div>
+  <div class="bottom-sheet" id="product-detail"></div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-banner-content">
+      <p class="cookie-banner-text">
+        Usamos cookies para melhorar a experiencia.
+        <a href="#" style="color:var(--verde-medio);text-decoration:underline;">Politica de Privacidade</a>.
+      </p>
+      <div class="cookie-banner-actions">
+        <button class="btn btn-primary btn-sm" id="cookie-accept">Aceitar</button>
+        <button class="btn btn-ghost btn-sm" id="cookie-reject">Recusar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ck-backdrop" id="checkout-backdrop"></div>
+  <div class="ck-modal" id="checkout-modal">
+    <div class="ck-modal__inner">
+      <div class="ck-modal__header">
+        <h2>Finalizar Compra</h2>
+        <button class="ck-modal__close" id="ck-modal-close">&times;</button>
+      </div>
+      <div class="ck-stepper">
+        <div class="ck-step-dot active">1</div>
+        <span class="ck-step-label">Carrinho</span>
+        <div class="ck-step-line"></div>
+        <div class="ck-step-dot">2</div>
+        <span class="ck-step-label">Dados</span>
+        <div class="ck-step-line"></div>
+        <div class="ck-step-dot">3</div>
+        <span class="ck-step-label">Pagamento</span>
+        <div class="ck-step-line"></div>
+        <div class="ck-step-dot">4</div>
+        <span class="ck-step-label">Confirmacao</span>
+      </div>
+      <div class="ck-modal__body">
+        <div class="ck-step-panel active" id="ck-step-1"></div>
+        <div class="ck-step-panel" id="ck-step-2"></div>
+        <div class="ck-step-panel" id="ck-step-3"></div>
+        <div class="ck-step-panel" id="ck-step-4"></div>
+      </div>
+      <div class="ck-modal__nav">
+        <button class="ck-nav-back" id="ck-nav-back" style="display:none;">Voltar</button>
+        <button class="ck-nav-next" id="ck-nav-next">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ck-backdrop" id="subscriptions-backdrop"></div>
+  <div class="sub-modal" id="subscriptions-modal">
+    <div class="sub-modal__inner">
+      <div class="sub-modal__header">
+        <h2>Minhas Assinaturas</h2>
+        <button class="ck-modal__close" id="sub-modal-close">&times;</button>
+      </div>
+      <div class="sub-modal__body" id="subscriptions-panel"></div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/core/firebase-config.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/auth.js"></script>
+  <script src="js/core/router.js"></script>
+  <script src="js/core/firestore-service.js"></script>
+  <script src="js/core/catalog-loader.js"></script>
+  <script src="js/core/referral-tracker.js"></script>
+  <script src="js/data/categories.js"></script>
+  <script src="js/data/products.js"></script>
+  <script src="js/data/stores.js"></script>
+  <script src="js/data/employees.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/catalogo/product-card.js"></script>
+  <script src="js/catalogo/product-detail.js"></script>
+  <script src="js/catalogo/cart.js"></script>
+  <script src="js/catalogo/checkout.js"></script>
+  <script src="js/catalogo/subscriptions.js"></script>
+  <script src="js/catalogo/search.js"></script>
+  <script src="js/catalogo/filters.js"></script>
+  <script src="js/pages/catalogo.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => console.warn('[SW] Registro falhou:', err));
+      });
+    }
+  </script>
+</body>
+</html>

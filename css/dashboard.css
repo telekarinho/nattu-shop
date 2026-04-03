@@ -1,0 +1,302 @@
+/* ============================================
+   CLUBE DO NATURAL — Dashboard Styles
+   KPI Cards + Charts + Orders + Alerts
+   ============================================ */
+
+/* === KPI GRID === */
+.dashboard-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+/* === KPI CARD === */
+.kpi-card {
+  background: var(--branco);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--verde-medio);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.kpi-card__icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.kpi-card__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.kpi-card__value {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--verde-escuro);
+  line-height: 1.2;
+}
+
+.kpi-card__label {
+  font-size: var(--fs-xs);
+  color: var(--cinza-600);
+  margin-top: var(--space-1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* KPI color accents */
+.kpi--vendas { border-left-color: var(--verde-claro); }
+.kpi--pedidos { border-left-color: var(--azul); }
+.kpi--ticket { border-left-color: var(--dourado); }
+.kpi--estoque { border-left-color: var(--vermelho); }
+.kpi--mrr { border-left-color: #9C27B0; }
+.kpi--subs { border-left-color: #00BCD4; }
+
+/* === CHARTS ROW === */
+.dashboard-charts {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+@media (max-width: 968px) {
+  .dashboard-charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === DASHBOARD CARD (generic container) === */
+.dashboard-card {
+  background: var(--branco);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard-card__title {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--cinza-700);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-4);
+}
+
+/* === BAR CHART === */
+.bar-chart {
+  width: 100%;
+}
+
+.bar-chart__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  height: 220px;
+  padding-top: var(--space-6);
+}
+
+.bar-chart__col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.bar-chart__value {
+  font-size: 10px;
+  font-weight: var(--fw-semibold);
+  color: var(--verde-escuro);
+  white-space: nowrap;
+}
+
+.bar-chart__bar {
+  width: 100%;
+  max-width: 50px;
+  min-height: 4px;
+  background: linear-gradient(to top, var(--verde-medio), var(--verde-claro));
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transition: height var(--transition-base);
+}
+
+.bar-chart__col:hover .bar-chart__bar {
+  background: linear-gradient(to top, var(--verde-escuro), var(--verde-medio));
+}
+
+.bar-chart__label {
+  font-size: 10px;
+  color: var(--cinza-600);
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* === DONUT CHART === */
+.donut-chart {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.donut-chart__ring {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.donut-chart__hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: var(--branco);
+  border-radius: 50%;
+}
+
+.donut-chart__legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 150px;
+}
+
+.donut-chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-xs);
+}
+
+.donut-chart__legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.donut-chart__legend-name {
+  flex: 1;
+  color: var(--cinza-700);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.donut-chart__legend-value {
+  font-weight: var(--fw-semibold);
+  color: var(--cinza-600);
+  white-space: nowrap;
+}
+
+/* === BOTTOM ROW === */
+.dashboard-bottom {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 968px) {
+  .dashboard-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === ALERT SECTIONS === */
+.alert-section {
+  margin-bottom: var(--space-4);
+}
+
+.alert-section:last-child {
+  margin-bottom: 0;
+}
+
+.alert-section__title {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-3);
+  color: var(--cinza-800);
+}
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.alert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+}
+
+.alert-item--warning {
+  background: var(--amarelo-claro);
+}
+
+.alert-item--danger {
+  background: var(--vermelho-claro);
+}
+
+.alert-item--info {
+  background: var(--azul-claro);
+}
+
+.alert-item__text {
+  line-height: var(--lh-normal);
+}
+
+/* === EMPTY STATE === */
+.dashboard-empty {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  color: var(--cinza-500);
+  font-size: var(--fs-sm);
+}
+
+/* === RESPONSIVE KPIs === */
+@media (max-width: 768px) {
+  .dashboard-kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kpi-card {
+    padding: var(--space-4);
+  }
+
+  .kpi-card__value {
+    font-size: var(--fs-lg);
+  }
+
+  .bar-chart__bars {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-kpis {
+    grid-template-columns: 1fr;
+  }
+}

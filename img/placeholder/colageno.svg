@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fdf2f7;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f8e4ee;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#d4a0b8" stroke-width="3"/>
+  <!-- Container/pot -->
+  <rect x="140" y="160" width="120" height="110" rx="12" fill="#F5F5F5"/>
+  <rect x="140" y="160" width="120" height="30" rx="12" fill="#E8E8E8"/>
+  <!-- Lid -->
+  <rect x="150" y="142" width="100" height="22" rx="8" fill="#EEEEEE"/>
+  <rect x="185" y="134" width="30" height="12" rx="6" fill="#BDBDBD"/>
+  <!-- Label -->
+  <rect x="152" y="200" width="96" height="55" rx="6" fill="white" opacity="0.9"/>
+  <text x="200" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#C2185B">COLÁGENO</text>
+  <text x="200" y="235" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#E91E63">Hidrolisado</text>
+  <text x="200" y="248" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#999">Tipo I e III</text>
+  <!-- Sparkle effects -->
+  <g fill="#E91E63" opacity="0.4">
+    <polygon points="120,150 123,145 126,150 123,155" />
+    <polygon points="280,170 283,165 286,170 283,175" />
+    <polygon points="130,260 133,255 136,260 133,265" />
+    <polygon points="275,250 278,245 281,250 278,255" />
+  </g>
+  <text x="200" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#C2185B">Colágeno</text>
+</svg>

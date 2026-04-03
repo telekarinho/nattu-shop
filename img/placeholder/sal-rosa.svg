@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f8d0d8;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#e0a0b0" stroke-width="3"/>
+  <!-- Salt grinder -->
+  <g transform="translate(200,190)">
+    <rect x="-25" y="-60" width="50" height="100" rx="5" fill="#F5F5F5"/>
+    <rect x="-25" y="-60" width="50" height="40" rx="5" fill="transparent" stroke="#E0E0E0" stroke-width="1.5"/>
+    <!-- Salt crystals visible inside -->
+    <g opacity="0.7">
+      <rect x="-15" y="-50" width="8" height="6" rx="1" fill="#F48FB1" transform="rotate(15 -11 -47)"/>
+      <rect x="5" y="-45" width="7" height="5" rx="1" fill="#EC407A" transform="rotate(-10 8 -42)"/>
+      <rect x="-10" y="-38" width="9" height="6" rx="1" fill="#F8BBD0" transform="rotate(5 -5 -35)"/>
+      <rect x="8" y="-35" width="6" height="5" rx="1" fill="#F06292"/>
+      <rect x="-5" y="-28" width="8" height="5" rx="1" fill="#EC407A" transform="rotate(-8 -1 -25)"/>
+    </g>
+    <!-- Metal parts -->
+    <rect x="-28" y="-22" width="56" height="6" rx="2" fill="#BDBDBD"/>
+    <rect x="-25" y="-16" width="50" height="55" rx="4" fill="#9E9E9E"/>
+    <rect x="-20" y="-12" width="40" height="45" rx="3" fill="#BDBDBD"/>
+    <!-- Knob on top -->
+    <circle cx="0" cy="-65" r="10" fill="#9E9E9E"/>
+    <circle cx="0" cy="-65" r="6" fill="#BDBDBD"/>
+  </g>
+  <!-- Scattered salt crystals -->
+  <g opacity="0.5">
+    <rect x="120" y="260" width="6" height="4" rx="1" fill="#F48FB1" transform="rotate(30 123 262)"/>
+    <rect x="260" y="250" width="5" height="4" rx="1" fill="#EC407A" transform="rotate(-20 262 252)"/>
+    <rect x="140" y="280" width="5" height="3" rx="1" fill="#F8BBD0" transform="rotate(15 142 281)"/>
+    <rect x="250" y="275" width="6" height="4" rx="1" fill="#F06292" transform="rotate(-25 253 277)"/>
+  </g>
+  <text x="200" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#AD1457">Sal Rosa do Himalaia</text>
+</svg>

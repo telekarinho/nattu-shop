@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(for f:*)",
+      "Bash(node -c \"$f\")",
+      "Bash(echo \"SYNTAX ERROR in $f\")",
+      "mcp__Desktop_Commander__read_file",
+      "mcp__Desktop_Commander__list_directory",
+      "Bash(grep -l \"const Utils\\\\|const Toast\" C:/Users/rodri/clubedonatural/js/core/*.js C:/Users/rodri/clubedonatural/js/components/*.js)",
+      "Bash(find /c/Users/rodri/clubedonatural/js -type f -name *.js)",
+      "Bash(node -c \"C:/Users/rodri/clubedonatural/js/admin/funcionarios.js\")",
+      "Bash(node -c \"C:/Users/rodri/clubedonatural/js/admin/metas.js\")",
+      "Bash(node -c js/admin/metas-extra.js)",
+      "Bash(node -c js/admin/metas.js)",
+      "Bash(node -c js/admin/afiliados.js)",
+      "Bash(node -c js/admin/admin-app.js)",
+      "Bash(node -c js/core/referral-tracker.js)",
+      "Bash(node -c js/catalogo/checkout.js)",
+      "Bash(find js:*)",
+      "Bash(2)",
+      "Bash(while read:*)",
+      "Bash(do node:*)",
+      "Bash(echo \"FALHOU: $f\")",
+      "Bash(npx firebase:*)",
+      "Bash(echo $FIREBASE_TOKEN)",
+      "Bash(echo $FIREBASE_CI_TOKEN)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''tokens'''' in d, ''''user'''' in d\\)\")",
+      "Bash(node -e \"const d=require\\(''''$HOME/.config/configstore/firebase-tools.json''''.replace\\(/\\\\/g,''''/''''\\)\\); console.log\\(''''tokens'''' in d, ''''user'''' in d\\)\")",
+      "Bash(node -e \"const fs=require\\(''fs''\\); const d=JSON.parse\\(fs.readFileSync\\(process.env.HOME+''/.config/configstore/firebase-tools.json'',''utf8''\\)\\); console.log\\(Object.keys\\(d\\).join\\('', ''\\)\\);\")",
+      "Bash(grep -E \"\\\\.\\(html|json\\)$\")",
+      "Bash(grep -o src=\"\"[^\"\"]*.js\"\" index.html catalogo.html checkout.html admin/index.html pdv/index.html)"
+    ]
+  }
+}

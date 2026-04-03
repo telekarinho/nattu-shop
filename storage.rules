@@ -1,0 +1,21 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    match /produto-imagens/{productId}/{fileName} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+
+    match /fiscal-certificados/{storeId}/{fileName} {
+      allow read, write: if signedIn();
+    }
+
+    match /fiscal-pdfs/{storeId}/{fileName} {
+      allow read, write: if signedIn();
+    }
+  }
+}

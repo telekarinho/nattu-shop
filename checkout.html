@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FAFAF7">
+  <meta name="description" content="Finalizar Pedido — Clube do Natural. Produtos naturais entregues para você.">
+  <title>Checkout — Clube do Natural</title>
+  <link rel="icon" type="image/png" href="img/logo-full.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="catalogo.html" class="logo">
+        <span class="logo-icon"><img src="img/logo-full.png" alt="Logo Clube do Natural"></span>
+        <span>Clube do Natural</span>
+      </a>
+      <a href="catalogo.html" class="btn btn-ghost btn-sm" id="btn-back-catalog">
+        ← Voltar ao Catálogo
+      </a>
+    </div>
+  </header>
+
+  <div class="checkout-page">
+    <div class="checkout-container">
+
+      <!-- ========== EMPTY CART STATE ========== -->
+      <div class="checkout-empty hidden" id="checkout-empty">
+        <div class="checkout-empty__icon">🛒</div>
+        <h2 class="checkout-empty__title">Seu carrinho está vazio</h2>
+        <p class="checkout-empty__text">Adicione produtos antes de finalizar o pedido.</p>
+        <a href="catalogo.html" class="btn btn-primary btn-lg">Explorar Catálogo</a>
+      </div>
+
+      <!-- ========== STEPPER ========== -->
+      <div class="checkout-stepper" id="checkout-stepper">
+        <div class="stepper">
+          <div class="stepper-step active" data-step="1">
+            <span class="stepper-number">1</span>
+            <span class="stepper-label">Dados</span>
+          </div>
+          <div class="stepper-line" data-line="1"></div>
+          <div class="stepper-step" data-step="2">
+            <span class="stepper-number">2</span>
+            <span class="stepper-label">Loja</span>
+          </div>
+          <div class="stepper-line" data-line="2"></div>
+          <div class="stepper-step" data-step="3">
+            <span class="stepper-number">3</span>
+            <span class="stepper-label">Entrega</span>
+          </div>
+          <div class="stepper-line" data-line="3"></div>
+          <div class="stepper-step" data-step="4">
+            <span class="stepper-number">4</span>
+            <span class="stepper-label">Pagamento</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHECKOUT LAYOUT ========== -->
+      <div class="checkout-layout" id="checkout-layout">
+
+        <!-- ===== MAIN CONTENT (Steps) ===== -->
+        <div class="checkout-main">
+
+          <!-- ========== STEP 1: DADOS DO CLIENTE ========== -->
+          <div class="checkout-step active" id="step-1">
+            <div class="checkout-section">
+              <h2 class="checkout-section__title">📋 Dados do Cliente</h2>
+              <form class="checkout-form" id="form-dados" autocomplete="off">
+                <div class="form-group">
+                  <label for="input-nome">
+                    Nome completo <span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="input-nome"
+                    name="nome"
+                    placeholder="Seu nome completo"
+                    required
+                    autocomplete="name"
+                  >
+                  <span class="error" id="error-nome"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-celular">
+                    Celular <span class="required">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="input-celular"
+                    name="celular"
+                    placeholder="(11) 99999-9999"
+                    required
+                    maxlength="15"
+                    autocomplete="tel"
+                  >
+                  <span class="error" id="error-celular"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-cpf">
+                    CPF <span class="text-cinza text-xs">(opcional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="input-cpf"
+                    name="cpf"
+                    placeholder="000.000.000-00"
+                    maxlength="14"
+                  >
+                  <span class="error" id="error-cpf"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-email">
+                    E-mail <span class="text-cinza text-xs">(opcional)</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="input-email"
+                    name="email"
+                    placeholder="seu@email.com"
+                    autocomplete="email"
+                  >
+                  <span class="error" id="error-email"></span>
+                </div>
+              </form>
+            </div>
+
+            <div class="checkout-nav">
+              <a href="catalogo.html" class="btn-back">← Voltar ao Catálogo</a>
+              <button class="btn-next" id="btn-step1-next">Continuar →</button>
+            </div>
+          </div>
+
+          <!-- ========== STEP 2: ESCOLHA A LOJA ========== -->
+          <div class="checkout-step" id="step-2">
+            <div class="checkout-section">
+              <h2 class="checkout-section__title">🏪 Escolha a Loja</h2>
+
+              <button class="geolocation-btn" id="btn-geolocation" type="button">
+                <span class="geo-icon">📍</span>
+                <span class="spinner-small"></span>
+                Usar minha localização
+              </button>
+
+              <div class="store-cards-grid" id="store-cards-grid">
+                <!-- Store: Centro -->
+                <div class="store-card" data-store-id="centro">
+                  <div class="store-card__name" data-field="nome">Clube do Natural - Centro</div>
+                  <div class="store-card__info">
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📍</span>
+                      <span data-field="endereco">Rua das Flores, 150 - Centro, São Paulo - SP</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">🕐</span>
+                      <span data-field="horario">Seg-Sex: 08:00-20:00 | Sáb: 08:00-18:00 | Dom: 09:00-14:00</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📞</span>
+                      <span data-field="telefone">(11) 3456-7890</span>
+                    </div>
+                  </div>
+                  <div class="store-card__distance" data-field="distance" style="display:none;"></div>
+                  <a href="https://wa.me/5511934567890" target="_blank" rel="noopener" class="store-card__whatsapp" onclick="event.stopPropagation();">
+                    💬 WhatsApp
+                  </a>
+                </div>
+
+                <!-- Store: Shopping -->
+                <div class="store-card" data-store-id="shopping">
+                  <div class="store-card__name" data-field="nome">Clube do Natural - Shopping</div>
+                  <div class="store-card__info">
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📍</span>
+                      <span data-field="endereco">Av. Paulista, 1000 - Loja 42, Shopping Natural, São Paulo - SP</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">🕐</span>
+                      <span data-field="horario">Seg-Sex: 10:00-22:00 | Sáb: 10:00-22:00 | Dom: 14:00-20:00</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📞</span>
+                      <span data-field="telefone">(11) 3456-7891</span>
+                    </div>
+                  </div>
+                  <div class="store-card__distance" data-field="distance" style="display:none;"></div>
+                  <a href="https://wa.me/5511934567891" target="_blank" rel="noopener" class="store-card__whatsapp" onclick="event.stopPropagation();">
+                    💬 WhatsApp
+                  </a>
+                </div>
+
+                <!-- Store: Zona Norte -->
+                <div class="store-card" data-store-id="norte">
+                  <div class="store-card__name" data-field="nome">Clube do Natural - Zona Norte</div>
+                  <div class="store-card__info">
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📍</span>
+                      <span data-field="endereco">Rua Voluntários da Pátria, 500 - Santana, São Paulo - SP</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">🕐</span>
+                      <span data-field="horario">Seg-Sex: 08:00-19:00 | Sáb: 08:00-16:00 | Dom: Fechado</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📞</span>
+                      <span data-field="telefone">(11) 3456-7892</span>
+                    </div>
+                  </div>
+                  <div class="store-card__distance" data-field="distance" style="display:none;"></div>
+                  <a href="https://wa.me/5511934567892" target="_blank" rel="noopener" class="store-card__whatsapp" onclick="event.stopPropagation();">
+                    💬 WhatsApp
+                  </a>
+                </div>
+
+                <!-- Store: Zona Sul -->
+                <div class="store-card" data-store-id="sul">
+                  <div class="store-card__name" data-field="nome">Clube do Natural - Zona Sul</div>
+                  <div class="store-card__info">
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📍</span>
+                      <span data-field="endereco">Av. Santo Amaro, 2200 - Brooklin, São Paulo - SP</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">🕐</span>
+                      <span data-field="horario">Seg-Sex: 07:00-21:00 | Sáb: 08:00-18:00 | Dom: 09:00-15:00</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📞</span>
+                      <span data-field="telefone">(11) 3456-7893</span>
+                    </div>
+                  </div>
+                  <div class="store-card__distance" data-field="distance" style="display:none;"></div>
+                  <a href="https://wa.me/5511934567893" target="_blank" rel="noopener" class="store-card__whatsapp" onclick="event.stopPropagation();">
+                    💬 WhatsApp
+                  </a>
+                </div>
+
+                <!-- Store: Praia Grande -->
+                <div class="store-card" data-store-id="praia">
+                  <div class="store-card__name" data-field="nome">Clube do Natural - Praia Grande</div>
+                  <div class="store-card__info">
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📍</span>
+                      <span data-field="endereco">Av. Presidente Kennedy, 800 - Guilhermina, Praia Grande - SP</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">🕐</span>
+                      <span data-field="horario">Seg-Sex: 09:00-19:00 | Sáb: 09:00-17:00 | Dom: 10:00-14:00</span>
+                    </div>
+                    <div class="store-card__info-row">
+                      <span class="info-icon">📞</span>
+                      <span data-field="telefone">(13) 3456-7894</span>
+                    </div>
+                  </div>
+                  <div class="store-card__distance" data-field="distance" style="display:none;"></div>
+                  <a href="https://wa.me/5513934567894" target="_blank" rel="noopener" class="store-card__whatsapp" onclick="event.stopPropagation();">
+                    💬 WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="checkout-nav">
+              <button class="btn-back" id="btn-step2-back">← Voltar</button>
+              <button class="btn-next" id="btn-step2-next" disabled>Continuar →</button>
+            </div>
+          </div>
+
+          <!-- ========== STEP 3: TIPO DE ENTREGA ========== -->
+          <div class="checkout-step" id="step-3">
+            <div class="checkout-section">
+              <h2 class="checkout-section__title">🚚 Tipo de Entrega</h2>
+
+              <div class="selected-store-summary" id="selected-store-summary">
+                <span class="selected-store-summary__icon">🏪</span>
+                <div>
+                  <span>Loja selecionada: </span>
+                  <span class="selected-store-summary__name" id="selected-store-name">—</span>
+                </div>
+              </div>
+
+              <div class="delivery-options">
+                <!-- Retirada na Loja -->
+                <div class="radio-card selected" data-delivery="retirada" id="option-retirada">
+                  <div class="radio-card__radio"></div>
+                  <div class="radio-card__content">
+                    <div class="radio-card__title">🏪 Retirada na Loja</div>
+                    <div class="radio-card__desc">
+                      Retire seu pedido diretamente na loja selecionada.
+                      <br>
+                      <span id="retirada-address" class="text-cinza text-xs">—</span>
+                    </div>
+                  </div>
+                  <span class="radio-card__price radio-card__price--free">Grátis</span>
+                </div>
+
+                <!-- Delivery -->
+                <div class="radio-card" data-delivery="delivery" id="option-delivery">
+                  <div class="radio-card__radio"></div>
+                  <div class="radio-card__content">
+                    <div class="radio-card__title">🛵 Delivery</div>
+                    <div class="radio-card__desc">Receba no conforto da sua casa.</div>
+
+                    <!-- Address form (shown when delivery selected) -->
+                    <div class="delivery-details" id="delivery-details">
+                      <div class="delivery-address-form">
+                        <div class="form-group form-group--full">
+                          <label for="input-rua">Rua / Avenida <span class="required">*</span></label>
+                          <input type="text" id="input-rua" name="rua" placeholder="Nome da rua">
+                        </div>
+                        <div class="form-group">
+                          <label for="input-numero">Número <span class="required">*</span></label>
+                          <input type="text" id="input-numero" name="numero" placeholder="Nº">
+                        </div>
+                        <div class="form-group">
+                          <label for="input-complemento">Complemento</label>
+                          <input type="text" id="input-complemento" name="complemento" placeholder="Apto, Bloco...">
+                        </div>
+                        <div class="form-group">
+                          <label for="input-bairro">Bairro <span class="required">*</span></label>
+                          <input type="text" id="input-bairro" name="bairro" placeholder="Bairro">
+                        </div>
+                        <div class="form-group">
+                          <label for="input-cep">CEP <span class="required">*</span></label>
+                          <input type="text" id="input-cep" name="cep" placeholder="00000-000" maxlength="9">
+                        </div>
+                      </div>
+
+                      <div class="delivery-fee-display" id="delivery-fee-display">
+                        <span class="delivery-fee-display__label">Taxa de entrega estimada:</span>
+                        <span class="delivery-fee-display__value" id="delivery-fee-value">Calculando...</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="checkout-nav">
+              <button class="btn-back" id="btn-step3-back">← Voltar</button>
+              <button class="btn-next" id="btn-step3-next">Continuar →</button>
+            </div>
+          </div>
+
+          <!-- ========== STEP 4: PAGAMENTO ========== -->
+          <div class="checkout-step" id="step-4">
+            <div class="checkout-section">
+              <h2 class="checkout-section__title">💳 Forma de Pagamento</h2>
+
+              <div class="payment-options">
+                <!-- PIX -->
+                <div class="radio-card selected" data-payment="pix" id="option-pix">
+                  <div class="radio-card__radio"></div>
+                  <div class="radio-card__content">
+                    <div class="radio-card__title">📱 PIX</div>
+                    <div class="radio-card__desc">Pagamento instantâneo</div>
+
+                    <div class="payment-details active" id="pix-details">
+                      <div class="pix-area">
+                        <div class="pix-qr-placeholder">
+                          📱
+                        </div>
+                        <p class="pix-code-text" id="pix-code">
+                          00020126580014br.gov.bcb.pix0136a1b2c3d4-e5f6-7890-abcd-ef1234567890520400005303986540510.005802BR5925CLUBE DO NATURAL LTDA6009SAO PAULO62070503***6304ABCD
+                        </p>
+                        <button class="pix-copy-btn" id="btn-copy-pix" type="button">
+                          📋 Copiar código PIX
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cartão -->
+                <div class="radio-card" data-payment="cartao" id="option-cartao">
+                  <div class="radio-card__radio"></div>
+                  <div class="radio-card__content">
+                    <div class="radio-card__title">💳 Cartão de Crédito / Débito</div>
+                    <div class="radio-card__desc">Visa, Mastercard, Elo</div>
+
+                    <div class="payment-details" id="cartao-details">
+                      <div class="card-form">
+                        <div class="form-group form-group--full">
+                          <label for="input-card-number">Número do Cartão</label>
+                          <input type="text" id="input-card-number" name="card-number" placeholder="0000 0000 0000 0000" maxlength="19">
+                        </div>
+                        <div class="form-group form-group--full">
+                          <label for="input-card-name">Nome no Cartão</label>
+                          <input type="text" id="input-card-name" name="card-name" placeholder="Como impresso no cartão" style="text-transform:uppercase;">
+                        </div>
+                        <div class="form-group">
+                          <label for="input-card-expiry">Validade</label>
+                          <input type="text" id="input-card-expiry" name="card-expiry" placeholder="MM/AA" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                          <label for="input-card-cvv">CVV</label>
+                          <input type="text" id="input-card-cvv" name="card-cvv" placeholder="000" maxlength="4">
+                        </div>
+                        <div class="card-form-disclaimer">
+                          🔒 Ambiente de demonstração — nenhum dado real será processado.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dinheiro -->
+                <div class="radio-card" data-payment="dinheiro" id="option-dinheiro">
+                  <div class="radio-card__radio"></div>
+                  <div class="radio-card__content">
+                    <div class="radio-card__title">💵 Dinheiro</div>
+                    <div class="radio-card__desc">Pague na entrega ou retirada</div>
+
+                    <div class="payment-details" id="dinheiro-details">
+                      <div class="cash-section">
+                        <label class="cash-change-check">
+                          <input type="checkbox" id="check-troco">
+                          Precisa de troco?
+                        </label>
+                        <div class="cash-change-input" id="cash-change-input">
+                          <label for="input-troco">Troco para quanto?</label>
+                          <input type="text" id="input-troco" name="troco" placeholder="R$ 0,00">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Subscription confirmation (only shown if cart has subscription items) -->
+            <div class="subscription-confirm hidden" id="subscription-confirm">
+              <h3 class="subscription-confirm__title">🔄 Confirmação de Assinatura</h3>
+              <p class="text-sm text-cinza mb-4">
+                Ao confirmar, você também ativa a assinatura mensal dos itens abaixo:
+              </p>
+              <ul class="subscription-confirm__items" id="subscription-confirm-items">
+                <!-- Filled by JS -->
+              </ul>
+              <div class="subscription-confirm__total">
+                <span>Total mensal da assinatura:</span>
+                <span id="subscription-confirm-total">R$ 0,00</span>
+              </div>
+              <p class="subscription-confirm__note">
+                Você poderá cancelar ou modificar sua assinatura a qualquer momento pelo WhatsApp ou diretamente na loja.
+              </p>
+            </div>
+
+            <div class="checkout-nav">
+              <button class="btn-back" id="btn-step4-back">← Voltar</button>
+              <button class="btn-confirm" id="btn-confirm-order">✅ Confirmar Pedido</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===== ORDER SUMMARY SIDEBAR ===== -->
+        <aside class="order-summary" id="order-summary">
+          <div class="order-summary__header" id="order-summary-header">
+            <h3 class="order-summary__title">🛒 Resumo do Pedido</h3>
+            <span class="order-summary__toggle" id="order-summary-toggle">▼</span>
+          </div>
+
+          <div class="order-summary__body" id="order-summary-body">
+            <ul class="order-summary__items" id="summary-items">
+              <!-- Filled by JS -->
+            </ul>
+
+            <div class="order-summary__divider"></div>
+
+            <div class="order-summary__row">
+              <span>Subtotal</span>
+              <span id="summary-subtotal">R$ 0,00</span>
+            </div>
+            <div class="order-summary__row">
+              <span>Taxa de entrega</span>
+              <span id="summary-delivery-fee">Grátis</span>
+            </div>
+
+            <div class="order-summary__divider"></div>
+
+            <div class="order-summary__row order-summary__row--total">
+              <span>Total</span>
+              <span id="summary-total">R$ 0,00</span>
+            </div>
+
+            <!-- Subscription summary (only if has sub items) -->
+            <div class="order-summary__subscription hidden" id="summary-subscription">
+              <strong>🔄 Assinatura mensal:</strong>
+              <span id="summary-subscription-value">R$ 0,00/mês</span>
+            </div>
+          </div>
+        </aside>
+
+      </div><!-- /.checkout-layout -->
+    </div><!-- /.checkout-container -->
+  </div><!-- /.checkout-page -->
+
+  <!-- ========== TOAST CONTAINER ========== -->
+  <div id="toast-container"></div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/core/firebase-config.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/auth.js"></script>
+  <script src="js/core/firestore-service.js"></script>
+  <script src="js/core/catalog-loader.js"></script>
+  <script src="js/core/referral-tracker.js"></script>
+  <script src="js/data/products.js"></script>
+  <script src="js/data/stores.js"></script>
+  <script src="js/data/categories.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/catalogo/cart.js"></script>
+  <script src="js/pages/checkout.js"></script>
+</body>
+</html>

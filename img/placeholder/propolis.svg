@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fdf5e6;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f5e6c8;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#c9a86c" stroke-width="3"/>
+  <!-- Dropper bottle -->
+  <g transform="translate(200,200)">
+    <!-- Bottle body -->
+    <rect x="-30" y="-30" width="60" height="90" rx="8" fill="#5D4037"/>
+    <rect x="-30" y="-30" width="60" height="40" rx="8" fill="#6D4C41" opacity="0.6"/>
+    <!-- Bottle neck -->
+    <rect x="-12" y="-45" width="24" height="18" rx="3" fill="#4E342E"/>
+    <!-- Dropper top -->
+    <rect x="-15" y="-65" width="30" height="22" rx="8" fill="#333"/>
+    <circle cx="0" cy="-58" r="10" fill="#444"/>
+    <!-- Glass pipette -->
+    <rect x="-3" y="-45" width="6" height="30" rx="2" fill="#B0BEC5" opacity="0.6"/>
+    <!-- Drop -->
+    <path d="M0,65 Q-6,72 0,80 Q6,72 0,65" fill="#FF8F00"/>
+    <!-- Label -->
+    <rect x="-22" y="-10" width="44" height="30" rx="4" fill="white" opacity="0.85"/>
+    <text x="0" y="6" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#5D4037">PRÓPOLIS</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#8D6E63">Extrato</text>
+  </g>
+  <!-- Honeycomb pattern -->
+  <g fill="none" stroke="#FFB300" stroke-width="1" opacity="0.3">
+    <polygon points="115,150 125,144 135,150 135,162 125,168 115,162"/>
+    <polygon points="135,150 145,144 155,150 155,162 145,168 135,162"/>
+    <polygon points="125,168 135,162 145,168 145,180 135,186 125,180"/>
+    <polygon points="255,140 265,134 275,140 275,152 265,158 255,152"/>
+    <polygon points="275,140 285,134 295,140 295,152 285,158 275,152"/>
+    <polygon points="265,158 275,152 285,158 285,170 275,176 265,170"/>
+  </g>
+  <text x="200" y="348" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037">Própolis</text>
+</svg>

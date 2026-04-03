@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#faf3e0;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f0e4c8;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#c4a870" stroke-width="3"/>
+  <!-- Bowl -->
+  <path d="M110 230 Q110 310 200 310 Q290 310 290 230" fill="#8B6F47"/>
+  <ellipse cx="200" cy="230" rx="90" ry="32" fill="#B8945C"/>
+  <!-- Granola clusters -->
+  <g fill="#A07030">
+    <circle cx="160" cy="218" r="8"/><circle cx="180" cy="212" r="10"/>
+    <circle cx="200" cy="216" r="9"/><circle cx="220" cy="210" r="11"/>
+    <circle cx="240" cy="218" r="8"/>
+  </g>
+  <g fill="#C8A050" opacity="0.7">
+    <circle cx="170" cy="225" r="6"/><circle cx="190" cy="222" r="7"/>
+    <circle cx="210" cy="224" r="6"/><circle cx="230" cy="220" r="7"/>
+  </g>
+  <!-- Raisins and fruits -->
+  <g fill="#6B2D5B">
+    <circle cx="175" cy="228" r="4"/><circle cx="215" cy="226" r="4"/>
+    <circle cx="195" cy="232" r="3.5"/>
+  </g>
+  <!-- Honey drizzle -->
+  <path d="M165 200 Q170 208 168 215" stroke="#D4A020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M210 198 Q215 206 212 215" stroke="#D4A020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Leaf -->
+  <g transform="translate(200,145)">
+    <path d="M0,5 Q-20,-25 -5,-45 Q10,-25 0,5" fill="#7B9E57"/>
+    <path d="M0,5 Q20,-25 5,-45 Q-10,-25 0,5" fill="#8BAE67"/>
+    <line x1="0" y1="5" x2="0" y2="-30" stroke="#5A7D3E" stroke-width="1.5"/>
+  </g>
+  <text x="200" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#8B6F47">Granola Artesanal</text>
+</svg>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configurar Firebase — Clube do Natural</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:#F5F0E8;min-height:100vh;padding:20px;
+}
+.container{max-width:700px;margin:0 auto}
+.header{text-align:center;padding:32px 0}
+.header h1{color:#1B4332;font-size:24px;margin-bottom:4px}
+.header p{color:#888;font-size:14px}
+
+.card{background:white;border-radius:16px;padding:32px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+.card h2{color:#1B4332;font-size:18px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card h2 .step{
+  background:#2D6A4F;color:white;width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;
+  flex-shrink:0;
+}
+
+.instructions{color:#555;font-size:14px;line-height:1.7;margin-bottom:20px}
+.instructions ol{padding-left:20px}
+.instructions li{margin-bottom:8px}
+.instructions a{color:#2D6A4F;font-weight:600}
+.instructions code{
+  background:#f0ebe0;padding:2px 8px;border-radius:4px;font-size:13px;
+  font-family:'Cascadia Code','Fira Code',monospace;
+}
+
+.config-input{
+  width:100%;min-height:200px;padding:16px;border:2px solid #e0d5c0;
+  border-radius:12px;font-family:'Cascadia Code','Fira Code',monospace;
+  font-size:13px;resize:vertical;outline:none;transition:border-color 0.2s;
+  background:#faf8f4;color:#333;
+}
+.config-input:focus{border-color:#2D6A4F}
+.config-input::placeholder{color:#bbb}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:14px 32px;
+  border:none;border-radius:12px;font-size:16px;font-weight:600;
+  cursor:pointer;transition:all 0.2s;
+}
+.btn-primary{background:#2D6A4F;color:white}
+.btn-primary:hover{background:#1B4332;transform:translateY(-1px)}
+.btn-primary:disabled{opacity:0.5;pointer-events:none}
+
+.btn-secondary{background:#e0d5c0;color:#1B4332}
+.btn-secondary:hover{background:#d0c5b0}
+
+.status{padding:12px 16px;border-radius:10px;font-size:14px;margin-top:16px;display:none}
+.status.success{display:block;background:#ecfdf5;color:#065f46}
+.status.error{display:block;background:#fef2f2;color:#991b1b}
+
+.current-config{
+  background:#f0ebe0;padding:16px;border-radius:10px;font-size:13px;
+  font-family:monospace;margin-top:12px;color:#555;word-break:break-all;
+}
+
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+
+.checklist{list-style:none;padding:0}
+.checklist li{
+  padding:10px 16px;border-radius:8px;margin-bottom:8px;
+  display:flex;align-items:center;gap:10px;font-size:14px;
+  background:#faf8f4;
+}
+.checklist li .icon{font-size:20px}
+.checklist li.done{background:#ecfdf5;color:#065f46}
+.checklist li.pending{background:#fef2f2;color:#991b1b}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>🔧 Configuração do Firebase</h1>
+    <p>Conecte o sistema ao Firebase para autenticação e banco de dados</p>
+  </div>
+
+  <!-- Step 1: Create Firebase Project -->
+  <div class="card">
+    <h2><span class="step">1</span> Criar Projeto no Firebase</h2>
+    <div class="instructions">
+      <ol>
+        <li>Acesse <a href="https://console.firebase.google.com/" target="_blank">console.firebase.google.com</a></li>
+        <li>Clique em <strong>"Adicionar projeto"</strong></li>
+        <li>Nome: <code>clube-do-natural</code> (ou outro nome)</li>
+        <li>Desative o Google Analytics (opcional) e crie o projeto</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Step 2: Enable Google Auth -->
+  <div class="card">
+    <h2><span class="step">2</span> Ativar Login com Google</h2>
+    <div class="instructions">
+      <ol>
+        <li>No Firebase Console, vá em <strong>Authentication → Sign-in method</strong></li>
+        <li>Clique em <strong>"Google"</strong> e ative</li>
+        <li>Preencha o email de suporte do projeto</li>
+        <li>Salve</li>
+        <li><strong>IMPORTANTE:</strong> Em Authentication → Settings → Authorized domains, adicione:<br>
+          <code>clubedonatural.vercel.app</code> e <code>localhost</code></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Step 3: Create Firestore -->
+  <div class="card">
+    <h2><span class="step">3</span> Criar Banco de Dados (Firestore)</h2>
+    <div class="instructions">
+      <ol>
+        <li>No Firebase Console, vá em <strong>Firestore Database</strong></li>
+        <li>Clique em <strong>"Criar banco de dados"</strong></li>
+        <li>Escolha <strong>"Modo de produção"</strong></li>
+        <li>Localização: <code>southamerica-east1</code> (São Paulo)</li>
+        <li>Após criar, vá em <strong>Regras</strong> e cole estas regras:</li>
+      </ol>
+      <textarea class="config-input" style="min-height:140px;font-size:12px" readonly>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users: anyone authenticated can read their own doc; admins can read/write all
+    match /users/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update, delete: if request.auth != null && isAdmin();
+    }
+    // All other collections: only approved users can read, only admins can write
+    match /{collection}/{docId} {
+      allow read: if request.auth != null && isApproved();
+      allow write: if request.auth != null && isAdmin();
+    }
+    function isAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'dono';
+    }
+    function isApproved() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.approved == true;
+    }
+  }
+}</textarea>
+    </div>
+  </div>
+
+  <!-- Step 4: Get Config -->
+  <div class="card">
+    <h2><span class="step">4</span> Colar Configuração do Firebase</h2>
+    <div class="instructions">
+      <ol>
+        <li>No Firebase Console, vá em <strong>Configurações do Projeto</strong> (engrenagem ⚙️)</li>
+        <li>Na seção <strong>"Seus apps"</strong>, clique no ícone <strong>&lt;/&gt;</strong> (Web)</li>
+        <li>Dê um nome: <code>clube-web</code> e registre</li>
+        <li>Copie o bloco <code>firebaseConfig</code> e cole abaixo:</li>
+      </ol>
+    </div>
+    <textarea class="config-input" id="config-text" placeholder='Cole aqui o objeto firebaseConfig do Firebase Console, ex:
+
+{
+  apiKey: "AIzaSy...",
+  authDomain: "meu-projeto.firebaseapp.com",
+  projectId: "meu-projeto",
+  storageBucket: "meu-projeto.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdef"
+}'></textarea>
+    <div id="status" class="status"></div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="saveConfig()">💾 Salvar e Conectar</button>
+      <button class="btn btn-secondary" onclick="testConnection()">🔍 Testar Conexão</button>
+    </div>
+
+    <div id="current-config" style="display:none;margin-top:20px">
+      <strong style="color:#1B4332;font-size:14px">Configuração atual:</strong>
+      <div class="current-config" id="current-config-text"></div>
+    </div>
+  </div>
+
+  <!-- Status -->
+  <div class="card" id="status-card" style="display:none">
+    <h2>✅ Status do Sistema</h2>
+    <ul class="checklist" id="checklist"></ul>
+    <div class="actions" style="margin-top:16px">
+      <a href="/login.html" class="btn btn-primary">Ir para Login</a>
+      <a href="/admin/" class="btn btn-secondary">Painel Admin</a>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="/js/core/firebase-config.js"></script>
+
+<script>
+  // Show current config if exists
+  if (CdnFirebase.isConfigured()) {
+    const cfg = CdnFirebase.config;
+    document.getElementById('current-config').style.display = 'block';
+    document.getElementById('current-config-text').textContent = JSON.stringify({
+      projectId: cfg.projectId,
+      authDomain: cfg.authDomain,
+      apiKey: cfg.apiKey ? cfg.apiKey.substring(0, 10) + '...' : '(empty)'
+    }, null, 2);
+  }
+
+  function parseConfig(text) {
+    // Handle various paste formats
+    let clean = text.trim();
+
+    // Remove "const firebaseConfig = " prefix
+    clean = clean.replace(/^(?:const|let|var)\s+\w+\s*=\s*/, '');
+
+    // Remove trailing semicolons
+    clean = clean.replace(/;\s*$/, '');
+
+    // If it looks like JS object (unquoted keys), convert to JSON
+    clean = clean.replace(/(\w+)\s*:/g, '"$1":');
+
+    // Remove trailing commas before }
+    clean = clean.replace(/,\s*}/g, '}');
+
+    try {
+      return JSON.parse(clean);
+    } catch(e) {
+      // Try eval as last resort (safe because user is pasting their own config)
+      try {
+        return (new Function('return ' + text.trim().replace(/;\s*$/, '')))();
+      } catch(e2) {
+        throw new Error('Não foi possível interpretar a configuração. Verifique o formato.');
+      }
+    }
+  }
+
+  function saveConfig() {
+    const text = document.getElementById('config-text').value;
+    const statusDiv = document.getElementById('status');
+
+    if (!text.trim()) {
+      statusDiv.className = 'status error';
+      statusDiv.textContent = 'Cole a configuração do Firebase acima.';
+      return;
+    }
+
+    try {
+      const config = parseConfig(text);
+
+      // Validate required fields
+      const required = ['apiKey', 'authDomain', 'projectId'];
+      const missing = required.filter(k => !config[k]);
+      if (missing.length) {
+        statusDiv.className = 'status error';
+        statusDiv.textContent = `Campos obrigatórios faltando: ${missing.join(', ')}`;
+        return;
+      }
+
+      // Save
+      CdnFirebase.saveConfig(config);
+
+      statusDiv.className = 'status success';
+      statusDiv.textContent = '✅ Configuração salva! Testando conexão...';
+
+      // Test connection
+      setTimeout(() => testConnection(), 500);
+
+    } catch(err) {
+      statusDiv.className = 'status error';
+      statusDiv.textContent = 'Erro: ' + err.message;
+    }
+  }
+
+  async function testConnection() {
+    const statusDiv = document.getElementById('status');
+
+    if (!CdnFirebase.isConfigured()) {
+      statusDiv.className = 'status error';
+      statusDiv.textContent = 'Configure o Firebase primeiro.';
+      return;
+    }
+
+    statusDiv.className = 'status success';
+    statusDiv.textContent = '🔄 Testando conexão...';
+
+    try {
+      // Re-init
+      if (!CdnFirebase.ready) {
+        const ok = CdnFirebase.init();
+        if (!ok) throw new Error('Falha ao inicializar Firebase');
+      }
+
+      // Test Firestore
+      await CdnFirebase.db.collection('_test').doc('ping').set({
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        test: true
+      });
+
+      // Clean up test doc
+      await CdnFirebase.db.collection('_test').doc('ping').delete();
+
+      statusDiv.className = 'status success';
+      statusDiv.textContent = '✅ Firebase conectado com sucesso! Firestore funcionando.';
+
+      // Show status card
+      showStatusCard(true, true);
+
+      // Show current config
+      const cfg = CdnFirebase.config;
+      document.getElementById('current-config').style.display = 'block';
+      document.getElementById('current-config-text').textContent = JSON.stringify({
+        projectId: cfg.projectId,
+        authDomain: cfg.authDomain,
+        apiKey: cfg.apiKey ? cfg.apiKey.substring(0, 10) + '...' : '(empty)'
+      }, null, 2);
+
+    } catch(err) {
+      console.error('Connection test failed:', err);
+      statusDiv.className = 'status error';
+
+      if (err.code === 'permission-denied') {
+        statusDiv.textContent = '⚠️ Firestore conectado, mas as regras de segurança bloquearam o teste. Cole as regras do passo 3 e tente novamente.';
+        showStatusCard(true, false);
+      } else {
+        statusDiv.textContent = `❌ Erro: ${err.message}. Verifique a configuração.`;
+        showStatusCard(false, false);
+      }
+    }
+  }
+
+  function showStatusCard(firebaseOk, firestoreOk) {
+    const card = document.getElementById('status-card');
+    const list = document.getElementById('checklist');
+    card.style.display = 'block';
+
+    list.innerHTML = `
+      <li class="${firebaseOk ? 'done' : 'pending'}">
+        <span class="icon">${firebaseOk ? '✅' : '❌'}</span>
+        Firebase App — ${firebaseOk ? 'Conectado' : 'Falhou'}
+      </li>
+      <li class="${firestoreOk ? 'done' : 'pending'}">
+        <span class="icon">${firestoreOk ? '✅' : '⚠️'}</span>
+        Firestore — ${firestoreOk ? 'Funcionando' : 'Verificar regras'}
+      </li>
+      <li class="pending">
+        <span class="icon">🔑</span>
+        Login Google — <a href="/login.html" style="color:#2D6A4F">Testar agora</a>
+      </li>
+    `;
+  }
+</script>
+</body>
+</html>

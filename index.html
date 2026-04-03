@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FAFAF7">
+  <meta name="description" content="CBN Plus - SaaS e marketplace para lojas de produtos naturais com catalogo por loja, operacao e assinatura mensal.">
+  <meta property="og:title" content="CBN Plus - SaaS para Lojas Naturais">
+  <meta property="og:description" content="Cada loja com seu catalogo, estoque, PDV, financeiro e vendas no marketplace.">
+  <meta property="og:type" content="website">
+  <title>CBN Plus - SaaS para Lojas Naturais</title>
+  <link rel="icon" type="image/png" href="img/logo-full.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/catalogo.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', var(--font-family); }
+    .saas-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+    .saas-card { background:#fff; border-radius:20px; padding:24px; box-shadow:var(--shadow-md); border:1px solid rgba(27,67,50,.08); }
+    .saas-card h4 { margin:0 0 10px; color:var(--verde-escuro); }
+    .saas-card p { margin:0; color:var(--cinza-600); }
+    .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:24px; }
+    .pricing-card { background:#fff; border-radius:20px; padding:24px; border:1px solid rgba(27,67,50,.1); box-shadow:var(--shadow-sm); }
+    .pricing-card--featured { border-color:var(--verde-medio); box-shadow:var(--shadow-lg); transform:translateY(-4px); }
+    .pricing-price { font-size:2rem; font-weight:800; color:var(--verde-escuro); margin:12px 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon"><img src="img/logo-full.png" alt="Logo CBN Plus"></span>
+        CBN Plus
+      </a>
+
+      <nav class="header-nav" id="main-nav">
+        <a href="catalogo.html">Marketplace</a>
+        <a href="#saas">SaaS</a>
+        <a href="#planos">Planos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="cart-btn" id="btn-cart" aria-label="Carrinho">
+          Carrinho
+          <span class="badge-count cart-badge" id="cart-badge" style="display:none;">0</span>
+        </button>
+        <button class="header-hamburger" id="btn-hamburger" aria-label="Menu">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="promo-banner" style="background:linear-gradient(90deg,var(--verde-escuro),var(--verde-medio));color:#fff;text-align:center;padding:10px var(--space-4);font-size:var(--fs-sm);font-weight:var(--fw-semibold);position:relative;z-index:1;">
+    SaaS para lojas de produtos naturais + marketplace centralizado + operacao completa por assinatura mensal
+  </div>
+
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>O software mais completo para <span>lojas de produtos naturais</span></h1>
+      <p>
+        O CBN Plus une marketplace, catalogo por loja, estoque, PDV, caixa, financeiro, assinaturas e painel multi-loja para voce vender mais e escalar seu negocio.
+      </p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:var(--space-6);margin-bottom:var(--space-6);flex-wrap:wrap;">
+        <div style="font-size:var(--fs-sm);opacity:0.95;"><strong>Marketplace</strong> com navegacao por loja</div>
+        <div style="font-size:var(--fs-sm);opacity:0.95;"><strong>Catalogo individual</strong> por tenant</div>
+        <div style="font-size:var(--fs-sm);opacity:0.95;"><strong>Mensalidade recorrente</strong> para lojistas</div>
+      </div>
+      <div class="hero-cta">
+        <a href="catalogo.html" class="btn btn-primary btn-lg">Ver Marketplace</a>
+        <a href="admin/index.html" class="btn btn-secondary btn-lg">Abrir Painel</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section scroll-reveal" id="saas">
+    <div class="container">
+      <h2 class="section-title">Tudo o que a loja natural precisa em um so sistema</h2>
+      <p class="section-subtitle">A base do Clube do Natural foi convertida para operar como software SaaS multi-loja.</p>
+      <div class="saas-grid">
+        <div class="saas-card">
+          <h4>Catalogo por loja</h4>
+          <p>Cada lojista publica seus produtos, variacoes, disponibilidade e identidade comercial no proprio catalogo.</p>
+        </div>
+        <div class="saas-card">
+          <h4>Marketplace central</h4>
+          <p>O cliente final encontra varias lojas naturais no mesmo ambiente e pode navegar por catalogo ou por loja.</p>
+        </div>
+        <div class="saas-card">
+          <h4>Operacao completa</h4>
+          <p>Pedidos, estoque, caixa, relatorios, notas, financeiro, equipe e PDV continuam disponiveis dentro do painel.</p>
+        </div>
+        <div class="saas-card">
+          <h4>Receita recorrente</h4>
+          <p>Voce monetiza o sistema com planos mensais e acompanha status de assinatura, trial e cobranca por lojista.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-bg scroll-reveal" id="marketplace">
+    <div class="container">
+      <h2 class="section-title">Produtos em destaque no marketplace</h2>
+      <p class="section-subtitle">Os cards abaixo ja usam a base do catalogo que cada loja pode operar individualmente.</p>
+      <div class="products-scroll" id="featured-products"></div>
+    </div>
+  </section>
+
+  <section class="section scroll-reveal" id="beneficios">
+    <div class="container">
+      <h2 class="section-title">Por que esse clone virou um SaaS forte</h2>
+      <p class="section-subtitle">Mantivemos o que funcionava no script original e reposicionamos para vender software.</p>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">1</div>
+          <h4>Tenant por loja</h4>
+          <p>Estrutura preparada para dados por loja, funcionarios, estoque, pedidos e configuracoes individuais.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">2</div>
+          <h4>Painel pronto para operar</h4>
+          <p>Voce nao parte do zero: ja existe admin com modulos reais para o nicho natural.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">3</div>
+          <h4>Mercado Pago e recorrencia</h4>
+          <p>A base ja possui checkout e rotas que podem ser evoluidas para cobrar cliente final e lojista.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">4</div>
+          <h4>Nicho claro</h4>
+          <p>Toda a comunicacao foi reposicionada para lojas de produtos naturais, suplementos, graos e emporios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="recurrence-cta scroll-reveal" id="planos">
+    <div class="container">
+      <h2>Planos para lojistas</h2>
+      <p>Exemplo de precificacao para transformar o sistema em receita recorrente.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h4>Start</h4>
+          <div class="pricing-price">R$ 197<span style="font-size:1rem;font-weight:600;">/mes</span></div>
+          <p>Catalogo, pedidos, estoque e operacao basica para lojas iniciando.</p>
+        </div>
+        <div class="pricing-card pricing-card--featured">
+          <h4>Pro</h4>
+          <div class="pricing-price">R$ 297<span style="font-size:1rem;font-weight:600;">/mes</span></div>
+          <p>Marketplace, caixa, relatorios e recursos mais completos para o lojista crescer.</p>
+        </div>
+        <div class="pricing-card">
+          <h4>Scale</h4>
+          <div class="pricing-price">R$ 497<span style="font-size:1rem;font-weight:600;">/mes</span></div>
+          <p>Multiunidade, operacao mais robusta e prioridade de suporte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section scroll-reveal" id="lojas">
+    <div class="container">
+      <h2 class="section-title">Lojas parceiras no modelo demo</h2>
+      <p class="section-subtitle">Cada uma representa um tenant com plano, faturamento e pagina propria no marketplace.</p>
+      <div class="benefits-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <div class="benefit-card"><h4>Raiz Pinheiros</h4><p>Plano Pro<br><a href="catalogo.html?loja=centro">Abrir loja</a></p></div>
+        <div class="benefit-card"><h4>Vida Leve Paulista</h4><p>Plano Scale<br><a href="catalogo.html?loja=shopping">Abrir loja</a></p></div>
+        <div class="benefit-card"><h4>Grao Vital Santana</h4><p>Plano Start<br><a href="catalogo.html?loja=norte">Abrir loja</a></p></div>
+        <div class="benefit-card"><h4>Verde Essencial Brooklin</h4><p>Plano Pro<br><a href="catalogo.html?loja=sul">Abrir loja</a></p></div>
+        <div class="benefit-card"><h4>Casa da Natureza Praia</h4><p>Plano Pro<br><a href="catalogo.html?loja=praia">Abrir loja</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="contato">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--branco);margin-bottom:var(--space-2);">
+          <img src="img/logo-full.png" alt="" style="width:28px;height:28px;display:inline-block;vertical-align:middle;margin-right:6px;">CBN Plus
+        </div>
+        <p>SaaS e marketplace para lojas de produtos naturais.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Produto</h5>
+        <a href="#saas">SaaS</a>
+        <a href="catalogo.html">Marketplace</a>
+        <a href="admin/index.html">Painel</a>
+      </div>
+      <div class="footer-col">
+        <h5>Planos</h5>
+        <a href="#planos">Start</a>
+        <a href="#planos">Pro</a>
+        <a href="#planos">Scale</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <a href="tel:+5511999990000">(11) 99999-0000</a>
+        <a href="mailto:contato@cbn.plus">contato@cbn.plus</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 CBN Plus. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="cart-sidebar__backdrop" id="cart-backdrop"></div>
+  <aside class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-sidebar__header">
+      <span class="cart-sidebar__title">Carrinho</span>
+      <button class="cart-sidebar__close" id="cart-close">X</button>
+    </div>
+    <div id="cart-shipping-bar"></div>
+    <div class="cart-sidebar__items" id="cart-items"></div>
+    <div class="cart-sidebar__empty" id="cart-empty">
+      <span class="cart-sidebar__empty-icon">Carrinho</span>
+      Seu carrinho esta vazio.
+    </div>
+    <div id="cart-sub-summary"></div>
+    <div class="cart-sidebar__footer" id="cart-footer" style="display:none;">
+      <div class="cart-sidebar__shipping-info" id="cart-shipping-info" style="display:none;"></div>
+      <div class="cart-sidebar__total">
+        <span>Total</span>
+        <span id="cart-total">R$ 0,00</span>
+      </div>
+      <button class="cart-sidebar__checkout-btn" id="cart-checkout-btn">Finalizar Compra</button>
+      <button class="cart-sidebar__checkout-btn" id="btn-subscriptions"
+        style="background:transparent;color:var(--neon-green);border:1px solid var(--neon-green);margin-top:var(--space-2);font-size:var(--fs-xs);">
+        Minhas Assinaturas
+        <span class="badge-count" id="sub-badge" style="display:none;position:static;margin-left:var(--space-2);">0</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="bottom-sheet-backdrop" id="product-detail-backdrop"></div>
+  <div class="bottom-sheet" id="product-detail"></div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-banner-content">
+      <p class="cookie-banner-text">
+        Usamos cookies para melhorar a experiencia.
+        <a href="#" style="color:var(--verde-medio);text-decoration:underline;">Politica de Privacidade</a>.
+      </p>
+      <div class="cookie-banner-actions">
+        <button class="btn btn-primary btn-sm" id="cookie-accept">Aceitar</button>
+        <button class="btn btn-ghost btn-sm" id="cookie-reject">Recusar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ck-backdrop" id="checkout-backdrop"></div>
+  <div class="ck-modal" id="checkout-modal">
+    <div class="ck-modal__inner">
+      <div class="ck-modal__header">
+        <h2>Finalizar Compra</h2>
+        <button class="ck-modal__close" id="ck-modal-close">&times;</button>
+      </div>
+      <div class="ck-stepper">
+        <div class="ck-step-dot active">1</div>
+        <span class="ck-step-label">Carrinho</span>
+        <div class="ck-step-line"></div>
+        <div class="ck-step-dot">2</div>
+        <span class="ck-step-label">Dados</span>
+        <div class="ck-step-line"></div>
+        <div class="ck-step-dot">3</div>
+        <span class="ck-step-label">Pagamento</span>
+        <div class="ck-step-line"></div>
+        <div class="ck-step-dot">4</div>
+        <span class="ck-step-label">Confirmacao</span>
+      </div>
+      <div class="ck-modal__body">
+        <div class="ck-step-panel active" id="ck-step-1"></div>
+        <div class="ck-step-panel" id="ck-step-2"></div>
+        <div class="ck-step-panel" id="ck-step-3"></div>
+        <div class="ck-step-panel" id="ck-step-4"></div>
+      </div>
+      <div class="ck-modal__nav">
+        <button class="ck-nav-back" id="ck-nav-back" style="display:none;">Voltar</button>
+        <button class="ck-nav-next" id="ck-nav-next">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ck-backdrop" id="subscriptions-backdrop"></div>
+  <div class="sub-modal" id="subscriptions-modal">
+    <div class="sub-modal__inner">
+      <div class="sub-modal__header">
+        <h2>Minhas Assinaturas</h2>
+        <button class="ck-modal__close" id="sub-modal-close">&times;</button>
+      </div>
+      <div class="sub-modal__body" id="subscriptions-panel"></div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/core/firebase-config.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/auth.js"></script>
+  <script src="js/core/router.js"></script>
+  <script src="js/core/firestore-service.js"></script>
+  <script src="js/core/catalog-loader.js"></script>
+  <script src="js/core/referral-tracker.js"></script>
+  <script src="js/data/categories.js"></script>
+  <script src="js/data/products.js"></script>
+  <script src="js/data/stores.js"></script>
+  <script src="js/data/employees.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/catalogo/product-card.js"></script>
+  <script src="js/catalogo/product-detail.js"></script>
+  <script src="js/catalogo/cart.js"></script>
+  <script src="js/catalogo/checkout.js"></script>
+  <script src="js/catalogo/subscriptions.js"></script>
+  <script src="js/pages/landing.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => console.warn('[SW] Registro falhou:', err));
+      });
+    }
+  </script>
+</body>
+</html>

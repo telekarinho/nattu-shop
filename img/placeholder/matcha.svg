@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#dcedc8;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#a5c97a" stroke-width="3"/>
+  <!-- Matcha bowl (chawan) -->
+  <path d="M120 230 Q125 300 200 300 Q275 300 280 230" fill="#795548"/>
+  <ellipse cx="200" cy="230" rx="80" ry="28" fill="#558B2F"/>
+  <!-- Matcha foam pattern -->
+  <ellipse cx="200" cy="228" rx="70" ry="23" fill="#7CB342"/>
+  <path d="M150 225 Q170 220 190 225 Q210 230 230 225 Q250 220 260 225" fill="none" stroke="#9CCC65" stroke-width="2"/>
+  <path d="M155 232 Q175 227 195 232 Q215 237 235 232 Q250 228 255 232" fill="none" stroke="#9CCC65" stroke-width="1.5"/>
+  <!-- Chasen (bamboo whisk) -->
+  <g transform="translate(280,170) rotate(20)">
+    <rect x="-6" y="-50" width="12" height="60" rx="4" fill="#D4A050"/>
+    <g stroke="#C8A040" stroke-width="1.5" fill="none">
+      <path d="M-5,10 Q-10,20 -8,35"/>
+      <path d="M-2,10 Q-5,22 -4,35"/>
+      <path d="M1,10 Q1,22 1,35"/>
+      <path d="M4,10 Q7,22 5,35"/>
+      <path d="M7,10 Q12,20 9,35"/>
+    </g>
+  </g>
+  <!-- Powder scatter -->
+  <g fill="#689F38" opacity="0.4">
+    <circle cx="130" cy="260" r="2"/><circle cx="140" cy="270" r="1.5"/>
+    <circle cx="260" cy="255" r="2"/><circle cx="270" cy="265" r="1.5"/>
+  </g>
+  <text x="200" y="348" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#33691E">Matchá</text>
+</svg>

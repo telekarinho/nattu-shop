@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "clube",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "npx", "serve", "C:/Users/rodri/clubedonatural", "--no-clipboard", "--no-request-logging"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}

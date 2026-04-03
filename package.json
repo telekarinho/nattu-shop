@@ -1,0 +1,13 @@
+{
+  "name": "cbn-plus",
+  "version": "1.0.0",
+  "description": "CBN Plus - SaaS e marketplace para lojas de produtos naturais com catalogo individual, operacao e mensalidade recorrente",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "start": "npx serve . -p 3000"
+  },
+  "keywords": ["produtos-naturais", "saas", "marketplace", "pwa", "vanilla-js"],
+  "author": "CBN Plus",
+  "license": "PROPRIETARY"
+}

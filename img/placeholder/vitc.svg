@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff8e1;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ffecb3;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="#ffb74d" stroke-width="3"/>
+  <!-- Bottle -->
+  <rect x="155" y="150" width="90" height="130" rx="10" fill="#FF8F00"/>
+  <rect x="170" y="132" width="60" height="22" rx="4" fill="#FFB74D"/>
+  <!-- Cap -->
+  <rect x="175" y="118" width="50" height="18" rx="6" fill="#E65100"/>
+  <!-- Label -->
+  <rect x="162" y="175" width="76" height="65" rx="5" fill="white" opacity="0.95"/>
+  <text x="200" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#E65100">VITAMINA C</text>
+  <text x="200" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FF6D00">1000mg</text>
+  <!-- Orange slice icon -->
+  <circle cx="200" cy="228" r="10" fill="#FF9800"/>
+  <g stroke="white" stroke-width="1" fill="none">
+    <line x1="200" y1="220" x2="200" y2="236"/>
+    <line x1="192" y1="228" x2="208" y2="228"/>
+    <line x1="194" y1="222" x2="206" y2="234"/>
+    <line x1="206" y1="222" x2="194" y2="234"/>
+  </g>
+  <!-- Citrus slices decoration -->
+  <g opacity="0.5">
+    <circle cx="120" cy="200" r="18" fill="#FFA726" stroke="#FF8F00" stroke-width="2"/>
+    <circle cx="120" cy="200" r="12" fill="#FFB74D"/>
+    <line x1="120" y1="190" x2="120" y2="210" stroke="white" stroke-width="1"/>
+    <line x1="110" y1="200" x2="130" y2="200" stroke="white" stroke-width="1"/>
+    <circle cx="280" cy="210" r="18" fill="#FFA726" stroke="#FF8F00" stroke-width="2"/>
+    <circle cx="280" cy="210" r="12" fill="#FFB74D"/>
+    <line x1="280" y1="200" x2="280" y2="220" stroke="white" stroke-width="1"/>
+    <line x1="270" y1="210" x2="290" y2="210" stroke="white" stroke-width="1"/>
+  </g>
+  <text x="200" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#E65100">Vitamina C</text>
+</svg>
