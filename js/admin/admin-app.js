@@ -1,5 +1,5 @@
-/* ============================================
-   CLUBE DO NATURAL — Admin App Bootstrap
+﻿/* ============================================
+   CLUBE DO NATURAL â€” Admin App Bootstrap
    SPA shell: auth, navigation, sync, store selector
    ============================================ */
 
@@ -15,19 +15,27 @@ const AdminApp = (() => {
     nf: 'Notas Fiscais',
     produtos: 'Produtos',
     lojas: 'Lojas',
-    funcionarios: 'Funcionários',
+    funcionarios: 'FuncionÃ¡rios',
     clientes: 'Clientes',
-    relatorios: 'Relatórios',
-    config: 'Configurações',
-    usuarios: 'Usuários',
+    relatorios: 'RelatÃ³rios',
+    config: 'ConfiguraÃ§Ãµes',
+    usuarios: 'UsuÃ¡rios',
     restock: 'Pedido de Compra',
     metas: 'Metas & Pontos',
     afiliados: 'Afiliados',
   };
 
+  const NETWORK_PAGE_TITLES = {
+    dashboard: 'Painel SaaS',
+    assinaturas: 'Receita Recorrente',
+    lojas: 'Lojas SaaS',
+    usuarios: 'Acessos SaaS',
+    config: 'Plataforma',
+  };
+
   const PAGE_META = {
     dashboard: {
-      description: 'Acompanhe a operação em poucos segundos e veja o que precisa de ação agora.',
+      description: 'Acompanhe a operaÃ§Ã£o em poucos segundos e veja o que precisa de aÃ§Ã£o agora.',
       tips: [
         'Confira vendas, pedidos e alertas da unidade.',
         'Se encontrar risco ou queda, siga para Financeiro ou Pedidos.',
@@ -39,10 +47,10 @@ const AdminApp = (() => {
       ],
     },
     pedidos: {
-      description: 'Aqui ficam os pedidos da loja atual e o fluxo diário de atendimento.',
+      description: 'Aqui ficam os pedidos da loja atual e o fluxo diÃ¡rio de atendimento.',
       tips: [
-        'Busque primeiro os pedidos novos ou em preparação.',
-        'Se houver divergência de pagamento, valide no Caixa.',
+        'Busque primeiro os pedidos novos ou em preparaÃ§Ã£o.',
+        'Se houver divergÃªncia de pagamento, valide no Caixa.',
         'Pedidos corretos alimentam financeiro, estoque e fiscal.',
       ],
       actions: [
@@ -51,22 +59,22 @@ const AdminApp = (() => {
       ],
     },
     estoque: {
-      description: 'Controle entrada, saída e risco de ruptura por unidade.',
+      description: 'Controle entrada, saÃ­da e risco de ruptura por unidade.',
       tips: [
         'Ajuste quantidades com base em contagem real ou nota de entrada.',
-        'Itens baixos devem virar reposição ou pedido de compra.',
-        'Estoque bem alimentado melhora CMV, financeiro e operação.',
+        'Itens baixos devem virar reposiÃ§Ã£o ou pedido de compra.',
+        'Estoque bem alimentado melhora CMV, financeiro e operaÃ§Ã£o.',
       ],
       actions: [
-        { page: 'restock', title: 'Pedir reposição', hint: 'Abrir pedido de compra' },
-        { page: 'produtos', title: 'Revisar produtos', hint: 'Conferir cadastro e ativação' },
+        { page: 'restock', title: 'Pedir reposiÃ§Ã£o', hint: 'Abrir pedido de compra' },
+        { page: 'produtos', title: 'Revisar produtos', hint: 'Conferir cadastro e ativaÃ§Ã£o' },
       ],
     },
     caixa: {
       description: 'Abra, acompanhe e feche o caixa da unidade sem misturar dados entre lojas.',
       tips: [
-        'Registre reforços, sangrias e fechamento no mesmo dia.',
-        'Diferença de caixa deve ser tratada antes de encerrar o turno.',
+        'Registre reforÃ§os, sangrias e fechamento no mesmo dia.',
+        'DiferenÃ§a de caixa deve ser tratada antes de encerrar o turno.',
         'O caixa alimenta o financeiro e o resultado da unidade.',
       ],
       actions: [
@@ -75,11 +83,11 @@ const AdminApp = (() => {
       ],
     },
     financeiro: {
-      description: 'Acompanhe custos, DRE, venda mínima e saúde financeira da loja.',
+      description: 'Acompanhe custos, DRE, venda mÃ­nima e saÃºde financeira da loja.',
       tips: [
-        'Cadastre primeiro os custos fixos e variáveis do mês.',
-        'Use uma loja específica para preencher a unidade corretamente.',
-        'Quanto melhor os dados, mais confiável fica o score.',
+        'Cadastre primeiro os custos fixos e variÃ¡veis do mÃªs.',
+        'Use uma loja especÃ­fica para preencher a unidade corretamente.',
+        'Quanto melhor os dados, mais confiÃ¡vel fica o score.',
       ],
       actions: [
         { page: 'nf', title: 'Abrir fiscal', hint: 'Completar dados da unidade' },
@@ -87,11 +95,11 @@ const AdminApp = (() => {
       ],
     },
     nf: {
-      description: 'Central fiscal da unidade com configuração, certificado e emissão operacional.',
+      description: 'Central fiscal da unidade com configuraÃ§Ã£o, certificado e emissÃ£o operacional.',
       tips: [
         'Use o auto preenchimento da loja para reduzir trabalho manual.',
         'Complete CSC, certificado e checklist antes de testar NFC-e.',
-        'Comece em homologação e só depois avance para produção.',
+        'Comece em homologaÃ§Ã£o e sÃ³ depois avance para produÃ§Ã£o.',
       ],
       actions: [
         { page: 'pedidos', title: 'Buscar venda', hint: 'Selecionar pedido para documento' },
@@ -99,27 +107,90 @@ const AdminApp = (() => {
       ],
     },
     produtos: {
-      description: 'Gerencie o catálogo que alimenta vendas, estoque e fiscal.',
+      description: 'Gerencie o catÃ¡logo que alimenta vendas, estoque e fiscal.',
       tips: [
-        'Cadastre nome, preço, custo e categoria com clareza.',
+        'Cadastre nome, preÃ§o, custo e categoria com clareza.',
         'Ative apenas os itens liberados para a loja atual.',
-        'Para pessoa leiga, o cadastro rápido com IA é o caminho mais simples.',
+        'Para pessoa leiga, o cadastro rÃ¡pido com IA Ã© o caminho mais simples.',
       ],
       actions: [
-        { href: '/admin/cadastro-produto', title: 'Cadastro rápido com IA', hint: 'Cadastrar produto sem complicação' },
+        { href: '/admin/cadastro-produto', title: 'Cadastro rÃ¡pido com IA', hint: 'Cadastrar produto sem complicaÃ§Ã£o' },
         { page: 'estoque', title: 'Ver estoque', hint: 'Conferir saldo por unidade' },
       ],
     },
     lojas: {
       description: 'Cada loja bem cadastrada reduz suporte e melhora o resto do sistema inteiro.',
       tips: [
-        'Preencha CNPJ, endereço, cidade, telefone e horários com cuidado.',
-        'Esses dados alimentam seletor, fiscal e visão do franqueado.',
+        'Preencha CNPJ, endereÃ§o, cidade, telefone e horÃ¡rios com cuidado.',
+        'Esses dados alimentam seletor, fiscal e visÃ£o do franqueado.',
         'Quanto melhor o cadastro da loja, menos retrabalho depois.',
       ],
       actions: [
         { page: 'nf', title: 'Abrir fiscal da loja', hint: 'Completar dados da NFC-e' },
         { page: 'funcionarios', title: 'Vincular equipe', hint: 'Separar acessos por unidade' },
+      ],
+    },
+  };
+
+  const NETWORK_PAGE_META = {
+    dashboard: {
+      description: 'Acompanhe a saude do software, da rede de lojas e dos indicadores centrais da plataforma.',
+      tips: [
+        'Use "Toda a Plataforma" para leitura executiva do SaaS.',
+        'Troque para uma loja especifica apenas quando quiser auditar uma unidade.',
+        'Priorize receita recorrente, lojas, usuarios e configuracoes globais.',
+      ],
+      actions: [
+        { page: 'assinaturas', title: 'Ver receita recorrente', hint: 'Acompanhar planos e MRR' },
+        { page: 'lojas', title: 'Gerenciar lojas SaaS', hint: 'Revisar tenants e status operacional' },
+      ],
+    },
+    assinaturas: {
+      description: 'Central comercial do SaaS com foco em mensalidades, status e crescimento da receita recorrente.',
+      tips: [
+        'Revise quais lojas estao ativas, em trial ou com cobranca pendente.',
+        'Use esta tela como centro da operacao comercial da plataforma.',
+        'Cruze a saude das assinaturas com a situacao das lojas.',
+      ],
+      actions: [
+        { page: 'lojas', title: 'Abrir lojas', hint: 'Cruzar plano e operacao por tenant' },
+        { page: 'usuarios', title: 'Ver acessos SaaS', hint: 'Garantir responsaveis certos por loja' },
+      ],
+    },
+    lojas: {
+      description: 'Gerencie os tenants do Nattu Shop, com visao de plano, escopo operacional e governanca da rede.',
+      tips: [
+        'Cada loja aqui representa um tenant da plataforma.',
+        'Revise plano, dados da unidade, status e responsaveis.',
+        'Uma loja bem configurada reduz suporte e retrabalho.',
+      ],
+      actions: [
+        { page: 'usuarios', title: 'Gerenciar usuarios', hint: 'Aprovar acessos e cargos' },
+        { page: 'config', title: 'Abrir plataforma', hint: 'Ajustar parametros globais do SaaS' },
+      ],
+    },
+    usuarios: {
+      description: 'Aprove e administre acessos da plataforma inteira, separando owner SaaS de operadores por loja.',
+      tips: [
+        'Usuarios do owner SaaS nao devem ficar presos a uma unidade.',
+        'Aprove usuarios apenas no cargo e tenant corretos.',
+        'Use esta tela como governanca central de acesso.',
+      ],
+      actions: [
+        { page: 'lojas', title: 'Voltar para lojas', hint: 'Conferir tenant vinculado ao usuario' },
+        { page: 'dashboard', title: 'Ir para painel SaaS', hint: 'Retomar visao executiva' },
+      ],
+    },
+    config: {
+      description: 'Configuracoes globais do produto SaaS, com impacto sobre toda a base de lojas.',
+      tips: [
+        'Ajuste aqui apenas parametros que devem valer para toda a plataforma.',
+        'Evite usar esta area para regras especificas de uma unica loja.',
+        'Pense nesta tela como configuracao do software, nao de uma unidade.',
+      ],
+      actions: [
+        { page: 'assinaturas', title: 'Revisar receita', hint: 'Cruzar configuracao com monetizacao' },
+        { page: 'dashboard', title: 'Voltar ao painel SaaS', hint: 'Validar impacto geral' },
       ],
     },
   };
@@ -237,14 +308,16 @@ const AdminApp = (() => {
   function renderUserInfo(user) {
     els.sidebarUserName.textContent = user.nome;
     const cargoLabels = {
-      dono: 'Proprietário',
+      dono: 'ProprietÃ¡rio',
       gerente: 'Gerente',
       atendente: 'Atendente',
       caixa: 'Caixa',
       estoquista: 'Estoquista',
       motoboy: 'Motoboy',
     };
-    els.sidebarUserCargo.textContent = cargoLabels[user.cargo] || user.cargo;
+    els.sidebarUserCargo.textContent = isNetworkAdminUser(user)
+      ? 'Owner SaaS'
+      : (cargoLabels[user.cargo] || user.cargo);
   }
 
   function populateStoreSelector(user) {
@@ -255,7 +328,7 @@ const AdminApp = (() => {
     const sourceStores = Array.isArray(window.DataStores) ? window.DataStores : [];
 
     if (user && user.cargo === 'dono') {
-      els.storeSelector.innerHTML = '<option value="todas">Todas as Lojas</option>' +
+      els.storeSelector.innerHTML = '<option value="todas">Toda a Plataforma</option>' +
         sourceStores.map(store => `<option value="${store.id}">${store.nome.split(' - ')[1] || store.nome}</option>`).join('');
       els.storeSelector.disabled = false;
       return;
@@ -277,6 +350,7 @@ const AdminApp = (() => {
   }
 
   function applyPermissions(user) {
+    applyNetworkAdminLabels(user);
     const links = document.querySelectorAll('.sidebar__link[data-page]');
     links.forEach(link => {
       const page = link.dataset.page;
@@ -295,7 +369,7 @@ const AdminApp = (() => {
     // Verify permission
     const user = AppState.get('user');
     if (user && !user.permissions.includes(page)) {
-      Toast.error('Sem permissão para esta página');
+      Toast.error('Sem permissÃ£o para esta pÃ¡gina');
       return;
     }
 
@@ -315,8 +389,9 @@ const AdminApp = (() => {
     });
 
     // Update page title
-    els.pageTitle.textContent = PAGE_TITLES[page] || page;
-    document.title = `${PAGE_TITLES[page] || page} — Admin — Nattu Shop`;
+    const title = getPageTitle(page);
+    els.pageTitle.textContent = title;
+    document.title = `${title} - Admin - Nattu Shop`;
     renderPageContext(page);
 
     // Close mobile sidebar
@@ -415,30 +490,30 @@ const AdminApp = (() => {
     const sourceStores = Array.isArray(window.DataStores) ? window.DataStores : [];
     const selectedStore = sourceStores.find(store => store.id === selectedStoreId);
 
-    if (user && user.cargo === 'dono' && selectedStoreId === 'todas') {
-      return 'Visão da rede inteira';
+    if (isNetworkAdminUser(user) && selectedStoreId === 'todas') {
+      return 'Owner do SaaS';
     }
     if (selectedStore) {
       return `Loja atual: ${selectedStore.nome.split(' - ')[1] || selectedStore.nome}`;
     }
-    return 'Visão operacional';
+    return 'VisÃ£o operacional';
   }
 
   function renderPageContext(page) {
     if (!els.contextPanel) return;
-    const meta = PAGE_META[page] || {
-      description: 'Use esta área para acompanhar a operação da unidade com mais clareza.',
+    const meta = getPageMeta(page) || PAGE_META[page] || {
+      description: 'Use esta Ã¡rea para acompanhar a operaÃ§Ã£o da unidade com mais clareza.',
       tips: [
-        'Revise os dados principais da tela antes de fazer mudanças.',
+        'Revise os dados principais da tela antes de fazer mudanÃ§as.',
         'Use o seletor de loja para trabalhar na unidade correta.',
         'Se algo parecer fora do lugar, valide pedidos, estoque, caixa e financeiro.',
       ],
-      actions: [{ page: 'dashboard', title: 'Voltar ao dashboard', hint: 'Retomar a visão geral' }],
+      actions: [{ page: 'dashboard', title: 'Voltar ao dashboard', hint: 'Retomar a visÃ£o geral' }],
     };
 
     els.contextPanel.hidden = false;
     els.contextScope.textContent = getCurrentScopeLabel();
-    els.contextTitle.textContent = PAGE_TITLES[page] || 'Painel administrativo';
+    els.contextTitle.textContent = getPageTitle(page) || PAGE_TITLES[page] || 'Painel administrativo';
     els.contextDescription.textContent = meta.description;
     els.contextTips.innerHTML = (meta.tips || []).map(tip => `<li>${tip}</li>`).join('');
     els.contextActions.innerHTML = (meta.actions || []).map(action => `
@@ -467,7 +542,7 @@ const AdminApp = (() => {
 
   function openHelpModal(page, meta) {
     if (!els.helpModal) return;
-    els.helpTitle.textContent = `Como usar ${PAGE_TITLES[page] || 'esta tela'}`;
+    els.helpTitle.textContent = `Como usar ${getPageTitle(page) || 'esta tela'}`;
     els.helpDescription.textContent = meta.description || '';
     els.helpSteps.innerHTML = (meta.tips || []).map(step => `<li>${step}</li>`).join('');
     els.helpModal.hidden = false;
@@ -477,6 +552,40 @@ const AdminApp = (() => {
     if (els.helpModal) els.helpModal.hidden = true;
   }
 
+
+  function isNetworkAdminUser(user) {
+    return !!(user && user.cargo === 'dono' && !user.storeId);
+  }
+
+  function getPageTitle(page) {
+    const user = AppState.get('user');
+    if (isNetworkAdminUser(user) && NETWORK_PAGE_TITLES[page]) return NETWORK_PAGE_TITLES[page];
+    return PAGE_TITLES[page] || page;
+  }
+
+  function getPageMeta(page) {
+    const user = AppState.get('user');
+    if (isNetworkAdminUser(user) && NETWORK_PAGE_META[page]) return NETWORK_PAGE_META[page];
+    return PAGE_META[page] || null;
+  }
+
+  function applyNetworkAdminLabels(user) {
+    const relabel = {
+      dashboard: isNetworkAdminUser(user) ? 'Painel SaaS' : 'Dashboard',
+      assinaturas: isNetworkAdminUser(user) ? 'Receita Recorrente' : 'Assinaturas',
+      lojas: isNetworkAdminUser(user) ? 'Lojas SaaS' : 'Lojas',
+      usuarios: isNetworkAdminUser(user) ? 'Acessos SaaS' : 'Usuarios',
+      config: isNetworkAdminUser(user) ? 'Plataforma' : 'Configuracoes'
+    };
+
+    document.querySelectorAll('.sidebar__link[data-page]').forEach(link => {
+      const textNode = link.querySelector('.sidebar__link-text');
+      const page = link.dataset.page;
+      if (textNode && relabel[page]) {
+        textNode.textContent = relabel[page];
+      }
+    });
+  }
   /* ------------------------------------------
      CONNECTION STATUS
   ------------------------------------------ */
@@ -564,7 +673,7 @@ const AdminApp = (() => {
   ------------------------------------------ */
   function onSWMessage(event) {
     if (event.data && event.data.type === 'SYNC_COMPLETE') {
-      Toast.success('Sincronização concluída!');
+      Toast.success('SincronizaÃ§Ã£o concluÃ­da!');
       updateSyncBanner();
       // Re-render current page with fresh data
       const activePage = AppState.get('activeAdminPage') || 'dashboard';
@@ -640,20 +749,20 @@ const AdminApp = (() => {
 
     el.innerHTML = `
       <div style="max-width:700px;">
-        <h2 style="color:#1B4332;margin-bottom:24px;">⚙️ Configurações do Sistema</h2>
+        <h2 style="color:#1B4332;margin-bottom:24px;">âš™ï¸ ConfiguraÃ§Ãµes do Sistema</h2>
 
         <!-- Assinaturas -->
         <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin-bottom:20px;">
-          <h3 style="margin:0 0 16px;font-size:16px;color:#1B4332;">🔄 Assinaturas Recorrentes</h3>
+          <h3 style="margin:0 0 16px;font-size:16px;color:#1B4332;">ðŸ”„ Assinaturas Recorrentes</h3>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
             <div>
               <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:4px;">Desconto da Assinatura (%)</label>
               <input type="number" id="cfg-sub-discount" min="0" max="50" step="1" value="${s.subscriptionDiscount || 15}"
                 style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:15px;box-sizing:border-box;">
-              <span style="font-size:11px;color:#999;">Desconto aplicado em vendas por assinatura no PDV e catálogo</span>
+              <span style="font-size:11px;color:#999;">Desconto aplicado em vendas por assinatura no PDV e catÃ¡logo</span>
             </div>
             <div>
-              <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:4px;">Frequências Disponíveis</label>
+              <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:4px;">FrequÃªncias DisponÃ­veis</label>
               <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
                 <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;">
                   <input type="checkbox" id="cfg-freq-semanal" ${(s.frequencies || ['semanal','quinzenal','mensal']).includes('semanal') ? 'checked' : ''}> Semanal
@@ -669,9 +778,9 @@ const AdminApp = (() => {
           </div>
         </div>
 
-        <!-- Gamificação -->
+        <!-- GamificaÃ§Ã£o -->
         <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin-bottom:20px;">
-          <h3 style="margin:0 0 16px;font-size:16px;color:#1B4332;">🎯 Gamificação & Metas</h3>
+          <h3 style="margin:0 0 16px;font-size:16px;color:#1B4332;">ðŸŽ¯ GamificaÃ§Ã£o & Metas</h3>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
             <div>
               <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:4px;">Pontos por Assinatura Fechada</label>
@@ -688,10 +797,10 @@ const AdminApp = (() => {
 
         <!-- Loja -->
         <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin-bottom:20px;">
-          <h3 style="margin:0 0 16px;font-size:16px;color:#1B4332;">🏪 Loja & Geral</h3>
+          <h3 style="margin:0 0 16px;font-size:16px;color:#1B4332;">ðŸª Loja & Geral</h3>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
             <div>
-              <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:4px;">Frete Grátis a partir de (R$)</label>
+              <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:4px;">Frete GrÃ¡tis a partir de (R$)</label>
               <input type="number" id="cfg-free-shipping" min="0" step="1" value="${s.freeShippingMin || 89}"
                 style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:15px;box-sizing:border-box;">
             </div>
@@ -704,9 +813,9 @@ const AdminApp = (() => {
         </div>
 
         <button onclick="saveConfigPage()" class="btn btn--primary" style="padding:12px 32px;font-size:15px;">
-          💾 Salvar Configurações
+          ðŸ’¾ Salvar ConfiguraÃ§Ãµes
         </button>
-        <span id="cfg-saved-msg" style="display:none;margin-left:12px;color:#10B981;font-weight:600;font-size:14px;">✅ Salvo!</span>
+        <span id="cfg-saved-msg" style="display:none;margin-left:12px;color:#10B981;font-weight:600;font-size:14px;">âœ… Salvo!</span>
       </div>
     `;
   }
@@ -730,7 +839,7 @@ const AdminApp = (() => {
     saveSettings(settings);
     const msg = document.getElementById('cfg-saved-msg');
     if (msg) { msg.style.display = 'inline'; setTimeout(() => msg.style.display = 'none', 3000); }
-    if (typeof Toast !== 'undefined') Toast.success('Configurações salvas!');
+    if (typeof Toast !== 'undefined') Toast.success('ConfiguraÃ§Ãµes salvas!');
   };
 
   return {
@@ -749,3 +858,4 @@ const AdminApp = (() => {
 document.addEventListener('DOMContentLoaded', () => {
   AdminApp.init();
 });
+
