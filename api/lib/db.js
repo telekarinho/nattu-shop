@@ -1,5 +1,5 @@
 /**
- * Database abstraction layer for Clube do Natural API.
+ * Database abstraction layer for Nattu Shop API.
  *
  * Uses Vercel KV (Redis) when KV_REST_API_URL is set,
  * otherwise falls back to in-memory storage (dev only).

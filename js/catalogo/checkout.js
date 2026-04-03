@@ -821,7 +821,7 @@ const Checkout = (() => {
   function generateLocalPixCode(orderNum, total) {
     // Generate a simulated PIX code (copia-e-cola format)
     const cleanTotal = total.toFixed(2).replace('.', '');
-    return `00020126580014BR.GOV.BCB.PIX0136clubedonatural-${orderNum}520400005303986540${cleanTotal}5802BR5925CLUBE DO NATURAL LTDA6009SAO PAULO62070503***6304`;
+    return `00020126580014BR.GOV.BCB.PIX0136nattu-shop-${orderNum}520400005303986540${cleanTotal}5802BR5925NATTU SHOP LTDA6009SAO PAULO62070503***6304`;
   }
 
   // ======= PUBLIC API =======

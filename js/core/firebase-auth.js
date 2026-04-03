@@ -1,5 +1,5 @@
 // =============================================
-// Firebase Auth Guard — Clube do Natural
+// Firebase Auth Guard — Nattu Shop
 // =============================================
 // Handles Google sign-in, user approval check, and page protection.
 // Include this AFTER firebase-config.js on every protected page.

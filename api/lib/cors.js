@@ -1,10 +1,10 @@
 /**
- * CORS and common response helpers for Clube do Natural API.
+ * CORS and common response helpers for Nattu Shop API.
  */
 
 const ALLOWED_ORIGINS = [
-  "https://clubedonatural.com.br",
-  "https://www.clubedonatural.com.br",
+  "https://nattu.shop",
+  "https://www.nattu.shop",
   "http://localhost:3000",
   "http://localhost:5500",
 ];

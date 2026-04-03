@@ -139,7 +139,7 @@ const FirestoreService = (() => {
     }
   }
 
-  const HOSTINGER_BACKUP_ENDPOINT = 'https://api.clubedonatural.com/backup/sync.php';
+  const HOSTINGER_BACKUP_ENDPOINT = 'https://nattu.shop/backup/sync.php';
   const HOSTINGER_BACKUP_QUEUE_KEY = 'hostinger_backup_queue_v1';
 
   function queueBackupPayload(payload) {

@@ -112,7 +112,7 @@ module.exports = async function handler(req, res) {
       if (process.env.MERCADOPAGO_ACCESS_TOKEN) {
         try {
           const siteUrl =
-            process.env.SITE_URL || "https://clubedonatural.com.br";
+            process.env.SITE_URL || "https://nattu.shop";
           const preference = await createPreference({
             items: items.map((i) => ({
               title: i.name,

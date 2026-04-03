@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#FAFAF7">
-  <meta name="description" content="Pedido Confirmado — Clube do Natural. Acompanhe seu pedido de produtos naturais.">
-  <title>Pedido Confirmado — Clube do Natural</title>
+  <meta name="description" content="Pedido Confirmado — Nattu Shop. Acompanhe seu pedido de produtos naturais.">
+  <title>Pedido Confirmado — Nattu Shop</title>
   <link rel="icon" type="image/png" href="img/logo-full.png">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/variables.css">
@@ -473,8 +473,8 @@
   <header class="site-header">
     <div class="header-inner">
       <a href="catalogo.html" class="logo">
-        <span class="logo-icon"><img src="img/logo-full.png" alt="Logo Clube do Natural"></span>
-        <span>Clube do Natural</span>
+        <span class="logo-icon"><img src="img/logo-full.png" alt="Logo Nattu Shop"></span>
+        <span>Nattu Shop</span>
       </a>
       <a href="catalogo.html" class="btn btn-ghost btn-sm">
         ← Voltar ao catálogo
@@ -492,7 +492,7 @@
       <section class="order-success">
         <div class="order-success__icon">✔</div>
         <h1 class="order-success__title">Pedido Confirmado!</h1>
-        <p class="order-success__subtitle">Obrigado por comprar no Clube do Natural</p>
+        <p class="order-success__subtitle">Obrigado por comprar no Nattu Shop</p>
       </section>
 
       <!-- ========== ORDER NUMBER ========== -->
@@ -587,7 +587,7 @@
         <div class="pwa-install-card__text">
           <div class="pwa-install-card__title">Instale o app para acompanhar seus pedidos</div>
           <div class="pwa-install-card__desc">
-            Adicione o Clube do Natural à tela inicial do seu celular para acesso rápido e notificações.
+            Adicione o Nattu Shop à tela inicial do seu celular para acesso rápido e notificações.
           </div>
         </div>
       </div>
@@ -595,7 +595,7 @@
       <!-- ========== FOOTER ========== -->
       <footer class="order-footer">
         <p class="order-footer__text">
-          Clube do Natural &copy; 2026 — Produtos naturais com entrega e assinatura
+          Nattu Shop &copy; 2026 — Produtos naturais com entrega e assinatura
         </p>
       </footer>
 
@@ -734,7 +734,7 @@
     const storePhone = order.store?.whatsapp || order.store?.telefone || order.whatsapp || '';
     const phoneClean = storePhone.replace(/\D/g, '');
 
-    let whatsMsg = '🌿 *Clube do Natural — Pedido #' + orderNumber + '*\n\n';
+    let whatsMsg = '🌿 *Nattu Shop — Pedido #' + orderNumber + '*\n\n';
     whatsMsg += '👤 Cliente: ' + nome + '\n';
     whatsMsg += '🏪 Loja: ' + storeName + '\n';
     whatsMsg += '📦 Entrega: ' + (deliveryLabels[deliveryType] || deliveryType) + '\n';

@@ -1,5 +1,5 @@
 /* ============================================
-   CBN Plus - Product Card Renderer
+   Nattu Shop - Product Card Renderer
    ============================================ */
 
 const ProductCard = {

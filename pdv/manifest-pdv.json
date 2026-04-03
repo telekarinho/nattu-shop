@@ -1,7 +1,7 @@
 {
-  "name": "PDV — Clube do Natural",
+  "name": "PDV — Nattu Shop",
   "short_name": "PDV Natural",
-  "description": "Frente de Caixa offline — Clube do Natural",
+  "description": "Frente de Caixa offline — Nattu Shop",
   "start_url": "/pdv/",
   "display": "standalone",
   "orientation": "any",

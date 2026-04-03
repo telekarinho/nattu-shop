@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrar — Clube do Natural</title>
+<title>Entrar — Nattu Shop</title>
 <link rel="icon" href="/img/logo-icon.png">
 <link rel="manifest" href="/manifest.json">
 <style>
@@ -257,7 +257,7 @@ body{
 
       let msg = 'Erro ao fazer login. ';
       if (err.code === 'auth/popup-closed-by-user') msg = 'Login cancelado. Tente novamente.';
-      else if (err.code === 'auth/unauthorized-domain') msg = 'Dominio nao autorizado no Firebase. Adicione o dominio deste site em Authentication > Settings > Authorized domains no console Firebase (ex: www.clubedonatural.com, clubedonatural.com, clubedonatural.vercel.app).';
+      else if (err.code === 'auth/unauthorized-domain') msg = 'Dominio nao autorizado no Firebase. Adicione o dominio deste site em Authentication > Settings > Authorized domains no console Firebase (ex: www.nattu-shop.com, nattu-shop.com, nattu-shop.vercel.app).';
       else if (err.code === 'auth/popup-blocked') msg = 'Popup bloqueado pelo navegador. Tente permitir popups ou use outro navegador.';
       else if (err.code === 'auth/cancelled-popup-request') msg = 'Login cancelado. Tente novamente.';
       else if (err.code === 'auth/network-request-failed') msg = 'Sem internet. Verifique sua conexao.';

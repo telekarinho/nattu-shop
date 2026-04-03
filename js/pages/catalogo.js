@@ -1,5 +1,5 @@
 /* ============================================
-   CBN Plus - Catalogo Marketplace
+   Nattu Shop - Catalogo Marketplace
    ============================================ */
 
 const CatalogoPage = {

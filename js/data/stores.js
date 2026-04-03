@@ -1,5 +1,5 @@
 /* ============================================
-   CBN Plus - Lojas SaaS / Tenants
+   Nattu Shop - Lojas SaaS / Tenants
    ============================================ */
 
 const DataStores = [

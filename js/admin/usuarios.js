@@ -1,5 +1,5 @@
 // =============================================
-// Users Admin — Clube do Natural
+// Users Admin — Nattu Shop
 // =============================================
 // Manages user approval, roles, and fine-grained access control via Firebase.
 

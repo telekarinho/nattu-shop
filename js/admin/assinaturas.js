@@ -175,7 +175,7 @@ const AdminAssinaturas = (() => {
       `tem entrega prevista para *${dataEntrega}*.\n\n` +
       `Valor: *${Utils.formatBRL(sub.precoFinal)}* (${sub.desconto}% de desconto)\n\n` +
       `Precisa alterar algo? Estamos à disposição! 😊\n\n` +
-      `Clube do Natural 🌿`;
+      `Nattu Shop 🌿`;
     window.open(Utils.whatsappLink(phone, msg), '_blank');
   }
 

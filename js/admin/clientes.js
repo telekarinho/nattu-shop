@@ -322,7 +322,7 @@ const AdminClientes = (() => {
   ------------------------------------------ */
   function openWhatsApp(customer) {
     const firstName = customer.nome.split(' ')[0];
-    const msg = `Olá ${firstName}! 🌿\n\nAqui é do Clube do Natural. Tudo bem?\n\nGostaríamos de saber como foi sua experiência com seus últimos pedidos. Precisa de algo?\n\nEstamos à disposição! 😊`;
+    const msg = `Olá ${firstName}! 🌿\n\nAqui é do Nattu Shop. Tudo bem?\n\nGostaríamos de saber como foi sua experiência com seus últimos pedidos. Precisa de algo?\n\nEstamos à disposição! 😊`;
     const link = Utils.whatsappLink(customer.phone, msg);
     window.open(link, '_blank');
   }

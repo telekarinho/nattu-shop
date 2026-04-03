@@ -305,7 +305,7 @@ const AdminPedidos = (() => {
       const msg = `Olá ${order.cliente.nome.split(' ')[0]}! 🌿\n\n` +
         `Que bom que você gostou do(a) ${item.nome}!\n\n` +
         `Sabia que você pode receber esse produto todo mês com ${item.descontoRecorrencia}% de desconto? ` +
-        `É a nossa assinatura Clube do Natural — sem compromisso, cancele quando quiser!\n\n` +
+        `É a nossa assinatura Nattu Shop — sem compromisso, cancele quando quiser!\n\n` +
         `Quer que eu ative para você? 😊`;
       const link = Utils.whatsappLink(phone, msg);
       window.open(link, '_blank');
@@ -535,7 +535,7 @@ const AdminPedidos = (() => {
         `Seu pedido *${order.numero}* está com status: *${getStatusLabel(normalizedStatus)}*.\n\n` +
         `Itens:\n${order.items.map(it => `• ${it.quantidade}x ${it.nome} (${it.peso})`).join('\n')}\n\n` +
         `Total: *${Utils.formatBRL(order.total)}*\n\n` +
-        `Clube do Natural 🌿`;
+        `Nattu Shop 🌿`;
       window.open(Utils.whatsappLink(phone, msg), '_blank');
     });
 
@@ -561,7 +561,7 @@ const AdminPedidos = (() => {
     }
 
     const store = DataStores.find(s => s.id === order.loja);
-    const storeName = store ? store.nome : 'Clube do Natural';
+    const storeName = store ? store.nome : 'Nattu Shop';
 
     receiptWindow.document.write(`
       <!DOCTYPE html>
@@ -596,7 +596,7 @@ const AdminPedidos = (() => {
         <div class="row"><span>Pagamento:</span><span>${getPaymentLabel(order.pagamento)}</span></div>
         <div class="line"></div>
         <div class="center" style="margin-top:8px;">Obrigado pela preferência!</div>
-        <div class="center">🌿 Clube do Natural</div>
+        <div class="center">🌿 Nattu Shop</div>
         <script>window.print();</script>
       </body></html>
     `);

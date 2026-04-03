@@ -1026,7 +1026,7 @@ const AdminNF = (() => {
     formData.append('certificatePassword', password || '');
     formData.append('certificate', file);
 
-    const response = await fetch('https://api.clubedonatural.com/fiscal/upload-certificate.php', {
+    const response = await fetch('https://nattu.shop/fiscal/upload-certificate.php', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${idToken}`,
@@ -1258,7 +1258,7 @@ const AdminNF = (() => {
       <body>
         <div class="sheet">
           <div class="center">
-            <div class="title">${escapeHtml(store.nome || 'Clube do Natural')}</div>
+            <div class="title">${escapeHtml(store.nome || 'Nattu Shop')}</div>
             <div class="subtitle muted">${escapeHtml(store.endereco || '')}</div>
             <div class="subtitle muted">CNPJ ${Utils.formatCNPJ(config.cnpj || store.cnpj || '')}${config.ie ? ` · IE ${escapeHtml(config.ie)}` : ''}</div>
             <div style="margin-top: 14px;"><span class="badge">${title}</span></div>

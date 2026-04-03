@@ -1,5 +1,5 @@
 // =============================================
-// Firebase Configuration — Clube do Natural
+// Firebase Configuration — Nattu Shop
 // =============================================
 // This file initializes Firebase App, Auth and Firestore.
 // Config is loaded from localStorage (set via admin/setup) or defaults.

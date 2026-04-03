@@ -316,7 +316,7 @@ const AdminApp = (() => {
 
     // Update page title
     els.pageTitle.textContent = PAGE_TITLES[page] || page;
-    document.title = `${PAGE_TITLES[page] || page} — Admin — Clube do Natural`;
+    document.title = `${PAGE_TITLES[page] || page} — Admin — Nattu Shop`;
     renderPageContext(page);
 
     // Close mobile sidebar

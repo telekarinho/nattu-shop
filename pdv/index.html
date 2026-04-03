@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDV — Clube do Natural</title>
-<meta name="description" content="Frente de Caixa — Clube do Natural">
+<title>PDV — Nattu Shop</title>
+<meta name="description" content="Frente de Caixa — Nattu Shop">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1B4332">
@@ -939,16 +939,16 @@ const PDV_PRODUCTS = [
   { id:'desodorante-natural', nome:'Desodorante Natural Vegano', categoria:'higiene', preco:24.90, variacoes:[{peso:'50g',preco:24.90}], barcode:'7891234567031' },
   { id:'oleo-essencial', nome:'Óleo Essencial de Lavanda', categoria:'higiene', preco:28.90, variacoes:[{peso:'10ml',preco:28.90},{peso:'30ml',preco:64.90}], barcode:'7891234567032' },
   // ===== PRODUTOS DA LOJA ONLINE (Shopify) =====
-  { id:'coenzima-q10', nome:'Coenzima Q10 + Vitamina E', categoria:'capsulas', preco:35.99, variacoes:[{peso:'60 caps 350mg',preco:35.99}], barcode:'7891234567033', imagem:'https://www.clubedonatural.com/cdn/shop/files/ChatGPTImage6deago.de2025_11_33_59_1024x.png?v=1754490920', descricao:'Suporte à energia celular, saúde cardiovascular e proteção antioxidante. 100mg de CoQ10 por dose + Vitamina E.' },
-  { id:'clubeleve', nome:'ClubeLeve', categoria:'capsulas', preco:24.99, variacoes:[{peso:'90 caps 500mg',preco:24.99}], barcode:'7891234567034', imagem:'https://www.clubedonatural.com/cdn/shop/files/ChatGPTImage6deago.de2025_11_49_35_1024x.png?v=1754491849', descricao:'Fórmula natural com Quitosana, Spirulina, Psyllium, Inulina (FOS) e Picolinato de Cromo. Auxilia na saciedade e controle metabólico.' },
-  { id:'treonclube-magnesio', nome:'TreonClube Magnésio Treonato', categoria:'capsulas', preco:35.99, variacoes:[{peso:'60 caps 500mg',preco:35.99}], barcode:'7891234567035', imagem:'https://www.clubedonatural.com/cdn/shop/files/ChatGPTImage5deago.de2025_16_54_12_1024x.png?v=1754424093', descricao:'Magnésio Treonato que atravessa a barreira hematoencefálica. Melhora memória, foco, concentração e qualidade do sono.' },
-  { id:'vitamina-b12', nome:'Vitamina B12 (Metilcobalamina)', categoria:'capsulas', preco:34.99, variacoes:[{peso:'60 caps 350mg',preco:34.99}], barcode:'7891234567036', imagem:'https://www.clubedonatural.com/cdn/shop/files/SuplementoVitaminaB12ClubedoNatural_1024x.png?v=1754403167', descricao:'Metilcobalamina pura de alta absorção. Aumenta energia, melhora memória e foco, apoia sistema nervoso e imunológico.' },
-  { id:'oleo-semente-abobora', nome:'Óleo de Semente de Abóbora', categoria:'capsulas', preco:49.99, variacoes:[{peso:'60 caps 1000mg',preco:49.99}], barcode:'7891234567037', imagem:'https://www.clubedonatural.com/cdn/shop/files/OleodeSementedeAbobora_1024x.png?v=1754329754', descricao:'Rico em ácidos graxos essenciais, fitoesteróis e vitamina E. Suporte à saúde da próstata, bexiga e coração.' },
-  { id:'cloreto-magnesio', nome:'Cloreto de Magnésio P.A.', categoria:'capsulas', preco:24.99, variacoes:[{peso:'120 caps 500mg',preco:24.99}], barcode:'7891234567038', imagem:'https://www.clubedonatural.com/cdn/shop/files/ChatGPTImage5deago.de2025_17_08_30_1024x.png?v=1754424523', descricao:'Magnésio P.A. 500mg. Alivia desconfortos musculares e articulares, fortalece ossos e sistema nervoso. 120 cápsulas.' },
-  { id:'curcuma-95', nome:'Cúrcuma 95% Curcuminoides', categoria:'capsulas', preco:29.99, variacoes:[{peso:'60 caps 500mg',preco:29.99}], barcode:'7891234567039', imagem:'https://www.clubedonatural.com/cdn/shop/files/ChatGPTImage5deago.de2025_17_17_11_1024x.png?v=1754425118', descricao:'Extrato padronizado com 95% de curcuminoides. Ação anti-inflamatória, antioxidante, saúde articular e digestiva.' },
-  { id:'colageno-tipo-ii', nome:'Colágeno Tipo II', categoria:'capsulas', preco:29.99, variacoes:[{peso:'30 caps 500mg',preco:29.99}], barcode:'7891234567040', imagem:'https://www.clubedonatural.com/cdn/shop/files/ChatGPTImage28deago.de2025_10_28_46_1024x.png?v=1756387837', descricao:'Colágeno tipo II não desnaturado + ácido hialurônico + vitamina E. Saúde articular, elasticidade da pele e proteção celular.' },
-  { id:'colageno-complex', nome:'Colágeno Complex', categoria:'capsulas', preco:49.99, variacoes:[{peso:'96 caps 500mg',preco:49.99}], barcode:'7891234567041', imagem:'https://www.clubedonatural.com/cdn/shop/files/ChatGPTImage6deago.de2025_12_07_40_1024x.png?v=1754492870', descricao:'Peptídeos bioativos de colágeno + ácido hialurônico + vitamina C. Firmeza da pele, fortalecimento de unhas, cabelos e articulações.' },
-  { id:'az-complex', nome:'A-Z Complex Multivitamínico', categoria:'capsulas', preco:19.99, variacoes:[{peso:'60 caps 500mg',preco:19.99}], barcode:'7891234567042', imagem:'https://www.clubedonatural.com/cdn/shop/files/ChatGPTImage6deago.de2025_11_59_14_1024x.png?v=1754492366', descricao:'Multivitamínico completo de A a Zinco. Fortalece imunidade, previne deficiências nutricionais, mais disposição e bem-estar.' },
+  { id:'coenzima-q10', nome:'Coenzima Q10 + Vitamina E', categoria:'capsulas', preco:35.99, variacoes:[{peso:'60 caps 350mg',preco:35.99}], barcode:'7891234567033', imagem:'https://www.nattu-shop.com/cdn/shop/files/ChatGPTImage6deago.de2025_11_33_59_1024x.png?v=1754490920', descricao:'Suporte à energia celular, saúde cardiovascular e proteção antioxidante. 100mg de CoQ10 por dose + Vitamina E.' },
+  { id:'clubeleve', nome:'ClubeLeve', categoria:'capsulas', preco:24.99, variacoes:[{peso:'90 caps 500mg',preco:24.99}], barcode:'7891234567034', imagem:'https://www.nattu-shop.com/cdn/shop/files/ChatGPTImage6deago.de2025_11_49_35_1024x.png?v=1754491849', descricao:'Fórmula natural com Quitosana, Spirulina, Psyllium, Inulina (FOS) e Picolinato de Cromo. Auxilia na saciedade e controle metabólico.' },
+  { id:'treonclube-magnesio', nome:'TreonClube Magnésio Treonato', categoria:'capsulas', preco:35.99, variacoes:[{peso:'60 caps 500mg',preco:35.99}], barcode:'7891234567035', imagem:'https://www.nattu-shop.com/cdn/shop/files/ChatGPTImage5deago.de2025_16_54_12_1024x.png?v=1754424093', descricao:'Magnésio Treonato que atravessa a barreira hematoencefálica. Melhora memória, foco, concentração e qualidade do sono.' },
+  { id:'vitamina-b12', nome:'Vitamina B12 (Metilcobalamina)', categoria:'capsulas', preco:34.99, variacoes:[{peso:'60 caps 350mg',preco:34.99}], barcode:'7891234567036', imagem:'https://www.nattu-shop.com/cdn/shop/files/SuplementoVitaminaB12ClubedoNatural_1024x.png?v=1754403167', descricao:'Metilcobalamina pura de alta absorção. Aumenta energia, melhora memória e foco, apoia sistema nervoso e imunológico.' },
+  { id:'oleo-semente-abobora', nome:'Óleo de Semente de Abóbora', categoria:'capsulas', preco:49.99, variacoes:[{peso:'60 caps 1000mg',preco:49.99}], barcode:'7891234567037', imagem:'https://www.nattu-shop.com/cdn/shop/files/OleodeSementedeAbobora_1024x.png?v=1754329754', descricao:'Rico em ácidos graxos essenciais, fitoesteróis e vitamina E. Suporte à saúde da próstata, bexiga e coração.' },
+  { id:'cloreto-magnesio', nome:'Cloreto de Magnésio P.A.', categoria:'capsulas', preco:24.99, variacoes:[{peso:'120 caps 500mg',preco:24.99}], barcode:'7891234567038', imagem:'https://www.nattu-shop.com/cdn/shop/files/ChatGPTImage5deago.de2025_17_08_30_1024x.png?v=1754424523', descricao:'Magnésio P.A. 500mg. Alivia desconfortos musculares e articulares, fortalece ossos e sistema nervoso. 120 cápsulas.' },
+  { id:'curcuma-95', nome:'Cúrcuma 95% Curcuminoides', categoria:'capsulas', preco:29.99, variacoes:[{peso:'60 caps 500mg',preco:29.99}], barcode:'7891234567039', imagem:'https://www.nattu-shop.com/cdn/shop/files/ChatGPTImage5deago.de2025_17_17_11_1024x.png?v=1754425118', descricao:'Extrato padronizado com 95% de curcuminoides. Ação anti-inflamatória, antioxidante, saúde articular e digestiva.' },
+  { id:'colageno-tipo-ii', nome:'Colágeno Tipo II', categoria:'capsulas', preco:29.99, variacoes:[{peso:'30 caps 500mg',preco:29.99}], barcode:'7891234567040', imagem:'https://www.nattu-shop.com/cdn/shop/files/ChatGPTImage28deago.de2025_10_28_46_1024x.png?v=1756387837', descricao:'Colágeno tipo II não desnaturado + ácido hialurônico + vitamina E. Saúde articular, elasticidade da pele e proteção celular.' },
+  { id:'colageno-complex', nome:'Colágeno Complex', categoria:'capsulas', preco:49.99, variacoes:[{peso:'96 caps 500mg',preco:49.99}], barcode:'7891234567041', imagem:'https://www.nattu-shop.com/cdn/shop/files/ChatGPTImage6deago.de2025_12_07_40_1024x.png?v=1754492870', descricao:'Peptídeos bioativos de colágeno + ácido hialurônico + vitamina C. Firmeza da pele, fortalecimento de unhas, cabelos e articulações.' },
+  { id:'az-complex', nome:'A-Z Complex Multivitamínico', categoria:'capsulas', preco:19.99, variacoes:[{peso:'60 caps 500mg',preco:19.99}], barcode:'7891234567042', imagem:'https://www.nattu-shop.com/cdn/shop/files/ChatGPTImage6deago.de2025_11_59_14_1024x.png?v=1754492366', descricao:'Multivitamínico completo de A a Zinco. Fortalece imunidade, previne deficiências nutricionais, mais disposição e bem-estar.' },
 ];
 
 const CAT_ICONS = { graos:'🌾', suplementos:'💪', chas:'🍵', temperos:'🌶️', mel:'🍯', oleos:'🫒', snacks:'🥜', higiene:'🧴', capsulas:'💊' };
@@ -1265,7 +1265,7 @@ function renderProducts() {
 
   if (activeCat !== 'todos') prods = prods.filter(p => p.categoria === activeCat);
   if (search) {
-    // Check if pasted/typed a QR Code URL (e.g. https://clubedonatural.vercel.app/catalogo?produto=chia-sementes)
+    // Check if pasted/typed a QR Code URL (e.g. https://nattu-shop.vercel.app/catalogo?produto=chia-sementes)
     const qrUrlMatch = search.match(/[?&]produto=([^&]+)/i) || search.match(/produto=([^&\s]+)/i);
     if (qrUrlMatch) {
       const pid = qrUrlMatch[1];
@@ -1748,7 +1748,7 @@ function showReceipt(sale) {
   const el = document.getElementById('receiptContent');
   el.innerHTML = `
     <div class="receipt-store">
-      <h4>🌿 ${receiptStore ? receiptStore.nome : 'Clube do Natural'}</h4>
+      <h4>🌿 ${receiptStore ? receiptStore.nome : 'Nattu Shop'}</h4>
       <p>${receiptStore ? receiptStore.endereco : ''}</p>
       <p>CNPJ: ${receiptStore ? receiptStore.cnpj : ''} | Tel: ${receiptStore ? (receiptStore.telefone || receiptStore.tel || '') : ''}</p>
     </div>
@@ -1781,7 +1781,7 @@ function showReceipt(sale) {
     </div>
     <div class="receipt-footer">
       Obrigado pela preferência!<br>
-      Clube do Natural — Saúde em cada escolha 🌿
+      Nattu Shop — Saúde em cada escolha 🌿
     </div>
   `;
   openModal('receiptModal');
@@ -1792,7 +1792,7 @@ function printReceipt() { window.print(); }
 function sendWhatsApp() {
   if (!lastSale) return;
   const s = lastSale;
-  let msg = `*🌿 Clube do Natural*\n`;
+  let msg = `*🌿 Nattu Shop*\n`;
   msg += `Pedido: ${s.id}\n`;
   msg += `Data: ${fmtDate(s.data)}\n\n`;
   msg += `*Itens:*\n`;
@@ -2412,7 +2412,7 @@ function generateLabels() {
   const variation = product.variacoes[varIndex];
   const qty = parseInt(document.getElementById('labelQty').value) || 1;
 
-  const qrUrl = `https://clubedonatural.com/catalogo?produto=${product.id}`;
+  const qrUrl = `https://nattu-shop.com/catalogo?produto=${product.id}`;
   const qrSvg = generateQRCodeSVG(qrUrl, 100);
 
   const preview = document.getElementById('labelPreview');

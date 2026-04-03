@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#1B4332">
-<title>Cadastro Inteligente — Clube do Natural</title>
+<title>Cadastro Inteligente — Nattu Shop</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -502,7 +502,7 @@ input[type=file]{display:none}
       <div class="ai-chat-header">
         <div class="chat-avatar">🤖</div>
         <div>
-          <div class="chat-name">Assistente Clube do Natural</div>
+          <div class="chat-name">Assistente Nattu Shop</div>
           <div class="chat-status">online</div>
         </div>
       </div>
@@ -961,7 +961,7 @@ const App = {
     this.availableStores = all;
     sel.innerHTML = isNetworkAdmin ? '<option value="todas">📍 Todas as lojas</option>' : '';
     all.forEach(s => {
-      sel.innerHTML += `<option value="${s.id}">🏪 ${s.nome.replace('Clube do Natural - ','')}</option>`;
+      sel.innerHTML += `<option value="${s.id}">🏪 ${s.nome.replace('Nattu Shop - ','')}</option>`;
     });
     if (!isNetworkAdmin && all[0]) {
       sel.value = all[0].id;
@@ -984,7 +984,7 @@ const App = {
     const stores = this.getScopedStoreOptions();
     wrap.innerHTML = stores.map(store => `
       <div class="form-group">
-        <label>${store.nome.replace('Clube do Natural - ','Loja ')}</label>
+        <label>${store.nome.replace('Nattu Shop - ','Loja ')}</label>
         <input type="number" min="0" step="1" data-stock-store="${store.id}" value="${Number(stock[store.id] || 0)}">
       </div>
     `).join('');
@@ -2507,7 +2507,7 @@ Retorne APENAS este JSON:
       progressBar.style.width = '40%';
 
       // Build prompt
-      let prompt = `Você é um especialista em produtos naturais para uma loja chamada Clube do Natural. Analise as fotos deste produto e retorne um JSON.
+      let prompt = `Você é um especialista em produtos naturais para uma loja chamada Nattu Shop. Analise as fotos deste produto e retorne um JSON.
 
 ${imageParts.length > 1 ? `Foram enviadas ${imageParts.length} fotos:\n${photoLabels.map((l,i) => `- Imagem ${i+1}: ${l}`).join('\n')}\n` : ''}${this.buildCategoryPromptHints() ? `Foco da categoria: ${this.buildCategoryPromptHints()}\n` : ''}
 REGRAS IMPORTANTES:
@@ -2955,7 +2955,7 @@ Responda em português brasileiro.`;
       script += `Para usar, ${uList[0].toLowerCase()}. `;
     }
     if (curiosidade) script += `Uma curiosidade: ${curiosidade.substring(0, 100)}. `;
-    script += `Venha conhecer no Clube do Natural!`;
+    script += `Venha conhecer no Nattu Shop!`;
 
     // Limit to ~500 chars for free tier
     return script.substring(0, 500);

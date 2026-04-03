@@ -1,5 +1,5 @@
 /**
- * MercadoPago integration helper for Clube do Natural.
+ * MercadoPago integration helper for Nattu Shop.
  *
  * Uses the MercadoPago REST API directly (no SDK needed).
  * Requires env var MERCADOPAGO_ACCESS_TOKEN.
@@ -52,7 +52,7 @@ async function createPreference({
     },
     external_reference: externalRef,
     notification_url: notificationUrl,
-    statement_descriptor: "CLUBE DO NATURAL",
+    statement_descriptor: "NATTU SHOP",
     ...(backUrls
       ? {
           back_urls: {

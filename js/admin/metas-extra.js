@@ -403,7 +403,7 @@ const MetasExtra = (() => {
     { id: 'rw_bonus_300', nome: 'Bônus R$300', descricao: 'Bônus em dinheiro de R$300', icone: '🏆', pontos: 1000, tipo: 'bonus', ativo: true },
     { id: 'rw_produto', nome: 'Produto Grátis', descricao: 'Escolha um produto da loja como presente', icone: '🎁', pontos: 150, tipo: 'vale', ativo: true },
     { id: 'rw_almoco', nome: 'Almoço Especial', descricao: 'Vale almoço em restaurante até R$40', icone: '🍽️', pontos: 250, tipo: 'vale', ativo: true },
-    { id: 'rw_camiseta', nome: 'Camiseta Exclusiva', descricao: 'Camiseta exclusiva do Clube do Natural', icone: '👕', pontos: 350, tipo: 'presente', ativo: false },
+    { id: 'rw_camiseta', nome: 'Camiseta Exclusiva', descricao: 'Camiseta exclusiva do Nattu Shop', icone: '👕', pontos: 350, tipo: 'presente', ativo: false },
     { id: 'rw_curso', nome: 'Curso Online', descricao: 'Acesso a um curso online pago pela empresa', icone: '📚', pontos: 800, tipo: 'desenvolvimento', ativo: false },
   ];
 
