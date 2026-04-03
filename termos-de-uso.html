@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Termos de Uso do Nattu Shop.">
+  <meta name="theme-color" content="#FAFAF7">
+  <title>Termos de Uso - Nattu Shop</title>
+  <link rel="icon" type="image/png" href="img/logo-full.png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', var(--font-family); background:#f8faf7; }
+    .brand-mark { width:40px; height:40px; border-radius:14px; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#133326,#28c76f); color:#fff; font-weight:800; letter-spacing:.04em; box-shadow:0 10px 24px rgba(19,51,38,.18); }
+    .legal-shell { max-width: 900px; margin: 0 auto; padding: 48px 16px 80px; }
+    .legal-card { background:#fff; border-radius:28px; padding:32px; box-shadow:var(--shadow-md); border:1px solid rgba(27,67,50,.08); }
+    .legal-card h1 { margin-bottom: 12px; }
+    .legal-card p, .legal-card li { color: var(--cinza-700); line-height: 1.7; }
+    .legal-card h2 { margin-top: 28px; margin-bottom: 10px; }
+    .legal-card ul { list-style: disc; padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon brand-mark">NS</span>
+        <span style="color:var(--verde-escuro);font-weight:800;">Nattu Shop</span>
+      </a>
+      <nav class="header-nav" id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="catalogo.html">Marketplace</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-hamburger" id="btn-hamburger" aria-label="Menu">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="legal-shell">
+    <article class="legal-card">
+      <span class="section-kicker">Documento legal</span>
+      <h1>Termos de Uso</h1>
+      <p>Os presentes termos disciplinam o uso das paginas publicas, do marketplace e da plataforma Nattu Shop. O acesso e uso continuado do servico representam concordancia com estas regras.</p>
+
+      <h2>1. Objeto</h2>
+      <p>O Nattu Shop oferece uma base de software e marketplace para lojas de produtos naturais, incluindo recursos de catalogo, operacao comercial, pedidos, estoque, checkout, administracao e funcionalidades correlatas.</p>
+
+      <h2>2. Responsabilidades do usuario</h2>
+      <ul>
+        <li>Fornecer informacoes verdadeiras, atualizadas e completas.</li>
+        <li>Utilizar a plataforma de forma licita e de acordo com a finalidade comercial contratada.</li>
+        <li>Proteger acessos, credenciais e dispositivos utilizados para operar o sistema.</li>
+      </ul>
+
+      <h2>3. Conteudo e operacao das lojas</h2>
+      <p>Cada loja cliente e responsavel pelos produtos, informacoes comerciais, precos, descricoes, regras fiscais, meios de entrega, cumprimento regulatorio e atendimento ao consumidor final em sua propria operacao.</p>
+
+      <h2>4. Disponibilidade e melhorias</h2>
+      <p>O Nattu Shop busca manter o servico disponivel e em evolucao continua, mas pode realizar manutencoes, atualizacoes, correcoes e mudancas de infraestrutura sempre que necessario para seguranca, desempenho e continuidade operacional.</p>
+
+      <h2>5. Limites de responsabilidade</h2>
+      <p>Na extensao permitida por lei, o Nattu Shop nao responde por uso indevido da plataforma, informacoes inseridas por terceiros, indisponibilidades de provedores externos, falhas decorrentes de integracoes de terceiros ou eventos fora de controle razoavel.</p>
+
+      <h2>6. Propriedade intelectual</h2>
+      <p>Marcas, interface, codigo, textos, estrutura e materiais do Nattu Shop permanecem protegidos por direitos de propriedade intelectual e nao podem ser reproduzidos ou explorados sem autorizacao.</p>
+
+      <h2>7. Contato</h2>
+      <p>Solicitacoes contratuais, tecnicas ou juridicas podem ser encaminhadas para <a href="mailto:contato@nattu.shop">contato@nattu.shop</a>.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nattu Shop. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('btn-hamburger');
+    const nav = document.getElementById('main-nav');
+    menuButton?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuButton.textContent = open ? 'Fechar' : 'Menu';
+    });
+  </script>
+</body>
+</html>

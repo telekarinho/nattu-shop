@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agende uma demonstracao do Nattu Shop para sua loja de produtos naturais.">
+  <meta name="theme-color" content="#FAFAF7">
+  <title>Contato e Demonstracao - Nattu Shop</title>
+  <link rel="icon" type="image/png" href="img/logo-full.png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', var(--font-family); background: linear-gradient(180deg, #f8faf7 0%, #eef7f0 100%); }
+    .brand-mark { width:40px; height:40px; border-radius:14px; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#133326,#28c76f); color:#fff; font-weight:800; letter-spacing:.04em; box-shadow:0 10px 24px rgba(19,51,38,.18); }
+    .contact-shell { max-width: 1120px; margin: 0 auto; padding: 48px 16px 80px; }
+    .contact-hero { display:grid; grid-template-columns: 1.1fr .9fr; gap:24px; align-items:stretch; }
+    .contact-card, .contact-panel { background:#fff; border-radius:28px; padding:28px; box-shadow:var(--shadow-md); border:1px solid rgba(27,67,50,.08); }
+    .contact-card h1 { font-size: clamp(2rem, 4vw, 3.4rem); margin-bottom: 12px; }
+    .contact-card p { color: var(--cinza-600); font-size: var(--fs-md); }
+    .contact-points { display:grid; gap:14px; margin-top:24px; }
+    .contact-point { padding:16px 18px; border-radius:18px; background:#f7fbf8; border:1px solid rgba(27,67,50,.08); }
+    .contact-point strong { display:block; margin-bottom:6px; color:var(--verde-escuro); }
+    .contact-panel h2 { margin-bottom: 8px; }
+    .contact-panel p { color: var(--cinza-600); margin-bottom: 20px; }
+    .contact-form { display:grid; gap:14px; }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .contact-form textarea { min-height: 120px; resize: vertical; }
+    .contact-helper { margin-top: 14px; font-size: var(--fs-sm); color: var(--cinza-600); }
+    .mini-links { display:flex; flex-wrap:wrap; gap:12px; margin-top:20px; }
+    .mini-links a { font-size: var(--fs-sm); }
+    @media (max-width: 860px) {
+      .contact-hero { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon brand-mark">NS</span>
+        <span style="color:var(--verde-escuro);font-weight:800;">Nattu Shop</span>
+      </a>
+      <nav class="header-nav" id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="catalogo.html">Marketplace</a>
+        <a href="index.html#planos">Planos</a>
+        <a href="contato.html" style="color:var(--verde-medio);font-weight:var(--fw-bold);">Contato</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-hamburger" id="btn-hamburger" aria-label="Menu">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="contact-shell">
+    <section class="contact-hero">
+      <div class="contact-card">
+        <span class="section-kicker">Demonstracao comercial</span>
+        <h1>Agende uma conversa sobre o Nattu Shop</h1>
+        <p>Preencha os dados da sua operacao e abrimos uma apresentacao focada em estoque, pedidos, catalogo por loja, marketplace e assinatura mensal para sua equipe.</p>
+
+        <div class="contact-points">
+          <div class="contact-point">
+            <strong>Para quem e</strong>
+            Emporios naturais, lojas de suplementos, casas de graos, mercados saudaveis e operacoes com delivery proprio.
+          </div>
+          <div class="contact-point">
+            <strong>O que mostramos na demo</strong>
+            Painel administrativo, fluxo de pedidos, vitrine do marketplace, operacao por loja e modelo de monetizacao por mensalidade.
+          </div>
+          <div class="contact-point">
+            <strong>Contato principal</strong>
+            <a href="mailto:contato@nattu.shop">contato@nattu.shop</a>
+          </div>
+        </div>
+
+        <div class="mini-links">
+          <a href="politica-de-privacidade.html">Politica de Privacidade</a>
+          <a href="termos-de-uso.html">Termos de Uso</a>
+          <a href="catalogo.html">Ver marketplace</a>
+        </div>
+      </div>
+
+      <div class="contact-panel">
+        <h2>Solicitar demonstracao</h2>
+        <p>Este formulario abre seu cliente de e-mail com um briefing inicial para acelerar o atendimento.</p>
+
+        <form class="contact-form" id="contact-form">
+          <div class="contact-grid">
+            <input type="text" id="lead-name" name="nome" placeholder="Seu nome" required>
+            <input type="email" id="lead-email" name="email" placeholder="Seu melhor e-mail" required>
+          </div>
+          <div class="contact-grid">
+            <input type="text" id="lead-store" name="loja" placeholder="Nome da loja">
+            <input type="text" id="lead-city" name="cidade" placeholder="Cidade / Estado">
+          </div>
+          <textarea id="lead-message" name="mensagem" placeholder="Conte rapidamente como sua operacao funciona hoje e o que voce quer melhorar."></textarea>
+          <button type="submit" class="btn btn-primary btn-lg">Enviar briefing por e-mail</button>
+        </form>
+
+        <div class="contact-helper">
+          Ao enviar, voce sera redirecionado para o seu aplicativo de e-mail com o assunto e a mensagem prontos.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--branco);margin-bottom:var(--space-2);">
+          <span class="brand-mark" style="width:28px;height:28px;border-radius:10px;font-size:11px;vertical-align:middle;margin-right:6px;">NS</span>Nattu Shop
+        </div>
+        <p>SaaS e marketplace para lojas de produtos naturais.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navegacao</h5>
+        <a href="index.html">Home</a>
+        <a href="catalogo.html">Marketplace</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <a href="politica-de-privacidade.html">Politica de Privacidade</a>
+        <a href="termos-de-uso.html">Termos de Uso</a>
+      </div>
+      <div class="footer-col">
+        <h5>Fale conosco</h5>
+        <a href="mailto:contato@nattu.shop">contato@nattu.shop</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nattu Shop. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('btn-hamburger');
+    const nav = document.getElementById('main-nav');
+    menuButton?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuButton.textContent = open ? 'Fechar' : 'Menu';
+    });
+
+    document.getElementById('contact-form')?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const name = document.getElementById('lead-name').value.trim();
+      const email = document.getElementById('lead-email').value.trim();
+      const store = document.getElementById('lead-store').value.trim() || 'Nao informado';
+      const city = document.getElementById('lead-city').value.trim() || 'Nao informado';
+      const message = document.getElementById('lead-message').value.trim() || 'Sem observacoes adicionais.';
+      const subject = encodeURIComponent(`Solicitacao de demonstracao - ${store}`);
+      const body = encodeURIComponent(
+        `Nome: ${name}\nEmail: ${email}\nLoja: ${store}\nCidade/Estado: ${city}\n\nContexto:\n${message}`
+      );
+      window.location.href = `mailto:contato@nattu.shop?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>

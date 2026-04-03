@@ -5,17 +5,23 @@
    Offline fallback page
    ============================================ */
 
-const CACHE_VERSION = 'cdn-v6';
+const CACHE_VERSION = 'nattu-v7';
 const OFFLINE_PAGE = '/offline.html';
 
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/catalogo.html',
+  '/contato.html',
+  '/politica-de-privacidade.html',
+  '/termos-de-uso.html',
+  '/404.html',
   '/checkout.html',
   '/pedido.html',
   '/offline.html',
   '/manifest.json',
+  '/robots.txt',
+  '/sitemap.xml',
 
   // CSS
   '/css/variables.css',

@@ -1,7 +1,7 @@
 {
   "name": "Nattu Shop",
-  "short_name": "Clube Natural",
-  "description": "Produtos naturais com entrega e assinatura",
+  "short_name": "Nattu Shop",
+  "description": "SaaS e marketplace para lojas de produtos naturais",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#1B4332",
