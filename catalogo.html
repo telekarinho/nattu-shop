@@ -25,6 +25,10 @@
     .marketplace-panel label { display:block; margin-bottom:6px; font-size:12px; font-weight:700; color:var(--verde-escuro); text-transform:uppercase; letter-spacing:.04em; }
     .marketplace-panel select { width:100%; padding:10px 12px; border-radius:10px; border:1px solid #d7ddd8; font:inherit; }
     .marketplace-meta { margin-top:10px; font-size:13px; color:var(--cinza-600); }
+    #promo-banner { position:relative; z-index:1; line-height:1.45; overflow-wrap:anywhere; }
+    @media (max-width: 768px) {
+      #promo-banner { padding-inline: var(--space-3) !important; }
+    }
   </style>
 </head>
 <body>
@@ -59,7 +63,7 @@
   <section class="search-section" id="search-section">
     <div class="container">
       <div class="search-section__input-wrap">
-        <span class="search-section__icon" aria-hidden="true">⌕</span>
+        <span class="search-section__icon" aria-hidden="true">&#128269;</span>
         <input
           type="search"
           class="search-section__input"

@@ -14,6 +14,7 @@
   border-bottom: 1px solid var(--cinza-200);
   box-shadow: var(--shadow-sm);
   height: var(--header-height);
+  overflow: clip;
 }
 
 .header-inner {
@@ -24,22 +25,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-4);
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: var(--space-3);
   text-decoration: none;
-  font-size: 0;
-  line-height: 0;
-  color: transparent;
+  font-size: var(--fs-base);
+  line-height: 1;
+  color: var(--verde-escuro);
+  font-weight: var(--fw-bold);
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .logo-icon {
   display: block;
   flex-shrink: 0;
   height: 58px;
+}
+
+.logo > span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .logo-icon img {
@@ -67,19 +78,23 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  flex-shrink: 0;
 }
 
 .cart-btn {
   position: relative;
-  width: 44px;
+  width: auto;
+  min-width: 44px;
   height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 var(--space-3);
   border-radius: var(--radius-full);
-  font-size: 20px;
+  font-size: var(--fs-base);
   color: var(--cinza-700);
   transition: background var(--transition-fast);
+  white-space: nowrap;
 }
 
 .cart-btn:hover { background: var(--cinza-100); }
@@ -105,6 +120,11 @@
 
 @media (max-width: 768px) {
   .header-hamburger { display: flex; }
+
+  .header-inner {
+    padding: 0 var(--space-3);
+    gap: var(--space-2);
+  }
 
   .header-nav {
     display: none;
@@ -137,6 +157,30 @@
 
   /* Logo smaller on mobile */
   .logo-icon { height: 38px; }
+
+  .logo {
+    gap: var(--space-2);
+    font-size: 15px;
+  }
+
+  .logo > span:last-child {
+    max-width: 120px;
+  }
+
+  .header-actions {
+    gap: var(--space-1);
+  }
+
+  .cart-btn {
+    padding: 0 var(--space-2);
+    font-size: var(--fs-sm);
+  }
+}
+
+@media (max-width: 420px) {
+  .logo > span:last-child {
+    max-width: 100px;
+  }
 }
 
 /* === HERO (Light Premium Gradient) === */
